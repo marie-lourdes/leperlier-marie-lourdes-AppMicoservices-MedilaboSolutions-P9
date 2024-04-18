@@ -20,6 +20,7 @@ public class MicroservicePatientsApplication implements CommandLineRunner {
 		SpringApplication.run(MicroservicePatientsApplication.class, args);
 	}
 
+	// for test CRUD operation 
 	@Override
 	public void run(String ... args) {
 		List<Patient> allPatients=patientRepositoryImpl.getAllPatients(); 
@@ -27,10 +28,13 @@ public class MicroservicePatientsApplication implements CommandLineRunner {
 		allPatients.forEach(patient-> System.out.println("patient"+patient));
 		
 		Patient patient=new Patient();
+		patient.setPrenom("prenomtest");
+		patient.setNom("nomtest");
 		patient.setDateDeNaissance("0000-00-00");
 		patient.setAdresse("7557 eregtrhrthrthet");
 		patient.setTelephone("755-778-6746");
 		patient.setGenre("F");
 				patientRepositoryImpl.addPatient(patient); 
 	}
+
 }
