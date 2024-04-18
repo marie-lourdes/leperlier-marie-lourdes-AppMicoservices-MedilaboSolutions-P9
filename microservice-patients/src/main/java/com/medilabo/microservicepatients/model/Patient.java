@@ -7,8 +7,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
+@Table(name="patient")
+@Data
 public class Patient {
 	
 	@Id
@@ -16,10 +20,10 @@ public class Patient {
 	private long id;
 	
 	@Column(name="prenom")
-	private String firstName;
+	private String prenom;
 	
 	@Column(name="nom")
-	private String lastName;
+	private String nom;
 	
 	@Column(name="date_de_naissance")
 	private Date dateDeNaissance;
