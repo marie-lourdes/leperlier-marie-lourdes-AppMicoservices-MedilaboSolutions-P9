@@ -14,7 +14,8 @@ import com.medilabo.microservicepatients.repository.PatientRepositoryImpl;
 public class MicroservicePatientsApplication implements CommandLineRunner {
 
 	@Autowired
-	PatientRepositoryImpl patientRepositoryImpl ;
+	private PatientRepositoryImpl patientRepositoryImpl ;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(MicroservicePatientsApplication.class, args);
 	}
@@ -24,5 +25,12 @@ public class MicroservicePatientsApplication implements CommandLineRunner {
 		List<Patient> allPatients=patientRepositoryImpl.getAllPatients(); 
 		System.out.println("patient"+allPatients);
 		allPatients.forEach(patient-> System.out.println("patient"+patient));
+		
+		Patient patient=new Patient();
+		patient.setDateDeNaissance("0000-00-00");
+		patient.setAdresse("7557 eregtrhrthrthet");
+		patient.setTelephone("755-778-6746");
+		patient.setGenre("F");
+				patientRepositoryImpl.addPatient(patient); 
 	}
 }
