@@ -21,8 +21,8 @@ public class AuthenticationWebSecurity {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(request -> {
 			request.requestMatchers(HttpMethod.GET, "/patient/**").hasRole("USER");
-			request.requestMatchers("/patient/creation/**").hasRole("ADMIN");
-			request.requestMatchers("/h2-console/**").permitAll();
+			request.requestMatchers("/patient/**").hasRole("ADMIN");	
+			//request.requestMatchers("/h2-console/**").permitAll();
 			request.anyRequest().authenticated();
 
 		}).httpBasic(Customizer.withDefaults());
