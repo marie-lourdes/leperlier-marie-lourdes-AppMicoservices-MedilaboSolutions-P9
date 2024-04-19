@@ -38,7 +38,7 @@ public class MicroservicePatientsApplication implements CommandLineRunner {
 		patient.setPrenom("prenomtestUpdated");
 		
 		patientRepositoryImpl.updatePatient(patient, 1);
-		String prenomModifie=patientRepositoryImpl.getOnePatient( 1).get().getPrenom();
+		String prenomModifie=patientRepositoryImpl.getPatientById( 1).getPrenom();
 		System.out.println("prenomModifie" +prenomModifie);
 
 	}
