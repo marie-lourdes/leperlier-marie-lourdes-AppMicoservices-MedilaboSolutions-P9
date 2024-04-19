@@ -21,11 +21,11 @@ public class PatientRepositoryImpl {
 		log.debug("Adding patient: {} {}", patientCreated.getPrenom(), patientCreated.getNom());
 		
 		boolean isExistingPatient = patientRepository.findAll().stream().filter(patient -> patient.getId()==patientCreated.getId()).collect(Collectors.toList()).isEmpty();
-		if(isExistingPatient) {
+		if(!isExistingPatient) {
 			throw new IllegalArgumentException("Failed to add this patient, this person already exist" + patientCreated);
 		}else {
 			patientRepository.save( patientCreated);
-			log.debug("Patient added successfully: {}", patientCreated);
+			log.debug("Patient added: {}", patientCreated);
 		}
 		
 		return patientRepository.save( patientCreated);
@@ -50,7 +50,7 @@ public class PatientRepositoryImpl {
 								+patientUpdated));
 		 patientRepository.save(existingPatientUpdated);
 		 
-		 log.debug("Patient updated successfully: {}", existingPatientUpdated);
+		 log.debug("Patient updated: {}", existingPatientUpdated);
 		return  existingPatientUpdated;
 	}
 
