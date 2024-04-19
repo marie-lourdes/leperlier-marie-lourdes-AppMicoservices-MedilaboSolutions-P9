@@ -16,15 +16,15 @@ public class PatientRepositoryImpl {
 	public Patient addPatient(Patient patient) {
 		return patientRepository.save( patient);
 	}
-	public Patient updatePatient(Patient patientUpdated,Long id) {
-		
 	
-		Patient existingpatientUpdated = patientRepository.findAll().stream()
+	public Patient updatePatient(Patient patientUpdated,long id) {
+		Patient existingpatientUpdated= new Patient();
+		existingpatientUpdated = patientRepository.findAll().stream()
 				.filter(patient -> patient.getId()==id).findFirst()
 				.map(existingPatient -> {
 					existingPatient.setNom( patientUpdated.getNom());
 					existingPatient.setPrenom( patientUpdated.getPrenom());
-					existingPatient.setDateDeNaissance( patientUpdated.getPrenom());
+					existingPatient.setDateDeNaissance( patientUpdated.getDateDeNaissance());
 					existingPatient.setGenre( patientUpdated.getGenre());
 					existingPatient.setAdresse( patientUpdated.getAdresse());
 					existingPatient.setTelephone( patientUpdated.getTelephone());
@@ -32,16 +32,14 @@ public class PatientRepositoryImpl {
 				}).orElseThrow(
 						() -> new NullPointerException("Failed to update patient, :"
 								+patientUpdated));
-	/*	if(!patientRepository.findAll().contains(patient.getId())) {
-			patientUpdated= patientRepository.save( patient);
-		}*/
+		 patientRepository.save(existingpatientUpdated);
 		return  existingpatientUpdated;
 	}
 	public List<Patient> getAllPatients() {
 		return patientRepository.findAll();
 	}
 	
-	public Optional<Patient> getOnePatient(Long id) {
+	public Optional<Patient> getOnePatient(long id) {
 		
 		return patientRepository.findById(id);
 	}
