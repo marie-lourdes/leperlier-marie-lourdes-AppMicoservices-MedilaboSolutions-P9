@@ -1,5 +1,6 @@
 package com.medilabo.microservicepatients.model;
 
+import com.medilabo.microservicepatients.utils.MessageErrorValidationCustomized;
 import com.medilabo.microservicepatients.utils.RegexConstant;
 
 import jakarta.persistence.Column;
@@ -31,20 +32,20 @@ public class Patient {
 	
 	@NotBlank
 	@Column(name = "date_de_naissance")
-	@Pattern(regexp = RegexConstant.REGEX_DATE, message = "la date de naissance doit avoir le format suivant: YYYY-MM-DD")
+	@Pattern(regexp = RegexConstant.REGEX_DATE, message = MessageErrorValidationCustomized.ERROR_MSG_BIRTHDATE_PATTERN)
 	private String dateDeNaissance;
 	
 	@NotBlank
 	@Column(name = "genre")
-	@Pattern(regexp = RegexConstant.REGEX_GENRE, message = "Le genre doit indiqué avec 'F' pour féminin et 'M' pour  masculin et en majuscule ")
+	@Pattern(regexp = RegexConstant.REGEX_GENDER, message = MessageErrorValidationCustomized.ERROR_MSG_GENDER_PATTERN)
 	private String genre;
 
 	@Column(name = "adresse")
-	@Pattern(regexp = RegexConstant.REGEX_ADDRESS, message = "l'adresse doit avoir le format suivant: 000 nom de la voie, rue")
+	@Pattern(regexp = RegexConstant.REGEX_ADDRESS, message = MessageErrorValidationCustomized.ERROR_MSG_ADDRESS_PATTERN)
 	private String adresse;
 
 	@Column(name = "telephone")
-	@Pattern(regexp = RegexConstant.REGEX_PHONE, message = "le numéro de téléphone doit avoir le format suivant: 000-000-0000")
+	@Pattern(regexp = RegexConstant.REGEX_PHONE, message = MessageErrorValidationCustomized.ERROR_MSG_PHONE_PATTERN)
 	private String telephone;
 
 }
