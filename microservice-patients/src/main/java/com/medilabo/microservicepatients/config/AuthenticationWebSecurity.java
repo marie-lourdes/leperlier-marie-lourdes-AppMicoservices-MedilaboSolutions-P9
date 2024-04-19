@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class AuthentificationWebSecurity {
+public class AuthenticationWebSecurity {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -27,8 +27,7 @@ public class AuthentificationWebSecurity {
 
 		}).httpBasic(Customizer.withDefaults());
 
-		http.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));// desactive le header securité cors pour le
-																			// path vers la bdd H2
+		http.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));// desactive le header securité cors pour le path vers la bdd H2
 		return http.build();
 	}
 
