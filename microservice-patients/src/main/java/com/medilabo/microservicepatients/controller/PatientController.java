@@ -40,7 +40,7 @@ public class PatientController {
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());
 
-			ResponseEntity<Patient> responseEntityNoValid = this.returnResponseEntityEmptyAndCode400();
+			ResponseEntity<Patient> responseEntityNoValid = this.returnResponseEntityEmptyAndCode409();
 			log.error(e.getMessage());
 			return responseEntityNoValid;
 		}
@@ -109,7 +109,7 @@ public class PatientController {
 		return new ResponseEntity<Patient>(HttpStatus.NOT_FOUND);
 	}
 
-	private ResponseEntity<Patient> returnResponseEntityEmptyAndCode400() {
-		return new ResponseEntity<Patient>(HttpStatus.BAD_REQUEST);
+	private ResponseEntity<Patient> returnResponseEntityEmptyAndCode409() {
+		return new ResponseEntity<Patient>(HttpStatus.CONFLICT);
 	}
 }

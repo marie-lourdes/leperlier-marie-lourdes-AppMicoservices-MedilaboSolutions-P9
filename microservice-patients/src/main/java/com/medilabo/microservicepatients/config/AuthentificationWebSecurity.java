@@ -21,13 +21,14 @@ public class AuthentificationWebSecurity {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(request -> {
 			request.requestMatchers(HttpMethod.GET, "/patient/**").hasRole("USER");
-			request.requestMatchers("/patient/**").hasRole("ADMIN");	
+			request.requestMatchers("/patient/creation/**").hasRole("ADMIN");
 			request.requestMatchers("/h2-console/**").permitAll();
 			request.anyRequest().authenticated();
 
-		}).formLogin(Customizer.withDefaults()).logout((logout) -> logout.permitAll());
+		}).httpBasic(Customizer.withDefaults());
 
-		http.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));// desactive le header securité cors pour le path vers la bdd H2
+		http.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));// desactive le header securité cors pour le
+																			// path vers la bdd H2
 		return http.build();
 	}
 
