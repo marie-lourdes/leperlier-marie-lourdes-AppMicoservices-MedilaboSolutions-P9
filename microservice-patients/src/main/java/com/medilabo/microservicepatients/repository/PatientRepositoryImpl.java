@@ -24,7 +24,6 @@ public class PatientRepositoryImpl {
 		if(!isExistingPatient) {
 			throw new IllegalArgumentException("Failed to add this patient, this person already exist" + patientCreated);
 		}else {
-			patientRepository.save( patientCreated);
 			log.debug("Patient added: {}", patientCreated);
 		}
 		

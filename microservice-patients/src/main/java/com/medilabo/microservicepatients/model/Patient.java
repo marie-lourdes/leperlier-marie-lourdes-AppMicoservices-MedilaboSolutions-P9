@@ -30,19 +30,19 @@ public class Patient {
 	private String nom;
 	
 	@Column(name="date_de_naissance")
-	@Pattern(regexp = RegexConstant.REGEX_DATE)
+	@Pattern(regexp = RegexConstant.REGEX_DATE, message="la date de naissance doit avoir le format suivant: YYYY-MM-DD")
 	private String dateDeNaissance;
 	
 	@Column(name="genre")
-	@Pattern(regexp = RegexConstant.REGEX_GENRE)
+	@Pattern(regexp = RegexConstant.REGEX_GENRE,message="Le genre doit indiqué avec 'F' pour féminin et 'M' pour  masculin et en majuscule ")
 	private String genre;
 	
 	@Column(name="adresse")
-	@Pattern(regexp = RegexConstant.REGEX_ADDRESS)
+	@Pattern(regexp = RegexConstant.REGEX_ADDRESS,message="l'adresse doit avoir le format suivant: 000 nom de la voie, rue")
 	private String adresse;
 	
 	@Column(name="telephone")
-	@Pattern(regexp = RegexConstant.REGEX_PHONE)
+	@Pattern(regexp = RegexConstant.REGEX_PHONE, message="le numéro de téléphone doit avoir le format suivant: 000-000-0000")
 	private String telephone;
 	
 }
