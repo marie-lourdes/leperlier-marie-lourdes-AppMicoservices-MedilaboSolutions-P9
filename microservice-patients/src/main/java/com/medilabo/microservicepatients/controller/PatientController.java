@@ -87,7 +87,7 @@ public class PatientController {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<List<Patient>> getPatientById() {
+	public ResponseEntity<List<Patient>> getAllPatients() {
 
 		List<Patient> patientFoundById = new ArrayList<>();
 		try {
