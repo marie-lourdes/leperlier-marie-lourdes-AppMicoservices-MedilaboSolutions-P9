@@ -28,11 +28,13 @@ public class Patient {
 	@NotBlank
 	@Column(name = "nom")
 	private String nom;
-
+	
+	@NotBlank
 	@Column(name = "date_de_naissance")
 	@Pattern(regexp = RegexConstant.REGEX_DATE, message = "la date de naissance doit avoir le format suivant: YYYY-MM-DD")
 	private String dateDeNaissance;
-
+	
+	@NotBlank
 	@Column(name = "genre")
 	@Pattern(regexp = RegexConstant.REGEX_GENRE, message = "Le genre doit indiqué avec 'F' pour féminin et 'M' pour  masculin et en majuscule ")
 	private String genre;

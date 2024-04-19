@@ -63,17 +63,17 @@ public class PatientController {
 			return responseEntityNoValid;
 		}
 
-		ResponseEntity<Patient> responseEntityValid = ResponseEntity.status(HttpStatus.OK).body( personUpdated);
+		ResponseEntity<Patient> responseEntityValid = ResponseEntity.status(HttpStatus.OK).body(personUpdated);
 		log.info("Patient updated successfully", responseEntityValid);
-		return responseEntityValid ;
+		return responseEntityValid;
 	}
-	
+
 	@GetMapping("/info-patient/{id}")
 	public ResponseEntity<Patient> getPatientById(@PathVariable long id) {
 
 		Patient patientFoundById = new Patient();
 		try {
-			 patientFoundById = patientRepositoryImpl.getPatientById(id);
+			patientFoundById = patientRepositoryImpl.getPatientById(id);
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 
@@ -81,27 +81,28 @@ public class PatientController {
 			return responseEntityNoValid;
 		}
 
-		ResponseEntity<Patient> responseEntityValid = ResponseEntity.status(HttpStatus.OK).body( patientFoundById);
+		ResponseEntity<Patient> responseEntityValid = ResponseEntity.status(HttpStatus.OK).body(patientFoundById);
 		log.info("Patient retrieved successfully", responseEntityValid);
-		return responseEntityValid ;
+		return responseEntityValid;
 	}
-	
+
 	@GetMapping("/list")
-	public ResponseEntity<List<Patient>>getPatientById( ) {
+	public ResponseEntity<List<Patient>> getPatientById() {
 
 		List<Patient> patientFoundById = new ArrayList<>();
 		try {
-			 patientFoundById = patientRepositoryImpl.getAllPatients();
+			patientFoundById = patientRepositoryImpl.getAllPatients();
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 
-			ResponseEntity<List<Patient>> responseEntityNoValid = new ResponseEntity<List<Patient>> (HttpStatus.NOT_FOUND);
+			ResponseEntity<List<Patient>> responseEntityNoValid = new ResponseEntity<List<Patient>>(
+					HttpStatus.NOT_FOUND);
 			return responseEntityNoValid;
 		}
 
-		ResponseEntity<List<Patient>> responseEntityValid = ResponseEntity.status(HttpStatus.OK).body( patientFoundById);
+		ResponseEntity<List<Patient>> responseEntityValid = ResponseEntity.status(HttpStatus.OK).body(patientFoundById);
 		log.info("List of patients retrieved successfully", responseEntityValid);
-		return ResponseEntity.status(HttpStatus.OK).body( patientFoundById);
+		return ResponseEntity.status(HttpStatus.OK).body(patientFoundById);
 	}
 
 	private ResponseEntity<Patient> returnResponseEntityEmptyAndCode404() {
