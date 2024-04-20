@@ -1,6 +1,8 @@
 package com.medilabo.microservicepatients.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -9,7 +11,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,23 +25,23 @@ class PatientServiceTest {
 	@MockBean
 	private PatientService patientServiceUnderTest;
 
-	private Patient patient2;
+	private Patient patientTest;
 
 	@BeforeEach
 	void setPerTest() {
-		patient2 = new Patient();
-		patient2.setId(6);
-		patient2.setPrenom("prenomtest2");
-		patient2.setNom("nomtest2");
-		patient2.setDateDeNaissance("1970-01-01");
-		patient2.setAdresse("33 Hazelton Avenue 2nd Floor Toronto,");
-		patient2.setTelephone("778-945-3170");
-		patient2.setGenre("F");
+		patientTest = new Patient();
+		patientTest.setId(6);
+		patientTest.setPrenom("prenomtest2");
+		patientTest.setNom("nomtest2");
+		patientTest.setDateDeNaissance("1970-01-01");
+		patientTest.setAdresse("33 Hazelton Avenue 2nd Floor Toronto,");
+		patientTest.setTelephone("778-945-3170");
+		patientTest.setGenre("F");
 		List<Patient> allPatients = new ArrayList<>();
-		allPatients.add(patient2);
-		when(patientServiceUnderTest.addPatient(patient2)).thenReturn(patient2);
+		allPatients.add(patientTest);
+		when(patientServiceUnderTest.addPatient(patientTest)).thenReturn(patientTest);
 		when(patientServiceUnderTest.getAllPatients()).thenReturn(allPatients);
-		// patientServiceUnderTest.addPatient(patient);
+		when(patientServiceUnderTest.getPatientById(6)).thenReturn(patientTest);
 	}
 
 	@Test
@@ -68,17 +69,49 @@ class PatientServiceTest {
 	void testAddPatientDuplicated() throws Exception {
 
 		try {
-			patientServiceUnderTest.addPatient(patient2);
+			patientServiceUnderTest.addPatient(patientTest);
 
 			List<Patient> allPatients = patientServiceUnderTest.getAllPatients();
 			assertTrue(allPatients.stream().filter(patient -> patient.getId() == 6).count() ==1);
 		} catch (IllegalArgumentException e) {
-			assertThrows(IllegalArgumentException.class, () -> patientServiceUnderTest.addPatient(patient2));
+			assertThrows(IllegalArgumentException.class, () -> patientServiceUnderTest.addPatient(patientTest));
 		} catch (AssertionError e) {
 			fail(e.getMessage());
 		}
 	}
 
 	@Test
-	void testupdatePatient() throws Exception {}
+	void testupdatePatient() throws Exception {
+		String	existingPatientbirthDate= patientServiceUnderTest.getPatientById(6).getDateDeNaissance();
+		assertEquals(existingPatientbirthDate,patientTest.getDateDeNaissance());
+	    
+		try {	  
+			patientTest.setDateDeNaissance("1970-01-02");
+			patientServiceUnderTest.updatePatient(patientTest, 6);
+			Patient patientFoundByIdUpdated= patientServiceUnderTest.getPatientById(6);
+		
+			assertNotEquals(patientFoundByIdUpdated.getDateDeNaissance(),existingPatientbirthDate);
+		} catch (AssertionError e) {
+			fail(e.getMessage());
+		}
+		
+	}
+
+	@Test
+	void testupdatePatient_WithNoExistingPatient() throws Exception {
+		when(patientServiceUnderTest.getPatientById(1)).thenThrow(NullPointerException.class);
+	    
+		try {	  
+			patientTest.setDateDeNaissance("1970-01-02");
+			patientServiceUnderTest.updatePatient(patientTest, 1);
+			Patient patientFoundByIdUpdated= patientServiceUnderTest.getPatientById(1);
+		
+			assertNull(patientFoundByIdUpdated);
+		} catch (NullPointerException e) {
+			assertThrows(NullPointerException.class, () -> patientServiceUnderTest.getPatientById(1));
+		}catch (AssertionError e) {
+			fail(e.getMessage());
+		}
+		
+	}
 }

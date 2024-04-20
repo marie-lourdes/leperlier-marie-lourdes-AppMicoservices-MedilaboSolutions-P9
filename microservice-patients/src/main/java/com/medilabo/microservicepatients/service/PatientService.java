@@ -3,6 +3,7 @@ package com.medilabo.microservicepatients.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,16 +25,18 @@ public class PatientService {
 	public Patient addPatient(Patient patientCreated) throws IllegalArgumentException {
 		log.debug("Adding patient: {} {}", patientCreated.getPrenom(), patientCreated.getNom());
 
-		/*boolean isExistingPatient = patientRepository.findAll().stream()
-				.filter(patient -> patient.getId() == patientCreated.getId()).collect(Collectors.toList()).isEmpty();*/
+		/*
+		 * boolean isExistingPatient = patientRepository.findAll().stream()
+		 * .filter(patient -> patient.getId() ==
+		 * patientCreated.getId()).collect(Collectors.toList()).isEmpty();
+		 */
 		if (isPatientDuplicated(patientCreated)) {
 			throw new IllegalArgumentException(
 					"Failed to add this patient, this person already exist" + patientCreated);
 		} else {
 			log.debug("Patient added: {}", patientCreated);
+			return patientRepository.save(patientCreated);
 		}
-
-		return patientRepository.save(patientCreated);
 	}
 
 	public Patient updatePatient(Patient patientUpdated, long id) {
@@ -80,15 +83,16 @@ public class PatientService {
 	private boolean isPatientDuplicated(Patient patientCreated) {
 		Optional<Patient> patientFoundByFirstNameAndLastName = patientRepository
 				.findByPrenomAndNom(patientCreated.getPrenom(), patientCreated.getNom());
-		
-		boolean isExistingPatientById = patientCreated.getId()== patientFoundByFirstNameAndLastName.get().getId() ;
-		boolean isExistingPatientByBirthdate = patientCreated.getDateDeNaissance()
-				.equals(patientFoundByFirstNameAndLastName.get().getDateDeNaissance());
-		if (isExistingPatientById && isExistingPatientByBirthdate) {
-			return true;
+		if (!patientFoundByFirstNameAndLastName.isEmpty()) {
 
-		}else {
-			return false;
+			boolean isExistingPatientByBirthdate = patientCreated.getDateDeNaissance()
+					.equals(patientFoundByFirstNameAndLastName.get().getDateDeNaissance());
+			if (isExistingPatientByBirthdate) {
+				return true;
+
+			}
 		}
+		return false;
 	}
+
 }
