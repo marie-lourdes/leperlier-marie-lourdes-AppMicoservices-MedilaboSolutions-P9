@@ -1,4 +1,4 @@
-package com.medilabo.microservicepatients.repository;
+package com.medilabo.microservicepatients.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -9,10 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.medilabo.microservicepatients.model.Patient;
-import com.medilabo.microservicepatients.service.PatientService;
 
 @SpringBootTest
-class PatientRepositoryImplTest {
+class PatientServiceTest {
 	
     @MockBean
 	private PatientService patientRepositoryImplUnderTest = new  PatientService() ;
