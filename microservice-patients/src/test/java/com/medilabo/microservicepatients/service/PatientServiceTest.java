@@ -2,6 +2,7 @@ package com.medilabo.microservicepatients.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -72,7 +73,7 @@ class PatientServiceTest {
 			patientServiceUnderTest.addPatient(patientTest);
 
 			List<Patient> allPatients = patientServiceUnderTest.getAllPatients();
-			assertTrue(allPatients.stream().filter(patient -> patient.getId() == 6).count() ==1);
+			assertTrue(allPatients.stream().filter(patient -> patient.getId() == 6).count() == 1);
 		} catch (IllegalArgumentException e) {
 			assertThrows(IllegalArgumentException.class, () -> patientServiceUnderTest.addPatient(patientTest));
 		} catch (AssertionError e) {
@@ -82,19 +83,18 @@ class PatientServiceTest {
 
 	@Test
 	void testupdatePatient() throws Exception {
-		String	existingPatientbirthDate= patientServiceUnderTest.getPatientById(6).getDateDeNaissance();
-		assertEquals(existingPatientbirthDate,patientTest.getDateDeNaissance());
-	    
-		try {	  
+		String existingPatientbirthDate = patientServiceUnderTest.getPatientById(6).getDateDeNaissance();
+		assertEquals(existingPatientbirthDate, patientTest.getDateDeNaissance());
+
+		try {
 			patientTest.setDateDeNaissance("1970-01-02");
 			patientServiceUnderTest.updatePatient(patientTest, 6);
-			Patient patientFoundByIdUpdated= patientServiceUnderTest.getPatientById(6);
-		
-			assertNotEquals(patientFoundByIdUpdated.getDateDeNaissance(),existingPatientbirthDate);
+			Patient resultPatientFoundByIdUpdated = patientServiceUnderTest.getPatientById(6);
+
+			assertNotEquals(resultPatientFoundByIdUpdated.getDateDeNaissance(), existingPatientbirthDate);
 		} catch (AssertionError e) {
 			fail(e.getMessage());
 		}
-		
 	}
 
 	@Test
@@ -104,14 +104,64 @@ class PatientServiceTest {
 		try {	  
 			patientTest.setDateDeNaissance("1970-01-02");
 			patientServiceUnderTest.updatePatient(patientTest, 1);
-			Patient patientFoundByIdUpdated= patientServiceUnderTest.getPatientById(1);
+			Patient resultPatientFoundByIdUpdated= patientServiceUnderTest.getPatientById(1);
 		
-			assertNull(patientFoundByIdUpdated);
+			assertNull(resultPatientFoundByIdUpdated);
 		} catch (NullPointerException e) {
 			assertThrows(NullPointerException.class, () -> patientServiceUnderTest.getPatientById(1));
 		}catch (AssertionError e) {
 			fail(e.getMessage());
+		}	
+	}
+
+	@Test
+	void getPatientById() throws Exception {
+		try {
+			Patient resultPatientFoundById = patientServiceUnderTest.getPatientById(6);
+
+			assertNotNull(resultPatientFoundById);
+		} catch (AssertionError e) {
+			fail(e.getMessage());
 		}
+	}
+
+	@Test
+	void getPatientById_WithPatientNotFound() throws Exception {
+		when(patientServiceUnderTest.getPatientById(6)).thenThrow(NullPointerException.class);
+		try {
+			Patient resultPatientFoundById = patientServiceUnderTest.getPatientById(6);
+
+			assertNotNull(resultPatientFoundById );
+		}catch (NullPointerException e) {
+			assertThrows(NullPointerException.class, () -> patientServiceUnderTest.getPatientById(6)); 
+		}catch (AssertionError e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testGetAllPatients() throws Exception {
+		try {
+			List<Patient> resultAllPatients = patientServiceUnderTest.getAllPatients();
+
+			assertTrue(resultAllPatients.size() >= 1);
+		} catch (AssertionError e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testGetAllPatients_WithListPatientsEmpty()throws Exception {
+		when(patientServiceUnderTest.getAllPatients()).thenReturn(new ArrayList<>());
 		
+		try {
+			List<Patient> resultAllPatients = patientServiceUnderTest.getAllPatients();
+
+			assertTrue(resultAllPatients.size()==0);
+		}catch (NullPointerException e) {
+			assertThrows(NullPointerException.class, () -> patientServiceUnderTest.getPatientById(6));  
+		}catch (AssertionError e) {
+			fail(e.getMessage());
+		}
 	}
 }
