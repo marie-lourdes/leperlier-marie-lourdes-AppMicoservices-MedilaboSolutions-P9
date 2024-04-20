@@ -82,7 +82,7 @@ class PatientServiceTest {
 	}
 
 	@Test
-	void testupdatePatient() throws Exception {
+	void testUpdatePatient() throws Exception {
 		String existingPatientbirthDate = patientServiceUnderTest.getPatientById(6).getDateDeNaissance();
 		assertEquals(existingPatientbirthDate, patientTest.getDateDeNaissance());
 
@@ -98,7 +98,7 @@ class PatientServiceTest {
 	}
 
 	@Test
-	void testupdatePatient_WithNoExistingPatient() throws Exception {
+	void testUpdatePatient_WithNoExistingPatient() throws Exception {
 		when(patientServiceUnderTest.getPatientById(1)).thenThrow(NullPointerException.class);
 	    
 		try {	  
@@ -115,7 +115,7 @@ class PatientServiceTest {
 	}
 
 	@Test
-	void getPatientById() throws Exception {
+	void testGetPatientById() throws Exception {
 		try {
 			Patient resultPatientFoundById = patientServiceUnderTest.getPatientById(6);
 
@@ -126,7 +126,7 @@ class PatientServiceTest {
 	}
 
 	@Test
-	void getPatientById_WithPatientNotFound() throws Exception {
+	void testGetPatientById_WithPatientNotFound() throws Exception {
 		when(patientServiceUnderTest.getPatientById(6)).thenThrow(NullPointerException.class);
 		try {
 			Patient resultPatientFoundById = patientServiceUnderTest.getPatientById(6);
