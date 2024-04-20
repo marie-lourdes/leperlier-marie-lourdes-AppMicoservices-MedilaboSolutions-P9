@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medilabo.microservicepatients.model.Patient;
-import com.medilabo.microservicepatients.repository.PatientRepositoryImpl;
+import com.medilabo.microservicepatients.service.PatientService;
 
 import jakarta.validation.Valid;
 
@@ -28,7 +28,7 @@ public class PatientController {
 	private static final Logger log = LogManager.getLogger(PatientController.class);
 
 	@Autowired
-	private PatientRepositoryImpl patientRepositoryImpl;
+	private PatientService patientRepositoryImpl;
 
 	@PostMapping("/creation")
 	public ResponseEntity<Patient> createPatient(@Valid @RequestBody Patient person) {

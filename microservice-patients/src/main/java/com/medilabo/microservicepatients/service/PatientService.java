@@ -1,4 +1,4 @@
-package com.medilabo.microservicepatients.repository;
+package com.medilabo.microservicepatients.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,13 +7,14 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.medilabo.microservicepatients.model.Patient;
+import com.medilabo.microservicepatients.repository.IPatientRepository;
 
-@Component
-public class PatientRepositoryImpl {
-	private static final Logger log = LogManager.getLogger(PatientRepositoryImpl.class);
+@Service
+public class PatientService {
+	private static final Logger log = LogManager.getLogger(PatientService.class);
 	@Autowired
 	private IPatientRepository patientRepository;
 

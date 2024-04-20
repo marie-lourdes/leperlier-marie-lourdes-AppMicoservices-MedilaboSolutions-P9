@@ -1,27 +1,20 @@
 package com.medilabo.microservicepatients;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.medilabo.microservicepatients.model.Patient;
-import com.medilabo.microservicepatients.repository.PatientRepositoryImpl;
-
 @SpringBootApplication
-public class MicroservicePatientsApplication implements CommandLineRunner {
+public class MicroservicePatientsApplication {
 
-	@Autowired
-	private PatientRepositoryImpl patientRepositoryImpl;
+	/*@Autowired
+	private PatientRepositoryImpl patientRepositoryImpl;*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroservicePatientsApplication.class, args);
 	}
 
 	// for test CRUD operation
-	@Override
+	/*@Override
 	public void run(String... args) {
 		List<Patient> allPatients = patientRepositoryImpl.getAllPatients();
 		System.out.println("patient" + allPatients);
@@ -41,6 +34,6 @@ public class MicroservicePatientsApplication implements CommandLineRunner {
 		String prenomModifie=patientRepositoryImpl.getPatientById( 1).getPrenom();
 		System.out.println("prenomModifie" +prenomModifie);
 
-	}
+	}*/
 
 }

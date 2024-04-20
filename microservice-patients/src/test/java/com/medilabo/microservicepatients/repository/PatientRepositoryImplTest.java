@@ -9,12 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.medilabo.microservicepatients.model.Patient;
+import com.medilabo.microservicepatients.service.PatientService;
 
 @SpringBootTest
 class PatientRepositoryImplTest {
 	
     @MockBean
-	private PatientRepositoryImpl patientRepositoryImplUnderTest = new  PatientRepositoryImpl() ;
+	private PatientService patientRepositoryImplUnderTest = new  PatientService() ;
 	
 	private Patient patient;
 	
