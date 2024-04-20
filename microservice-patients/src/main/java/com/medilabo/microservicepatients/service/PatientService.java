@@ -59,6 +59,7 @@ public class PatientService {
 		Patient patientFoundById = new Patient();
 		patientFoundById = patientRepository.findById(id)
 				.orElseThrow(() -> new NullPointerException("Patient not found, :" + id));
+		
 		log.debug("Patient retrieved successfully for id : {}", id);
 		return patientFoundById;
 	}
@@ -67,10 +68,11 @@ public class PatientService {
 		log.debug("Retrieving  all patients");
 		List<Patient> allPatients = new ArrayList<>();
 		allPatients = patientRepository.findAll();
+		
 		if (allPatients.isEmpty()) {
 			throw new NullPointerException("List of patients is empty");
-
 		}
+		
 		return allPatients;
 	}
 
@@ -88,5 +90,4 @@ public class PatientService {
 		}
 		return false;
 	}
-
 }

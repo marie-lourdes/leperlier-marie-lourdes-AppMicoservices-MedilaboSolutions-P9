@@ -22,12 +22,11 @@ import com.medilabo.microservicepatients.model.Patient;
 
 @SpringBootTest
 class PatientServiceTest {
-
+	private Patient patientTest;
+	
 	@MockBean
 	private PatientService patientServiceUnderTest;
-
-	private Patient patientTest;
-
+	
 	@BeforeEach
 	void setPerTest() {
 		patientTest = new Patient();
