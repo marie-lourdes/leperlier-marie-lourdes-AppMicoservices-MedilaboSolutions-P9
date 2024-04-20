@@ -27,7 +27,7 @@ public class AuthenticationWebSecurity {
 
 		}).httpBasic(Customizer.withDefaults());
 
-		http.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));// desactive le header securité cors pour le path vers la bdd H2
+		http.csrf(csrf -> csrf.ignoringRequestMatchers("/patient/**"));// desactive le header securité cors pour le path 
 		return http.build();
 	}
 
