@@ -24,11 +24,6 @@ public class PatientService {
 	public Patient addPatient(Patient patientCreated) throws IllegalArgumentException {
 		log.debug("Adding patient: {} {}", patientCreated.getPrenom(), patientCreated.getNom());
 
-		/*
-		 * boolean isExistingPatient = patientRepository.findAll().stream()
-		 * .filter(patient -> patient.getId() ==
-		 * patientCreated.getId()).collect(Collectors.toList()).isEmpty();
-		 */
 		if (isPatientDuplicated(patientCreated)) {
 			throw new IllegalArgumentException(
 					"Failed to add this patient, this person already exist" + patientCreated);
