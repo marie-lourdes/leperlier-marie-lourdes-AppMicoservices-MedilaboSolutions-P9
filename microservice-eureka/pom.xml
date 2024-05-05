@@ -11,7 +11,6 @@
 	<groupId>com.medilabo</groupId>
 	<artifactId>microservice-eureka</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>microservice-eureka</name>
 	<description>Eureka-server for application microservices medilabo solutions enterprise</description>
 	<properties>
 		<java.version>17</java.version>
@@ -21,6 +20,12 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<exclusions>
+	            <exclusion>
+	                <groupId>commons-logging</groupId>
+	                <artifactId>commons-logging</artifactId>
+	            </exclusion>
+        	</exclusions>
 		</dependency>
 
 		<dependency>
