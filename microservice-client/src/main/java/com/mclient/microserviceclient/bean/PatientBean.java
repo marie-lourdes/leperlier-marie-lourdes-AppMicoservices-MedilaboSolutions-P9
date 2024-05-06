@@ -1,15 +1,5 @@
 package com.mclient.microserviceclient.bean;
 
-import com.medilabo.microservicepatients.model.Patient;
-import com.medilabo.microservicepatients.utils.MessageErrorValidationCustomized;
-import com.medilabo.microservicepatients.utils.RegexConstant;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data

@@ -11,7 +11,6 @@
 	<groupId>com.medilabo</groupId>
 	<artifactId>microservice-API-Gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>microservice-API-Gateway</name>
 	<description>microservice Gateway to connect all microservices  with microservice-client of application Medilabo solutions enterprise</description>
 	<properties>
 		<java.version>17</java.version>
