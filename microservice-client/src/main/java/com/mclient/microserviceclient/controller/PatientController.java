@@ -17,14 +17,14 @@ import com.mclient.microserviceclient.proxy.IMicroservicePatientsProxy;
 public class PatientController {
 	@Autowired
 	IMicroservicePatientsProxy microservicePatientsProxy;
-	
-	  @GetMapping("/patients")
-	    public String accueil(Model model){
 
-	        ResponseEntity<List<PatientBean>> patients =  microservicePatientsProxy.getAllPatients();
+	@GetMapping("/patients")
+	public String accueil(Model model) {
 
-	        model.addAttribute("patients", patients);
+		ResponseEntity<List<PatientBean>> patients = microservicePatientsProxy.getAllPatients();
 
-	        return "Patients";
-	    }
+		model.addAttribute("patients", patients);
+
+		return "Patients";
+	}
 }
