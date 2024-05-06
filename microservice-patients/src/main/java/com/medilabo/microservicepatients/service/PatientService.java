@@ -2,7 +2,6 @@ package com.medilabo.microservicepatients.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,9 +23,8 @@ public class PatientService {
 	public Patient addPatient(Patient patientCreated) throws IllegalArgumentException {
 		log.debug("Adding patient: {} {}", patientCreated.getPrenom(), patientCreated.getNom());
 
-			return patientRepository.save(patientCreated);
-		}
-	
+		return patientRepository.save(patientCreated);
+	}
 
 	public Patient updatePatient(Patient patientUpdated, long id) {
 		log.debug("Adding patient: {} {}", patientUpdated.getPrenom(), patientUpdated.getNom());
@@ -42,19 +40,19 @@ public class PatientService {
 
 		Patient patientFoundById = new Patient();
 		patientFoundById = patientRepository.findById(id).orElseGet(null);
-		
+
 		log.debug("Patient retrieved successfully for id : {}", id);
 		return patientFoundById;
 	}
-	
+
 	public Patient getPatientByFullname(String prenom, String nom) {
-		log.debug("Retrieving  one patient  {}",prenom+nom);
+		log.debug("Retrieving  one patient  {}", prenom + nom);
 
 		Patient patientFoundByFullname = new Patient();
 		patientFoundByFullname = patientRepository.findByPrenomAndNom(prenom, nom)
-				.orElseThrow(()-> new NullPointerException("Patient not found by full name"));
-		
-		log.debug("Patient retrieved successfully for : {}", prenom+nom);
+				.orElseThrow(() -> new NullPointerException("Patient not found by full name"));
+
+		log.debug("Patient retrieved successfully for : {}", prenom + nom);
 		return patientFoundByFullname;
 	}
 
