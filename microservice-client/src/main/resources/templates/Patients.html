@@ -49,9 +49,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:if="${contacts.empty}">
-						<td colspan="6">Vous n'avez pas de contacts</td>
-					</tr>
 					<tr th:each="patient: ${patients}">
 						<td><span th:text="${patient.prenom}"> Nom </span></td>
 						<td><span th:text="${patient.nom}"> Prénom </span></td>

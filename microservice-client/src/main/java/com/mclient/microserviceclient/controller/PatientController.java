@@ -17,11 +17,15 @@ import com.mclient.microserviceclient.proxy.IMicroservicePatientsProxy;
 public class PatientController {
 	@Autowired
 	private IMicroservicePatientsProxy microservicePatientsProxy;
-
+	
+/*	public PatientController( IMicroservicePatientsProxy microservicePatientsProxy){
+		this.microservicePatientsProxy=microservicePatientsProxy;
+	}
+	public PatientController() {}*/
 	@GetMapping("/patients")
 	public String accueil(Model model) {
 
-		ResponseEntity<List<PatientBean>> patients = microservicePatientsProxy.getAllPatients();
+		List<PatientBean> patients = microservicePatientsProxy.getAllPatients();
 
 		model.addAttribute("patients", patients);
 
