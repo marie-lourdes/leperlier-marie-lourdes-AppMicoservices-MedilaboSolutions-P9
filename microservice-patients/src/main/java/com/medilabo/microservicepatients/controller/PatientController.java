@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.medilabo.microservicepatients.exceptions.PatientConflictException;
+import com.medilabo.microservicepatients.exceptions.PatientNotFoundException;
 import com.medilabo.microservicepatients.model.Patient;
 import com.medilabo.microservicepatients.service.PatientService;
 
@@ -28,17 +28,22 @@ public class PatientController {
 	private static final Logger log = LogManager.getLogger(PatientController.class);
 
 	@Autowired
-	private PatientService patientRepositoryImpl;
+	private PatientService patientService;
 
 	@PostMapping("/creation")
 	public Patient createPatient(@Valid @RequestBody Patient patient) {
-
-		Patient personCreated = new Patient();
+		Patient patientCreated = new Patient();
+				
 		try {
-			personCreated = patientRepositoryImpl.addPatient(patient);
-
-		} catch (IllegalArgumentException e) {
+			if (isPatientDuplicated(patient)) {
+				return null;		
+			}			
+			log.debug("Patient added: {}", patientCreated);
+			patientCreated= patientService.addPatient(patient);
+			
+		} catch (NullPointerException e) {
 			log.error(e.getMessage());
+			 throw new PatientConflictException("Failed to add this patient, this person already exist" + patientCreated); 
 
 			/*ResponseEntity<Patient> responseEntityNoValid = this.returnResponseEntityEmptyAndCode409();
 			log.error(e.getMessage());
@@ -48,26 +53,40 @@ public class PatientController {
 		/*ResponseEntity<Patient> responseEntityValid = ResponseEntity.status(HttpStatus.CREATED).body(personCreated);
 		log.info("Patient added successfully {}", responseEntityValid);*/
 		//return responseEntityValid;
-		return personCreated;
+		return patientCreated;
 	}
 
 	@PutMapping("/modification")
-	public Patient updateOnePatientById(@Valid @RequestBody Patient patient, @RequestParam long id) {
-
-		Patient personUpdated = new Patient();
+	public Patient updateOnePatientById(@Valid @RequestBody Patient patientUpdated, @RequestParam long id) {
+		Patient existingPatientUpdated = new Patient();
 		try {
-			personUpdated = patientRepositoryImpl.updatePatient(patient, id);
+		//Patient patientUpdated = new Patient();
+		
+	
+		existingPatientUpdated = patientService.getAllPatients().stream().filter(patient -> patient.getId() == id)
+				.findFirst().map(existingPatient -> {
+					existingPatient.setNom(patientUpdated.getNom());
+					existingPatient.setPrenom(patientUpdated.getPrenom());
+					existingPatient.setDateDeNaissance(patientUpdated.getDateDeNaissance());
+					existingPatient.setGenre(patientUpdated.getGenre());
+					existingPatient.setAdresse(patientUpdated.getAdresse());
+					existingPatient.setTelephone(patientUpdated.getTelephone());
+					return existingPatient;
+				}).orElseThrow(() -> new NullPointerException("Failed to update patient, :" + patientUpdated));
+		
+		
+		 patientService.updatePatient(existingPatientUpdated, id);
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-
+			  throw new PatientNotFoundException("Patient not found "+id);
 			//ResponseEntity<Patient> responseEntityNoValid = this.returnResponseEntityEmptyAndCode404();
 			//return responseEntityNoValid;
 		}
 
-	/*	ResponseEntity<Patient> responseEntityValid = ResponseEntity.status(HttpStatus.OK).body(personUpdated);
+	/*	ResponseEntity<Patient> responseEntityValid = ResponseEntity.status(HttpStatus.OK).body(patientUpdated);
 		log.info("Patient updated successfully", responseEntityValid);*/
 	//	return responseEntityValid;
-		return personUpdated;
+		return existingPatientUpdated ;
 	}
 
 	@GetMapping("/info-patient/{id}")
@@ -75,10 +94,11 @@ public class PatientController {
 
 		Patient patientFoundById = new Patient();
 		try {
-			patientFoundById = patientRepositoryImpl.getPatientById(id);
+			patientFoundById = patientService.getPatientById(id);
+			
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-
+			  throw new PatientNotFoundException("Patient not found for id "+id);
 			/*ResponseEntity<Patient> responseEntityNoValid = this.returnResponseEntityEmptyAndCode404();
 			return responseEntityNoValid;*/
 		}
@@ -94,9 +114,10 @@ public class PatientController {
 
 		List<Patient> patientFoundById = new ArrayList<>();
 		try {
-			patientFoundById = patientRepositoryImpl.getAllPatients();
+			patientFoundById = patientService.getAllPatients();
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
+		//	  throw new PatientNotFoundException("Patient not found for id "+id);
 
 		/*	ResponseEntity<List<Patient>> responseEntityNoValid = new ResponseEntity<List<Patient>>(
 					HttpStatus.NOT_FOUND);
@@ -116,4 +137,18 @@ public class PatientController {
 	private ResponseEntity<Patient> returnResponseEntityEmptyAndCode409() {
 		return new ResponseEntity<Patient>(HttpStatus.CONFLICT);
 	}*/
-}
+	private boolean isPatientDuplicated(Patient patientCreated) throws NullPointerException{
+		Patient patientFoundByFirstNameAndLastName = patientService
+				.getPatientByFullname(patientCreated.getPrenom(), patientCreated.getNom());
+		if (!(patientFoundByFirstNameAndLastName == null)) {
+
+			boolean isExistingPatientByBirthdate = patientCreated.getDateDeNaissance()
+					.equals(patientFoundByFirstNameAndLastName.getDateDeNaissance());
+			if (isExistingPatientByBirthdate) {
+				return true;
+
+			}
+		}
+		return false;
+	}
+	}
