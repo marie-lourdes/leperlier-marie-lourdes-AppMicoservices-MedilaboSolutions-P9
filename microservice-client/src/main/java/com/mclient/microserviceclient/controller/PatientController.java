@@ -16,7 +16,7 @@ import com.mclient.microserviceclient.proxy.IMicroservicePatientsProxy;
 @RequestMapping("accueil")
 public class PatientController {
 	@Autowired
-	IMicroservicePatientsProxy microservicePatientsProxy;
+	private IMicroservicePatientsProxy microservicePatientsProxy;
 
 	@GetMapping("/patients")
 	public String accueil(Model model) {
