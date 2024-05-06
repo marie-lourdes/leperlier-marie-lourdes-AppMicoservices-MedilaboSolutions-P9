@@ -13,15 +13,15 @@ import com.mclient.microserviceclient.bean.PatientBean;
 @FeignClient(name ="microservice-API-Gateway")
 public interface IMicroservicePatientsProxy {
 
-	@PostMapping("/creation")
+	@PostMapping("/MICROSERVICE-PATIENTS/creation")
 	public ResponseEntity<PatientBean> createPatient(PatientBean person);
 	
-	@PutMapping("/modification")
+	@PutMapping("/MICROSERVICE-PATIENTS/modification")
 	public ResponseEntity<PatientBean > updateOnePatientById( PatientBean  patient, long id) ;
 	
-	@GetMapping("/info-patient/{id}")
+	@GetMapping("/MICROSERVICE-PATIENTS/info-patient/{id}")
 	public ResponseEntity<PatientBean> getPatientById(long id); 
 	
-	@GetMapping("/list")
+	@GetMapping("MICROSERVICE-PATIENTS/list")
 	public ResponseEntity<List<PatientBean>> getAllPatients() ;
 }
