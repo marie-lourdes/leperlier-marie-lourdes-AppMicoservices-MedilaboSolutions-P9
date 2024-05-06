@@ -31,11 +31,11 @@ public class PatientController {
 	private PatientService patientRepositoryImpl;
 
 	@PostMapping("/creation")
-	public ResponseEntity<Patient> createPatient(@Valid @RequestBody Patient person) {
+	public ResponseEntity<Patient> createPatient(@Valid @RequestBody Patient patient) {
 
 		Patient personCreated = new Patient();
 		try {
-			personCreated = patientRepositoryImpl.addPatient(person);
+			personCreated = patientRepositoryImpl.addPatient(patient);
 
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());
