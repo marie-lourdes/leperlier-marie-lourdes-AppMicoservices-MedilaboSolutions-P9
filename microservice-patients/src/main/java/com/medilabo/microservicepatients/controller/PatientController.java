@@ -50,7 +50,7 @@ public class PatientController {
 	}
 
 	@PutMapping("/modification")
-	public Patient updateOnePatientById(@Valid @RequestBody Patient patientUpdated, @RequestParam long id) {
+	public Patient updateOnePatientById(@Valid @RequestBody Patient patientUpdated, @RequestParam Integer id) {
 		Patient existingPatientUpdated = new Patient();
 		try {
 
@@ -76,7 +76,7 @@ public class PatientController {
 	}
 
 	@GetMapping("/info-patient/{id}")
-	public Patient getPatientById(@PathVariable long id) {
+	public Patient getPatientById(@PathVariable Integer id) {
 
 		Patient patientFoundById = new Patient();
 		try {

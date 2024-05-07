@@ -35,7 +35,7 @@ public class PatientService {
 		return patientUpdated;
 	}
 
-	public Patient getPatientById(long id) {
+	public Patient getPatientById(Integer id) {
 		log.debug("Retrieving  one patient for id {}", id);
 
 		Patient patientFoundById = new Patient();

@@ -21,10 +21,10 @@ public interface IMicroservicePatientsProxy {
 	PatientBean createPatient(@Valid @RequestBody PatientBean patient);
 
 	@PutMapping("/MICROSERVICE-PATIENTS/patient/modification")
-	PatientBean updateOnePatientById(@Valid @RequestBody PatientBean patient, @RequestParam long id);
+	PatientBean updateOnePatientById(@Valid @RequestBody PatientBean patient, @RequestParam Integer id);
 
 	@GetMapping("/MICROSERVICE-PATIENTS/patient/info-patient/{id}")
-	PatientBean getPatientById(@PathVariable long id) ;
+	PatientBean getPatientById(@PathVariable Integer  id) ;
 
 	@GetMapping("MICROSERVICE-PATIENTS/patient/list")
 	List<PatientBean> getAllPatients() ;
