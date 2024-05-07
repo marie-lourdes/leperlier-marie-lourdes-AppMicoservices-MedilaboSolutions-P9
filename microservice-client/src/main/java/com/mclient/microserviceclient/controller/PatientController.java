@@ -35,7 +35,6 @@ public class PatientController {
 			if (result.hasErrors()) {
 				return "FormPatient";
 			}
-	
 			microservicePatientsProxy.createPatient(patient);
 		
         }catch(Exception e) {
