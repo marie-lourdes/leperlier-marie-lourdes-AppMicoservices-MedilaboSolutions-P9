@@ -1,6 +1,5 @@
 package com.mclient.microserviceclient.controller;
 
-
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -24,33 +23,73 @@ import jakarta.validation.Valid;
 @RequestMapping("home")
 public class PatientController {
 	private static final Logger log = LogManager.getLogger(PatientController.class);
-	
+
 	@Autowired
 	private IMicroservicePatientsProxy microservicePatientsProxy;
-	
-	@PostMapping("/formPatient")
-	public String formPatientPage(@Valid @ModelAttribute PatientBean patient, BindingResult result ) {
-      
-        try {
+
+	@PostMapping("/validateFormPatient")
+	public String formPatientPage(@Valid @ModelAttribute PatientBean patient, BindingResult result) {
+
+		try {
 			if (result.hasErrors()) {
 				return "FormPatient";
 			}
 			microservicePatientsProxy.createPatient(patient);
-		
-        }catch(Exception e) {
-        	log.error(e.getMessage());
-        }
-        return "patients";
+			log.info("Patient created sucessfully{} :", patient);
+
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		return "¨Patients";
 	}
-	
+
 	@GetMapping("/formPatient")
 	public String formPatientPage(Model model) {
-        PatientBean patient = new PatientBean();
-		//List<PatientBean> patients = microservicePatientsProxy.getAllPatients();
+		PatientBean patient = new PatientBean();
+		// List<PatientBean> patients = microservicePatientsProxy.getAllPatients();
 
 		model.addAttribute("patient", patient);
-
+		log.info(" Patient  form  page successfully retrieved");
 		return "FormPatient";
+	}
+
+	@PostMapping("/updateFormPatient/{id}")
+	public String updateUser(@Valid @ModelAttribute PatientBean patientUpdated, @PathVariable("id") Integer id,
+			BindingResult result) {
+		try {
+			if (result.hasErrors()) {
+				return "UpdateFormPatient";
+			}
+
+			microservicePatientsProxy.updateOnePatientById(patientUpdated, id);
+
+			log.info("Patient updated sucessfully{}, id: {}", patientUpdated, id);
+			return "Patients";
+
+		} catch (NullPointerException e) {
+			log.error(e.getMessage());
+			return "UpdateFormPatient";
+		}
+
+	}
+
+	@GetMapping("/updateFormPatient/{id}")
+	public String UpdateFormPatientPage(@PathVariable("id") Integer id, Model model) {
+		PatientBean patientToUpdate = new PatientBean();
+		try {
+			patientToUpdate = microservicePatientsProxy.getPatientById(id);
+			if (patientToUpdate != null) {
+				model.addAttribute("user", patientToUpdate);
+			}
+
+			log.info(" Patient  form update page successfully retrieved");
+			return "UpdateFormPatient";
+			// return Constants.USER_UPDATE_PAGE;
+		} catch (NullPointerException e) {
+			log.error(e.getMessage());
+			return "error404";
+			// return Constants.ERROR_404_PAGE;
+		}
 	}
 
 	@GetMapping("/patients")
@@ -62,9 +101,9 @@ public class PatientController {
 
 		return "Patients";
 	}
-	
+
 	@GetMapping("/info-patient/{id}")
-	public String infoPatientPage( @PathVariable Integer id, Model model) {
+	public String infoPatientPage(@PathVariable Integer id, Model model) {
 
 		PatientBean patient = microservicePatientsProxy.getPatientById(id);
 

@@ -38,11 +38,10 @@
 			Invalid infomations
 		</div>
 		<main>
-			<form th:action="@{/validateFormPatient}" method="post" th:object="${patient}">
-
+			<h1> Ajouter un Patient</h1>
+			<form th:action="@{home/validateFormPatient}" method="post" th:object="${patient}">
 				<div class="login-field">
 					<div class="login-field--fontawesome">
-						<i class="fa-regular fa-envelope"></i>
 						<input th:field="*{prenom}" type="text" name="prenom" required placeholder="Prénom" />
 					</div>
 				</div>
@@ -58,19 +57,16 @@
 				</div>
 				<div class="login-field">
 					<div class="login-field--fontawesome">
-						<i class="fa-solid fa-asterisk"></i>
 						<input th:field="*{genre}" type="text" name="genre" required placeholder="genre" />
 					</div>
 				</div>
 					<div class="login-field">
 					<div class="login-field--fontawesome">
-						<i class="fa-solid fa-asterisk"></i>
 						<input th:field="*{adresse}" type="text" name="adresse" required placeholder="Adresse" />
 					</div>
 				</div>
 					<div class="login-field">
 					<div class="login-field--fontawesome">
-						<i class="fa-solid fa-asterisk"></i>
 						<input th:field="*{telephone}" type="text" name="telephone" required placeholder="Téléphone" />
 					</div>
 				</div>
