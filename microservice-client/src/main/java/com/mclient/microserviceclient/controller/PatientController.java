@@ -28,8 +28,4 @@ public class PatientController {
 		return "Patients";
 	}
 
-	@GetMapping("/**")
-	public String error(Model model) {
-		return "error404";
-	}
 }
