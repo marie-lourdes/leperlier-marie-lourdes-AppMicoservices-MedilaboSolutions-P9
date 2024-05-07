@@ -23,6 +23,7 @@
 				<ul>
 					<li><a th:href="@{/home}">Accueil</a></li>
 					<li><a th:href="@{/home/patients}">Liste des patients</a></li>
+					<li><a th:href="@{/home/formPatient}">Formulaire</a></li>
 					<li><a th:href="@{/home/report-patient}">Rapport</a></li>
 					<li><a th:href="@{/logout}">Log off</a></li>
 				</ul>
@@ -56,9 +57,13 @@
 						<td><span th:text="${patient.genre}"> Genre</span></td>
 						<td><span th:text="${patient.adresse}"> Adresse </span></td>
 						<td><span th:text="${patient.telephone}"> Téléphone</span></td>
+							<td style="width: 15%" class="text-center">
+							<a th:href="@{/user/update/{id}(id=${patient.id})}">Modifier</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
+			<div class="button-styled"><a th:href="@{/home/formPatient}"class="button-form">Ajouter</a ></div>
 			</section>
 		</main>
 	</div>
