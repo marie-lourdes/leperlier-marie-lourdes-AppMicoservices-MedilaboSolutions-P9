@@ -21,9 +21,9 @@
 			</a>
 			<nav>
 				<ul>
-					<li><a th:href="@{/home}">Home</a></li>
-					<li><a th:href="@{/home/list-patients}">Transfer</a></li>
-					<li><a th:href="@{/home/report-patient}">Contact</a></li>
+					<li><a th:href="@{/home}">Accueil</a></li>
+					<li><a th:href="@{/home/patients}">Liste des patients</a></li>
+					<li><a th:href="@{/home/report-patient}">Rapport</a></li>
 					<li><a th:href="@{/logout}">Log off</a></li>
 				</ul>
 			</nav>
@@ -38,12 +38,12 @@
 			<section class="section-contacts " >
 			<h1 id="contacts">Accueil</h1>
 				<p>Bienvenue</p>
-		<div class="col-6 text-right" sec:authorize="isAuthenticated()">
+		<!--<div class="col-6 text-right" sec:authorize="isAuthenticated()">
 				<p>Bienvenue: <b class="user" sec:authentication="name"></b></p>
 				<form th:action="@{/logout}" method="post">
 					<input type="submit" value="Logout" />
 				</form>
-			</div>
+			</div>-->
 			</section>
 		</main>
 	</div>
