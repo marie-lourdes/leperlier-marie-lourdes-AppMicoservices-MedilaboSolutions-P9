@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+	<!--<link th:href="@{/css/main.css}" rel="stylesheet" />-->
+	<title>Formulaire Patient</title>
+</head>
+
+<body>
+	<header>
+		<div class="title-header"> Medilabo Solutions</div>
+		<div class="nav-bar">
+			<a th:href="@{/home}">
+				<div class="button-styled button-green">
+					Accueil
+				</div>
+			</a>
+			<nav>
+				<ul>
+					<li><a th:href="@{/home}">Accueil</a></li>
+					<li><a th:href="@{/home/patients}">Liste des patients</a></li>
+					<li><a th:href="@{/home/report-patient}">Rapport</a></li>
+					<li><a th:href="@{/logout}">Log off</a></li>
+				</ul>
+			</nav>
+		</div>
+		<ul id="breadcrumb">
+			<li class="link-home"> Home / </li>
+			<li th:text="${breadcrumbContact}" class="link-active"></li>
+		</ul>
+	</header>
+	<div class="container">
+		<div class="login-error" th:if="${param.error}">
+			Invalid infomations
+		</div>
+		<main>
+			<form th:action="@{/validateFormPatientPage}" method="post" th:object="${patient}">
+
+				<div class="login-field">
+					<div class="login-field--fontawesome">
+						<i class="fa-regular fa-envelope"></i>
+						<input th:field="*{prenom}" type="text" name="prenom" required placeholder="Prénom" />
+					</div>
+				</div>
+				<div class="login-field">
+					<div class="login-field--fontawesome">
+						<input th:field="*{nom}" type="text" name="nom" required placeholder="Nom" />
+					</div>
+				</div>
+				<div class="login-field">
+					<div class="login-field--fontawesome">
+						<input th:field="*{dateDeNaissance}" type="text" name="dateDeNaissance" required placeholder="Date de naissance" />
+					</div>
+				</div>
+				<div class="login-field">
+					<div class="login-field--fontawesome">
+						<i class="fa-solid fa-asterisk"></i>
+						<input th:field="*{genre}" type="text" name="genre" required placeholder="genre" />
+					</div>
+				</div>
+					<div class="login-field">
+					<div class="login-field--fontawesome">
+						<i class="fa-solid fa-asterisk"></i>
+						<input th:field="*{adresse}" type="text" name="adresse" required placeholder="Adresse" />
+					</div>
+				</div>
+					<div class="login-field">
+					<div class="login-field--fontawesome">
+						<i class="fa-solid fa-asterisk"></i>
+						<input th:field="*{telephone}" type="text" name="telephone" required placeholder="Téléphone" />
+					</div>
+				</div>
+				<div class="button-styled"><input class="button-form" type="submit" value="Ajouter" /></div>
+			</form>
+		</main>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
