@@ -46,7 +46,7 @@ public class PatientService {
 	}
 
 	public Patient getPatientByFullname(String prenom, String nom) {
-		log.debug("Retrieving  one patient  {}", prenom + nom);
+		log.debug("Retrieving  one patient by full name {}", prenom + nom);
 
 		Patient patientFoundByFullname = new Patient();
 		patientFoundByFullname = patientRepository.findByPrenomAndNom(prenom, nom)

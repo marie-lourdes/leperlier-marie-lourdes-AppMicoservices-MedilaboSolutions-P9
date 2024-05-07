@@ -36,15 +36,14 @@ public class PatientController {
 
 		try {
 			if (isPatientDuplicated(patient)) {
-				return null;
+				throw new PatientConflictException("Failed to add this patient, this person already exist" + patient);
 			}
 			log.debug("Patient added: {}", patientCreated);
 			patientCreated = patientService.addPatient(patient);
 
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			throw new PatientConflictException(
-					"Failed to add this patient, this person already exist" + patientCreated);
+
 		}
 
 		return patientCreated;
@@ -103,18 +102,19 @@ public class PatientController {
 		return patientFoundById;
 	}
 
-	private boolean isPatientDuplicated(Patient patientCreated) throws NullPointerException {
-		Patient patientFoundByFirstNameAndLastName = patientService.getPatientByFullname(patientCreated.getPrenom(),
-				patientCreated.getNom());
-		if (!(patientFoundByFirstNameAndLastName == null)) {
+	private boolean isPatientDuplicated(Patient patientCreated) {
 
-			boolean isExistingPatientByBirthdate = patientCreated.getDateDeNaissance()
-					.equals(patientFoundByFirstNameAndLastName.getDateDeNaissance());
-			if (isExistingPatientByBirthdate) {
-				return true;
+		long hasExistingPatient = patientService.getAllPatients().stream()
+				.filter(patient -> patientCreated.getNom().equals(patient.getNom())
+						&& patientCreated.getPrenom().equals(patient.getPrenom())
+						&& patientCreated.getDateDeNaissance().equals(patient.getDateDeNaissance()))
+				.count();
 
-			}
+		if (hasExistingPatient > 0) {
+			return true;
 		}
 		return false;
+
 	}
+
 }

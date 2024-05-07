@@ -17,11 +17,7 @@ import com.mclient.microserviceclient.proxy.IMicroservicePatientsProxy;
 public class PatientController {
 	@Autowired
 	private IMicroservicePatientsProxy microservicePatientsProxy;
-	
-/*	public PatientController( IMicroservicePatientsProxy microservicePatientsProxy){
-		this.microservicePatientsProxy=microservicePatientsProxy;
-	}
-	public PatientController() {}*/
+
 	@GetMapping("/patients")
 	public String accueil(Model model) {
 
@@ -30,5 +26,10 @@ public class PatientController {
 		model.addAttribute("patients", patients);
 
 		return "Patients";
+	}
+
+	@GetMapping("/**")
+	public String error(Model model) {
+		return "error404";
 	}
 }
