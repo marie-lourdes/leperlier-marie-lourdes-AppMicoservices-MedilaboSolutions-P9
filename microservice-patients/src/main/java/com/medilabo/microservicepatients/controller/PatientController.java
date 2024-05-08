@@ -97,6 +97,7 @@ public class PatientController {
 			patientFoundById = patientService.getAllPatients();
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
+			throw new PatientNotFoundException("list of patients not found");
 		}
 
 		return patientFoundById;

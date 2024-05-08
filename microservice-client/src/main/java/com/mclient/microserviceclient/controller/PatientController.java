@@ -1,5 +1,6 @@
 package com.mclient.microserviceclient.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -37,9 +38,9 @@ public class PatientController {
 			microservicePatientsProxy.createPatient(patientCreated);
 			log.info("Patient created sucessfully{} :", patientCreated);
 
-		} catch (Exception e) {
+		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			return "FormPatient";
+			return "404";
 		}
 		return "Patients";
 	}
@@ -67,9 +68,9 @@ public class PatientController {
 			log.info("Patient updated sucessfully{}, id: {}", patientUpdated, id);
 			return "Patients";
 
-		} catch (Exception e) {
+		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			return "UpdateFormPatient";
+			return "404";
 		}
 
 	}
@@ -95,9 +96,14 @@ public class PatientController {
 
 	@GetMapping("/patients")
 	public String listPatientsPage(Model model) {
-
-		List<PatientBean> patients = microservicePatientsProxy.getAllPatients();
-
+		List<PatientBean> patients = new ArrayList<>();
+		try {
+			patients = microservicePatientsProxy.getAllPatients();
+		} catch (NullPointerException e) {
+			log.error(e.getMessage());
+			return "404";
+			// return Constants.ERROR_404_PAGE;
+		}
 		model.addAttribute("patients", patients);
 
 		return "Patients";
