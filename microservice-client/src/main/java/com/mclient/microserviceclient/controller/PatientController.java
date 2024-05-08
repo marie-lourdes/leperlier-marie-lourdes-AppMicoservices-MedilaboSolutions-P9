@@ -79,7 +79,7 @@ public class PatientController {
 		try {
 			patientToUpdate = microservicePatientsProxy.getPatientById(id);
 			if (patientToUpdate != null) {
-				model.addAttribute("user", patientToUpdate);
+				model.addAttribute("patient", patientToUpdate);
 			}
 
 			log.info(" Patient  form update page successfully retrieved");

@@ -39,7 +39,7 @@
 		</div>
 		<main>
 			<h1>  Modifier un patient</h1>
-			<form th:action="@{/updateFormPatient/{id}(id=${patient.id})" method="post" th:object="${patient}">
+			<form th:action="@{/home/updateFormPatient/{id}(id=${patient.id})}" method="post" th:object="${patient}">
 
 				<div class="login-field">
 					<div class="login-field--fontawesome">
