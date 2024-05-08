@@ -13,32 +13,29 @@
 <body>
 	<header>
 		<div class="title-header"> Medilabo Solutions</div>
-		<div class="nav-bar">
-			<a th:href="@{/home}">
-				<img th:src="/images/logo.png"/>
-				<div class="button-styled button-green">
+		<div class="nav-bar">			
+				<img th:src="@{images/img.jpg}"/>
+				<!--<div class="button-styled button-green">
 					Accueil
+				</div>-->
+	
+			<nav class="navbar navbar-expand-lg bg-body-tertiary">
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/home}" >Accueil</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/home/patients}">Liste des patients</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/home/report-patient}">Rapport</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Log off</a></li>
+					</ul>
 				</div>
-			</a>
-			<nav>
-				<ul>
-					<li><a th:href="@{/home}">Accueil</a></li>
-					<li><a th:href="@{/home/patients}">Liste des patients</a></li>
-					<li><a th:href="@{/home/report-patient}">Rapport</a></li>
-					<li><a th:href="@{/logout}">Log off</a></li>
-				</ul>
 			</nav>
 		</div>
-		<ul id="breadcrumb">
-			<li class="link-home"> Home / </li>
-			<li th:text="${breadcrumbContact}" class="link-active"></li>
-		</ul>
 	</header>
 	<div class="container">
 		<main class="main--customized ">
 			<section class="section-contacts " >
-			<h1 id="patients">Liste des patients</h1>
-			<table aria-describedby="contacts">
+			<h1 style="color: red;">Liste des patients</h1>
+			<table class="table table-striped-columns" aria-describedby="contacts">
 				<thead>
 					<tr>
 						<th>Prénom</th>
@@ -57,13 +54,13 @@
 						<td><span th:text="${patient.genre}"> Genre</span></td>
 						<td><span th:text="${patient.adresse}"> Adresse </span></td>
 						<td><span th:text="${patient.telephone}"> Téléphone</span></td>
-							<td style="width: 15%" class="text-center">
-							<a th:href="@{/home/updateFormPatient/{id}(id=${patient.id})}">Modifier</a>
+						<td style="width: 15%" class="text-center">
+							<a th:href="@{/home/updateFormPatient/{id}(id=${patient.id})}" style="color: red;">Modifier</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<div class="button-styled"><a th:href="@{/home/formPatient}"class="button-form">Ajouter</a ></div>
+			<div class="btn btn-success"><a th:href="@{/home/formPatient}"class="button-form"style="color: white;">Ajouter</a ></div>
 			</section>
 		</main>
 	</div>
