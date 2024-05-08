@@ -28,19 +28,20 @@ public class PatientController {
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 
 	@PostMapping("/validateFormPatient")
-	public String formPatientPage(@Valid @ModelAttribute PatientBean patient, BindingResult result) {
+	public String addPatient(@Valid @ModelAttribute PatientBean patientCreated, BindingResult result) {
 
 		try {
 			if (result.hasErrors()) {
 				return "FormPatient";
 			}
-			microservicePatientsProxy.createPatient(patient);
-			log.info("Patient created sucessfully{} :", patient);
+			microservicePatientsProxy.createPatient(patientCreated);
+			log.info("Patient created sucessfully{} :", patientCreated);
 
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			return "FormPatient";
 		}
-		return "¨Patients";
+		return "Patients";
 	}
 
 	@GetMapping("/formPatient")
@@ -54,7 +55,7 @@ public class PatientController {
 	}
 
 	@PostMapping("/updateFormPatient/{id}")
-	public String updateUser(@Valid @ModelAttribute PatientBean patientUpdated, @PathVariable("id") Integer id,
+	public String updatePatient(@Valid @ModelAttribute PatientBean patientUpdated, @PathVariable("id") Integer id,
 			BindingResult result) {
 		try {
 			if (result.hasErrors()) {
@@ -66,7 +67,7 @@ public class PatientController {
 			log.info("Patient updated sucessfully{}, id: {}", patientUpdated, id);
 			return "Patients";
 
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return "UpdateFormPatient";
 		}
@@ -74,7 +75,7 @@ public class PatientController {
 	}
 
 	@GetMapping("/updateFormPatient/{id}")
-	public String UpdateFormPatientPage(@PathVariable("id") Integer id, Model model) {
+	public String updateFormPatientPage(@PathVariable("id") Integer id, Model model) {
 		PatientBean patientToUpdate = new PatientBean();
 		try {
 			patientToUpdate = microservicePatientsProxy.getPatientById(id);
@@ -87,7 +88,7 @@ public class PatientController {
 			// return Constants.USER_UPDATE_PAGE;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			return "error404";
+			return "404";
 			// return Constants.ERROR_404_PAGE;
 		}
 	}

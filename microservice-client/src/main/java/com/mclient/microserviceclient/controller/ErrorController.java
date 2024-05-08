@@ -9,6 +9,6 @@ public class ErrorController {
 
 	@GetMapping("/**")
 	public String error(Model model) {
-		return "error404";
+		return "404";
 	}
 }

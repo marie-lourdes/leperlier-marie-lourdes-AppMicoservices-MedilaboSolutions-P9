@@ -39,7 +39,7 @@
 		</div>
 		<main>
 			<h1> Ajouter un Patient</h1>
-			<form th:action="@{home/validateFormPatient}" method="post" th:object="${patient}">
+			<form th:action="@{/home/validateFormPatient}" method="post" th:object="${patient}">
 				<div class="login-field">
 					<div class="login-field--fontawesome">
 						<input th:field="*{prenom}" type="text" name="prenom" required placeholder="Prénom" />

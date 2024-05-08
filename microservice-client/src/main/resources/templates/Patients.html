@@ -15,6 +15,7 @@
 		<div class="title-header"> Medilabo Solutions</div>
 		<div class="nav-bar">
 			<a th:href="@{/home}">
+				<img th:src="/images/logo.png"/>
 				<div class="button-styled button-green">
 					Accueil
 				</div>
@@ -23,7 +24,6 @@
 				<ul>
 					<li><a th:href="@{/home}">Accueil</a></li>
 					<li><a th:href="@{/home/patients}">Liste des patients</a></li>
-					<li><a th:href="@{/home/formPatient}">Formulaire</a></li>
 					<li><a th:href="@{/home/report-patient}">Rapport</a></li>
 					<li><a th:href="@{/logout}">Log off</a></li>
 				</ul>
@@ -37,7 +37,7 @@
 	<div class="container">
 		<main class="main--customized ">
 			<section class="section-contacts " >
-			<h1 id="contacts">Liste des patients</h1>
+			<h1 id="patients">Liste des patients</h1>
 			<table aria-describedby="contacts">
 				<thead>
 					<tr>
