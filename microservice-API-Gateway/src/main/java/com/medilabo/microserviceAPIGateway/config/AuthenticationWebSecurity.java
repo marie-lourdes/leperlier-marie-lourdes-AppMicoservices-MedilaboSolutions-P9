@@ -1,8 +1,5 @@
 package com.medilabo.microserviceAPIGateway.config;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,21 +13,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
+/*@Configuration
 @EnableWebSecurity
 public class AuthenticationWebSecurity {
 
-	@Bean
+@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(request -> {
-			request.requestMatchers(HttpMethod.GET, "/patient/**").hasRole("USER");
-			request.requestMatchers("/patient/**").hasRole("ADMIN");	
+			request.requestMatchers(HttpMethod.GET, "/MICROSERVICE-PATIENTS/patient/**").hasRole("USER");
+			request.requestMatchers("/MICROSERVICE-PATIENTS/patient/**").hasRole("ADMIN");	
 			//request.requestMatchers("/h2-console/**").permitAll();
 			request.anyRequest().authenticated();
 
 		}).httpBasic(Customizer.withDefaults());
 
-		http.csrf(csrf -> csrf.ignoringRequestMatchers("/patient/**"));// desactive le header securité cors pour le path 
+		//http.csrf(csrf -> csrf.ignoringRequestMatchers("/patient/**"));// desactive le header securité cors pour le path 
 		return http.build();
 	}
 
@@ -47,4 +44,4 @@ public class AuthenticationWebSecurity {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-}
+}*/
