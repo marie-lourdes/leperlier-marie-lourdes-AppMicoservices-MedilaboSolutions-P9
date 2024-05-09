@@ -1,7 +1,7 @@
-package com.medilabo.microservicepatients.config;
+package com.medilabo.microserviceAPIGateway.config;
 
 
-/*@Configuration
+@Configuration
 @EnableWebSecurity
 public class AuthenticationWebSecurity {
 
@@ -32,4 +32,4 @@ public class AuthenticationWebSecurity {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-}*/
+}
