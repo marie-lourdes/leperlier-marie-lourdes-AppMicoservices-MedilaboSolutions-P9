@@ -10,7 +10,7 @@ import feign.auth.BasicAuthRequestInterceptor;
 public class FeignAuthConfig {
 
 	@Bean
-	public BasicAuthRequestInterceptor mBasicAuthRequestInterceptor()
+	public BasicAuthRequestInterceptor basicAuthRequestInterceptor()
 
 	{
 		return new BasicAuthRequestInterceptor("root", passwordEncoder().encode("rootroot"));
