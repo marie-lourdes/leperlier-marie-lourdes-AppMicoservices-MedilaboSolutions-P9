@@ -8,17 +8,16 @@ import feign.auth.BasicAuthRequestInterceptor;
 
 @Configuration
 public class FeignAuthConfig {
-	
-	public String username= "root";
-	public String password= "rootroot";
-	 @Bean
-	   public BasicAuthRequestInterceptor mBasicAuthRequestInterceptor()
+
+	@Bean
+	public BasicAuthRequestInterceptor mBasicAuthRequestInterceptor()
 
 	{
-	      return  new BasicAuthRequestInterceptor(passwordEncoder().encode("root"), passwordEncoder().encode("rootroot"));
-	   }
-		@Bean
-		public BCryptPasswordEncoder passwordEncoder() {
-			return new BCryptPasswordEncoder();
-		}
+		return new BasicAuthRequestInterceptor("root", passwordEncoder().encode("rootroot"));
+	}
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }
