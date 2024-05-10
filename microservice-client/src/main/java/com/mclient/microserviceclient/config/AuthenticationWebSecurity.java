@@ -31,7 +31,7 @@ public class AuthenticationWebSecurity {
 
 		}).httpBasic(Customizer.withDefaults());
 
-		http.csrf(csrf -> csrf.ignoringRequestMatchers("/patient/**"));// desactive le header securité cors pour le path 
+		http.csrf(csrf -> csrf.ignoringRequestMatchers("/home/**"));// desactive le header securité cors pour le path 
 		return http.build();
 	}
 
