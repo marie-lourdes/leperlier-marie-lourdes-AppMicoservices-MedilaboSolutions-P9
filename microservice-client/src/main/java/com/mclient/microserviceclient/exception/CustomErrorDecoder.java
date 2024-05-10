@@ -15,6 +15,8 @@ public class CustomErrorDecoder implements ErrorDecoder {
 		        return new PatientConflictException(
 		              "Patient already exist"
 		        );
+	      }else if(reponse.status() == 403 || reponse.status() == 401) {
+	    	 return new PatientNotAuthorizedException("access forbidden");
 	      }
 	      return defaultErrorDecoder.decode(invoqueur, reponse);
 	}

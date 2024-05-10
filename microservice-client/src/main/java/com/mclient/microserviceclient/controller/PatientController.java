@@ -21,7 +21,7 @@ import com.mclient.microserviceclient.proxy.IMicroservicePatientsProxy;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("home/patient")
+@RequestMapping("/home/patient")
 public class PatientController {
 	private static final Logger log = LogManager.getLogger(PatientController.class);
 
@@ -38,9 +38,9 @@ public class PatientController {
 			microservicePatientsProxy.createPatient(patientCreated);
 			log.info("Patient created sucessfully{} :", patientCreated);
 			return "Patients";
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			log.error(e.getMessage());
-			return "404";
+			return "FormPatient";
 		}
 		
 	}
@@ -48,8 +48,7 @@ public class PatientController {
 	@GetMapping("/formPatient")
 	public String formPatientPage(Model model) {
 		PatientBean patient = new PatientBean();
-		// List<PatientBean> patients = microservicePatientsProxy.getAllPatients();
-
+		
 		model.addAttribute("patient", patient);
 		log.info(" Patient  form  page successfully retrieved");
 		return "FormPatient";
@@ -68,16 +67,17 @@ public class PatientController {
 			log.info("Patient updated sucessfully{}, id: {}", patientUpdated, id);
 			return "Patients";
 
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			log.error(e.getMessage());
-			return "404";
+			return "UpdateFormPatient";
+		
 		}
 
 	}
 
 	@GetMapping("/updateFormPatient/{id}")
 	public String updateFormPatientPage(@PathVariable("id") Integer id, Model model) {
-		PatientBean patientToUpdate = new PatientBean();
+		PatientBean patientToUpdate = null;
 		try {
 			patientToUpdate = microservicePatientsProxy.getPatientById(id);
 			if (patientToUpdate != null) {
@@ -89,7 +89,7 @@ public class PatientController {
 			// return Constants.USER_UPDATE_PAGE;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			return "404";
+			return "/error/404";
 			// return Constants.ERROR_404_PAGE;
 		}
 	}
@@ -99,14 +99,16 @@ public class PatientController {
 		List<PatientBean> patients = new ArrayList<>();
 		try {
 			patients = microservicePatientsProxy.getAllPatients();
+			model.addAttribute("patients", patients);
+			return "Patients";
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			return "404";
+			return "/error/404";
 			// return Constants.ERROR_404_PAGE;
 		}
-		model.addAttribute("patients", patients);
+		
 
-		return "Patients";
+		
 	}
 
 	@GetMapping("/info-patient/{id}")
@@ -115,13 +117,14 @@ public class PatientController {
 
 		try {
 			patientFoundById = microservicePatientsProxy.getPatientById(id);
+			model.addAttribute("patient", patientFoundById);
+
+			return "Info-Patient";
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			return "404";
+			return "/error/404";
 			// return Constants.ERROR_404_PAGE;
 		}
-		model.addAttribute("patient", patientFoundById);
-
-		return "Info-Patient";
+		
 	}
 }

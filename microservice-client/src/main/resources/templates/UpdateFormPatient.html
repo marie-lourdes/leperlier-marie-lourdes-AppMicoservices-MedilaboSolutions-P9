@@ -18,7 +18,7 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/home}" >Accueil</a></li>
-						<li class="nav-item"><a class="nav-link" th:href="@{/home/patients}">Liste des patients</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/home/patient/all-patients}">Liste des patients</a></li>
 						<li class="nav-item"><a class="nav-link" th:href="@{/home/report-patient}">Rapport</a></li>
 					</ul>
 				</div>
@@ -31,7 +31,7 @@
 		</div>
 		<main>
 			<h1 style="color: red;">  Modifier un patient</h1>
-			<form th:action="@{/home/updateFormPatient/{id}(id=${patient.id})}" method="post" th:object="${patient}">
+			<form th:action="@{/home/patient/updateFormPatient/{id}(id=${patient.id})}" method="post" th:object="${patient}">
 
 				<div class="login-field">
 					<div class="login-field--fontawesome">
