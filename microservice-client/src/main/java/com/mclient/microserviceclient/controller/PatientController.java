@@ -21,7 +21,7 @@ import com.mclient.microserviceclient.proxy.IMicroservicePatientsProxy;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("home")
+@RequestMapping("home/patient")
 public class PatientController {
 	private static final Logger log = LogManager.getLogger(PatientController.class);
 
@@ -37,12 +37,12 @@ public class PatientController {
 			}
 			microservicePatientsProxy.createPatient(patientCreated);
 			log.info("Patient created sucessfully{} :", patientCreated);
-
+			return "Patients";
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			return "404";
 		}
-		return "Patients";
+		
 	}
 
 	@GetMapping("/formPatient")
@@ -94,7 +94,7 @@ public class PatientController {
 		}
 	}
 
-	@GetMapping("/patients")
+	@GetMapping("/all-patients")
 	public String listPatientsPage(Model model) {
 		List<PatientBean> patients = new ArrayList<>();
 		try {

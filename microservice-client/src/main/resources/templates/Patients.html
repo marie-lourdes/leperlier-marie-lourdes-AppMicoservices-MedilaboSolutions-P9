@@ -18,7 +18,7 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/home}" >Accueil</a></li>
-						<li class="nav-item"><a class="nav-link" th:href="@{/home/patients}">Liste des patients</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/home/patient/all-patients}">Liste des patients</a></li>
 						<li class="nav-item"><a class="nav-link" th:href="@{/home/report-patient}">Rapport</a></li>
 					</ul>
 				</div>
@@ -49,12 +49,12 @@
 						<td><span th:text="${patient.adresse}"> Adresse </span></td>
 						<td><span th:text="${patient.telephone}"> Téléphone</span></td>
 						<td style="width: 15%" class="text-center">
-							<a th:href="@{/home/updateFormPatient/{id}(id=${patient.id})}" style="color: red;">Modifier</a>
+							<a th:href="@{/home/patient/updateFormPatient/{id}(id=${patient.id})}" style="color: red;">Modifier</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<div class="btn btn-success"><a th:href="@{/home/formPatient}"class="button-form"style="color: white;">Ajouter</a ></div>
+			<div class="btn btn-success"><a th:href="@{/home/patient/formPatient}"class="button-form"style="color: white;">Ajouter</a ></div>
 			</section>
 		</main>
 	</div>

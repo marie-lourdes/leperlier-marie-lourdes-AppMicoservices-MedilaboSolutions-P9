@@ -22,16 +22,16 @@ public class AuthenticationWebSecurity {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(request -> {
-			
-			request.requestMatchers(HttpMethod.GET, "/home").hasRole("USER");
-			request.requestMatchers(HttpMethod.GET, "/home/patients").hasRole("USER");
-			request.requestMatchers("/home/**").hasRole("ADMIN");	
 			request.requestMatchers("/home").permitAll();
+			//request.requestMatchers(HttpMethod.GET, "/home").hasRole("USER");
+			request.requestMatchers(HttpMethod.GET, "/home/patient/all-patients").hasRole("USER");
+			request.requestMatchers("/home/patient/**").hasRole("ADMIN");	
+	
 			request.anyRequest().authenticated();
 
 		}).httpBasic(Customizer.withDefaults());
 
-		http.csrf(csrf -> csrf.ignoringRequestMatchers("/home/**"));// desactive le header securité cors pour le path 
+		//http.csrf(csrf -> csrf.ignoringRequestMatchers("/home/**"));// desactive le header securité cors pour le path 
 		return http.build();
 	}
 
@@ -40,7 +40,7 @@ public class AuthenticationWebSecurity {
 		UserDetails user = User.builder().username("user").password(passwordEncoder().encode("user")).roles("USER")
 				.build();
 		UserDetails admin = User.builder().username("admin").password(passwordEncoder().encode("admin"))
-				.roles("USER", "ADMIN").build();
+				.roles("ADMIN").build();
 		return new InMemoryUserDetailsManager(user, admin);
 	}
 
