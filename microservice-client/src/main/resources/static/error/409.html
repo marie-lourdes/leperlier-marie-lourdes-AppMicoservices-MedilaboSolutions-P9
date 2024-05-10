@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+	<!--<link th:href="@{/css/main.css}" rel="stylesheet" />-->
+	<title>Error 409</title>
+</head>
+
+<body>
+	<header class="text-center" style="background-color:#B7D3E1;">
+		<div class="title-header" style="color:red;font-weight:bold;"> Medilabo Solutions</div>
+		<div class="nav-bar">
+		<img th:src="@{images/img.jpg}"/>
+				<!--<div class="button-styled button-green">
+					Accueil
+				</div>-->
+	
+			<nav class="navbar navbar-expand-lg bg-body-tertiary">
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/home}" >Accueil</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Log off</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<div class="container">
+		<main class="main--customized ">
+			<section style="text-align: center; margin: 30% 0;">
+			<h1 style="color: red;">Page Erreur</h1>
+			<p>Les informations fournies existent déja.</p>
+			</section>
+		</main>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
