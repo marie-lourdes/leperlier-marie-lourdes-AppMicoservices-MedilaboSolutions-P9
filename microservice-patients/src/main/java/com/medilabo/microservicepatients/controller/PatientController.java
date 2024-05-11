@@ -55,6 +55,7 @@ public class PatientController {
 
 			existingPatientUpdated = patientService.getAllPatients().stream().filter(patient -> patient.getId() == id)
 					.findFirst().map(existingPatient -> {
+						existingPatient.setId(patientUpdated.getId());
 						existingPatient.setNom(patientUpdated.getNom());
 						existingPatient.setPrenom(patientUpdated.getPrenom());
 						existingPatient.setDateDeNaissance(patientUpdated.getDateDeNaissance());

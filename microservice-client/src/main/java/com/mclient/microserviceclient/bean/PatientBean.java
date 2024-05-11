@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PatientBean {
 
-	private long id;
+	private Integer id;
 	private String prenom;
 	private String nom;
 	private String dateDeNaissance;

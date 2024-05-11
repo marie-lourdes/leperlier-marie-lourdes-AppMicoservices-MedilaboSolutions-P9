@@ -23,7 +23,7 @@ public interface IMicroservicePatientsProxy {
 	PatientBean updateOnePatientById(@Valid @RequestBody PatientBean patient, @PathVariable Integer id);
 
 	@GetMapping("/MICROSERVICE-PATIENTS/patient/info-patient/{id}")
-	PatientBean getPatientById(@PathVariable Integer  id) ;
+	PatientBean getPatientById(@PathVariable Integer id) ;
 
 	@GetMapping("MICROSERVICE-PATIENTS/patient/list")
 	List<PatientBean> getAllPatients() ;

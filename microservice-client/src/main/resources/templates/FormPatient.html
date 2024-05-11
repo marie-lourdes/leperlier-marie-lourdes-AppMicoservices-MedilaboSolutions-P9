@@ -18,7 +18,7 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/home}" >Accueil</a></li>
-						<li class="nav-item"><a class="nav-link" th:href="@{/home/patient/all-patients}">Liste des patients</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/home/all-patients}">Liste des patients</a></li>
 						<li class="nav-item"><a class="nav-link" th:href="@{/home/report-patient}">Rapport</a></li>
 					</ul>
 				</div>
@@ -31,38 +31,38 @@
 		</div>
 		<main>
 			<h1 style="color: red;"> Ajouter un Patient</h1>
-			<form th:action="@{/home/patient/validateFormPatient}" method="post" th:object="${patient}">
+			<form th:action="@{/home/validateFormPatient}" method="post" th:object="${patient}">
 				<div class="login-field">
 					<div class="login-field--fontawesome">
-						<input class="form-control" th:field="*{prenom}" type="text" name="prenom" required placeholder="Prénom" />
+						<input  th:field="*{prenom}" type="text" class="form-control" name="prenom" required placeholder="Prénom"/>
 					</div>
 				</div>
 				<div class="login-field">
 					<div class="login-field--fontawesome">
-						<input class="form-control" th:field="*{nom}" type="text" name="nom" required placeholder="Nom" />
+						<input  th:field="*{nom}" type="text" class="form-control" name="nom" required placeholder="Nom"/>
 					</div>
 				</div>
 				<div class="login-field">
 					<div class="login-field--fontawesome">
-						<input class="form-control" th:field="*{dateDeNaissance}" type="text" name="dateDeNaissance" required placeholder="Date de naissance" />
+						<input th:field="*{dateDeNaissance}" type="text"  class="form-control" name="dateDeNaissance" required placeholder="Date de naissance"/>
 					</div>
 				</div>
 				<div class="login-field">
 					<div class="login-field--fontawesome">
-						<input class="form-control" th:field="*{genre}" type="text" name="genre" required placeholder="genre" />
+						<input  th:field="*{genre}" type="text" class="form-control" name="genre" required placeholder="genre"/>
 					</div>
 				</div>
 					<div class="login-field">
 					<div class="login-field--fontawesome">
-						<input class="form-control" th:field="*{adresse}" type="text" name="adresse" required placeholder="Adresse" />
+						<input class="form-control" th:field="*{adresse}" type="text" name="adresse" placeholder="Adresse"/>
 					</div>
 				</div>
 					<div class="login-field">
 					<div class="login-field--fontawesome">
-						<input class="form-control" th:field="*{telephone}" type="text" name="telephone" required placeholder="Téléphone" />
+						<input class="form-control" th:field="*{telephone}" type="text" name="telephone" placeholder="Téléphone"/>
 					</div>
 				</div>
-				<div><input class="button-form btn btn-success" type="submit" value="Ajouter" /></div>
+				<div><input class="button-form btn btn-success" type="submit" value="Ajouter"/></div>
 			</form>
 		</main>
 	</div>

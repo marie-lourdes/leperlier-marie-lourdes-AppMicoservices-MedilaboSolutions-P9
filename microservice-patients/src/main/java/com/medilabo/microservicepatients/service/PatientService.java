@@ -26,7 +26,7 @@ public class PatientService {
 		return patientRepository.save(patientCreated);
 	}
 
-	public Patient updatePatient(Patient patientUpdated, long id) {
+	public Patient updatePatient(Patient patientUpdated,Integer id) {
 		log.debug("Adding patient: {} {}", patientUpdated.getPrenom(), patientUpdated.getNom());
 
 		patientRepository.save(patientUpdated);
