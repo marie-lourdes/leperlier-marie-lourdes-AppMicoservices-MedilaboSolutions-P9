@@ -13,11 +13,11 @@ public class FeignAuthConfig {
 	public BasicAuthRequestInterceptor basicAuthRequestInterceptor()
 
 	{
-		return new BasicAuthRequestInterceptor("root", passwordEncoder().encode("rootroot"));
+		return new BasicAuthRequestInterceptor("root","rootroot");
 	}
 
-	@Bean
+	/*@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	}
+	}*/
 }

@@ -8,14 +8,16 @@ public class CustomErrorDecoder implements ErrorDecoder {
 	
 	@Override
 	  public Exception decode(String invoqueur, Response reponse) {
-	      if(reponse.status() == 404) {
-	        return new PatientNotFoundException(
-	              "Patient not found");
-	      }else if(reponse.status() == 409) {
-		        return new PatientConflictException(
-		              "Patient already exist"
-		        );
-	      }
-	      return defaultErrorDecoder.decode(invoqueur, reponse);
+		   if(reponse.status() == 404) {
+		        return new PatientNotFoundException(
+		              "Patient not found");
+		      }else if(reponse.status() == 409) {
+			        return new PatientConflictException(
+			              "Patient already exist"
+			        );
+		      }else if(reponse.status() == 403 || reponse.status() == 401) {
+		    	 return new PatientNotAuthorizedException("access forbidden");
+		      }
+		      return defaultErrorDecoder.decode(invoqueur, reponse);
 	}
 }
