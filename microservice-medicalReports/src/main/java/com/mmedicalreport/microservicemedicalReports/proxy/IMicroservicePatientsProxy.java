@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.mmedicalreport.microservicemedicalReports.bean.PatientBean;
 
-//@FeignClient(name="microservice-patients", url="localhost:9001")
+@FeignClient(name = "microservice-patients", url = "localhost:9001")
 public interface IMicroservicePatientsProxy {
-/*	@GetMapping("/MICROSERVICE-PATIENTS/patient/info-patient/{id}")
-	PatientBean getPatientById(@PathVariable Integer id) */;
+	@GetMapping("/MICROSERVICE-PATIENTS/patient/info-patient/{id}")
+	PatientBean getPatientById(@PathVariable Integer id);
 
 }

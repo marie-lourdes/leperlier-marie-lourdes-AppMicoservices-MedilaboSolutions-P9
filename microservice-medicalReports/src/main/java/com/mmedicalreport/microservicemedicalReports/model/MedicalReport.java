@@ -12,8 +12,7 @@ import lombok.Data;
 @Document(collection="medicalreports")
 public class MedicalReport { 
 	@Id
-    private String id;
-	
-    private String patId;
+    private String id;	
+    private Integer patId;
     private List<String> note= new ArrayList<>();  
 }
