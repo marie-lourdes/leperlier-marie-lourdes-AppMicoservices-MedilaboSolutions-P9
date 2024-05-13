@@ -21,10 +21,9 @@ public class AuthenticationWebSecurity {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(request -> {
-			//request.requestMatchers(HttpMethod.GET, "/home").hasRole("USER");
-			request.requestMatchers("/home/all-patients").hasRole("USER");
-			request.requestMatchers("/home/**").hasRole("ADMIN");	
 			request.requestMatchers("/home").permitAll();	
+			request.requestMatchers(HttpMethod.GET, "/home/all-patients").hasRole("USER");
+			request.requestMatchers("/home/**").hasRole("ADMIN");	
 			request.anyRequest().authenticated();
 
 		}).httpBasic(Customizer.withDefaults());
