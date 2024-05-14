@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mmedicalreport.microservicemedicalReports.bean.PatientBean;
 import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
 import com.mmedicalreport.microservicemedicalReports.proxy.IMicroservicePatientsProxy;
-import com.mmedicalreport.microservicemedicalReports.repository.IMedicalReportRepository;
 import com.mmedicalreport.microservicemedicalReports.service.MedicalReportService;
 
 import jakarta.validation.Valid;
@@ -58,9 +57,19 @@ public class MedicalReportController {
 
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			log.error("medical report  not found for name patient " + namePatient);
-
 			// throw new PatientNotFoundException("Patient not found for id " + id);
+		}
+		return medicalReportFoundByPatient;
+	}
+	
+	public MedicalReport getPatientByPatient(@PathVariable String namePatient) {
+		MedicalReport medicalReportFoundByPatient = new MedicalReport();
+		try {
+			medicalReportFoundByPatient  = medicalReportService.getMedicalReportByNamePatient(namePatient) ;
+
+		} catch (NullPointerException e) {
+			log.error(e.getMessage());
+			//throw new PatientNotFoundException("Patient not found for id " + id);
 		}
 		return medicalReportFoundByPatient;
 	}
