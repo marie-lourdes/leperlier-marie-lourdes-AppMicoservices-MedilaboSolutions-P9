@@ -2,12 +2,12 @@ package com.mmedicalreport.microservicemedicalReports.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
 import com.mmedicalreport.microservicemedicalReports.repository.IMedicalReportRepository;
 
-
-
+@Service
 public class MedicalReportService {
 	private static final Logger log = LogManager.getLogger(MedicalReportService.class);
 
