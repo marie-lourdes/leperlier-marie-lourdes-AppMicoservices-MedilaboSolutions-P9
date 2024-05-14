@@ -3,6 +3,7 @@ package com.mmedicalreport.microservicemedicalReports.proxy;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mmedicalreport.microservicemedicalReports.bean.PatientBean;
 
@@ -10,5 +11,8 @@ import com.mmedicalreport.microservicemedicalReports.bean.PatientBean;
 public interface IMicroservicePatientsProxy {
 	@GetMapping("/MICROSERVICE-PATIENTS/patient/info-patient/{id}")
 	PatientBean getPatientById(@PathVariable Integer id);
+	
+	@GetMapping("/MICROSERVICE-PATIENTS/patient/info-patient-ByName)")
+	public PatientBean getPatientByName(@RequestParam String nom);
 
 }

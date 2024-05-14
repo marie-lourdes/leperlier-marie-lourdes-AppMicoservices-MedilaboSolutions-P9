@@ -45,14 +45,14 @@ public class PatientService {
 		return patientFoundById;
 	}
 
-	public Patient getPatientByFullname(String prenom, String nom) {
-		log.debug("Retrieving  one patient by full name {}", prenom + nom);
+	public Patient getPatientByName(String nom) {
+		log.debug("Retrieving  one patient by id and name {}"+ nom);
 
 		Patient patientFoundByFullname = new Patient();
-		patientFoundByFullname = patientRepository.findByPrenomAndNom(prenom, nom)
-				.orElseThrow(() -> new NullPointerException("Patient not found by full name"));
+		patientFoundByFullname = patientRepository.findByNom(nom)
+				.orElseThrow(() -> new NullPointerException("Patient not found by id and name "));
 
-		log.debug("Patient retrieved successfully for : {}", prenom + nom);
+		log.debug("Patient retrieved successfully for : {}"+ nom);
 		return patientFoundByFullname;
 	}
 

@@ -11,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+import com.mmedicalreport.microservicemedicalReports.bean.PatientBean;
 import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
+import com.mmedicalreport.microservicemedicalReports.proxy.IMicroservicePatientsProxy;
 import com.mmedicalreport.microservicemedicalReports.repository.IMedicalReportRepository;
 
 
@@ -22,6 +24,8 @@ public class MicroserviceMedicalReportsApplication implements CommandLineRunner{
 	private static final Logger log = LogManager.getLogger(MicroserviceMedicalReportsApplication.class);
      @Autowired
     private  IMedicalReportRepository medicalReportRepository;
+     @Autowired
+    private IMicroservicePatientsProxy  microservicePatientsProxy;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MicroserviceMedicalReportsApplication.class, args);
@@ -38,6 +42,16 @@ public class MicroserviceMedicalReportsApplication implements CommandLineRunner{
     	 log.error("MedicalReport not found");
      }
 		// log.info("MedicalReport find by patient  id: {}",  medicalReportFoundById.get().getPatId());
+	
+		 PatientBean patientFoundById = new PatientBean();
+		Integer  medicalReportPatId =medicalReportRepository.getByPatId("1").get().getPatId();
+			/*patientFoundById = microservicePatientsProxy.getPatientById(  medicalReportPatId  );
+			 if ( medicalReportPatId != null) {
+				 log.info("patientFoundById: {}",  patientFoundById.getId());
+	     } else {
+	    	 log.error("patientFoundById Proxy ");
+	     }*/
+	
 	}
-
+	
 }

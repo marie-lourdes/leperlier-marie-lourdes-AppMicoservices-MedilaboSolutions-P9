@@ -28,19 +28,20 @@ public class MedicalReportController {
 	@Autowired
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 
-	@PostMapping("/creationRapportMedical/{id}")
-	public MedicalReport createMedicalReport(@PathVariable Integer id,
-			@Valid @RequestBody MedicalReport medicalReport) {
+@PostMapping("/creationRapportMedical")
+	public MedicalReport createMedicalReport(@Valid @RequestBody MedicalReport medicalReport) {
 		MedicalReport medicalReportCreated = new MedicalReport();
-		PatientBean patientFoundById = new PatientBean();
-		patientFoundById = microservicePatientsProxy.getPatientById(medicalReport.getPatId());
-		Integer patientId = patientFoundById.getId();
-		String patientName = patientFoundById.getNom();
+		PatientBean patientFoundByName = new PatientBean();
+		//Integer  medicalReportPatId =medicalReportService.getMedicalReportByPatId(patId)("1").get().getPatId();
+		//patientFoundByName = microservicePatientsProxy.getPatientByName(medicalReport.getPatient());
+		//Integer patientId =  patientFoundByName.getId();
+		//String patientName =  patientFoundByName.getNom();
 		try {
 
 			log.debug("MedicalReport added: {}", medicalReportCreated);
-			medicalReport.setPatId(patientId);
-			medicalReport.setPatient(patientName);
+			//medicalReportCreated.setPatId(patientId);
+			//medicalReportCreated.setPatient(patientName);
+			//medicalReportCreated.setNote( medicalReport.getNote());
 			medicalReportCreated = medicalReportService.addMedicalReport(medicalReport);
 
 		} catch (NullPointerException e) {
@@ -63,7 +64,20 @@ public class MedicalReportController {
 		return medicalReportFoundByPatient;
 	}
 
-	@GetMapping("/rapport-medical-byId/{id}")
+	@GetMapping("/rapport-medical-byPatId/{patId}")
+	public MedicalReport getPatientByPatId(@PathVariable String patId) {
+		MedicalReport medicalReportFoundByPatient = new MedicalReport();
+		try {
+			medicalReportFoundByPatient = medicalReportService.getMedicalReportByPatId(patId);
+
+		} catch (NullPointerException e) {
+			log.error(e.getMessage());
+			// throw new PatientNotFoundException("Patient not found for id " + id);
+		}
+		return medicalReportFoundByPatient;
+	}
+
+	/*@GetMapping("/rapport-medical-byId/{id}")
 	public MedicalReport getPatientByPatient(@PathVariable String id) {
 		MedicalReport medicalReportFoundByPatient = new MedicalReport();
 		try {
@@ -74,5 +88,5 @@ public class MedicalReportController {
 			// throw new PatientNotFoundException("Patient not found for id " + id);
 		}
 		return medicalReportFoundByPatient;
-	}
+	}*/
 }

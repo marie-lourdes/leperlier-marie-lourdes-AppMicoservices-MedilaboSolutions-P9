@@ -15,7 +15,7 @@ public class MedicalReport {
 	@Id
     private String id;	
 	
-	@Field(name="_patid")
+	@Field(name="patid")
     private Integer patId;
     
     private String patient;

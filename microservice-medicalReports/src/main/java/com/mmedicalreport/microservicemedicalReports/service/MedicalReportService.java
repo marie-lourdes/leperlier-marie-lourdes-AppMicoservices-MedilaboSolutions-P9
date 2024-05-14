@@ -38,6 +38,7 @@ public class MedicalReportService {
 		log.debug("MedicalReport retrieved successfully for : {}", namePatient);
 		return medicalReportFoundByPatient;
 	}
+	
 	public MedicalReport getMedicalReportById(String id) {
 		log.debug("Retrieving  one medical report by id{}", id);
 
@@ -46,6 +47,17 @@ public class MedicalReportService {
 				.orElseThrow(() -> new NullPointerException("MedicalReport not found by id"));
 
 		log.debug("MedicalReport retrieved successfully for : {}", id);
+		return patientFoundById;
+	}
+	
+	public MedicalReport getMedicalReportByPatId(String patId) {
+		log.debug("Retrieving  one medical report by patient id{}", patId);
+
+		MedicalReport patientFoundById = new MedicalReport();
+		patientFoundById= medicalReportRepository.getByPatId(patId)
+				.orElseThrow(() -> new NullPointerException("MedicalReport not found by patient id :"+patId));
+
+		log.debug("MedicalReport retrieved successfully for : {}", patId);
 		return patientFoundById;
 	}
 	public List<MedicalReport> getAllMedicalReports() throws NullPointerException {
