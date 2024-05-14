@@ -54,12 +54,12 @@ public class MedicalReportController {
 		MedicalReport medicalReportFoundByPatient = new MedicalReport();
 
 		try {
-			medicalReportFoundByPatient =   medicalReportService.getMedicalReportByNamePatient(namePatient);
+			medicalReportFoundByPatient = medicalReportService.getMedicalReportByNamePatient(namePatient);
 
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			log.error("medical report  not found for name patient " + namePatient);
-			
+
 			// throw new PatientNotFoundException("Patient not found for id " + id);
 		}
 		return medicalReportFoundByPatient;
