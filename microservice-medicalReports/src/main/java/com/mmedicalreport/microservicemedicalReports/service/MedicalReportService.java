@@ -3,7 +3,6 @@ package com.mmedicalreport.microservicemedicalReports.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.medilabo.microservicepatients.model.Patient;
 import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
 import com.mmedicalreport.microservicemedicalReports.repository.IMedicalReportRepository;
 
