@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.Data;
 
@@ -14,9 +15,16 @@ public class MedicalReport {
 	@Id
     private String id;	
 	
+	@Field(name="_patid")
     private Integer patId;
     
     private String patient;
     
     private List<String> note= new ArrayList<>();  
+    
+  /*  @Override
+	public String toString() {
+		return "MedicalReport{" + "id=" + id + ",  patId='" +patId+ '\'' + ", patient='" + patient + '\''
+				+'}';
+	}*/
 }
