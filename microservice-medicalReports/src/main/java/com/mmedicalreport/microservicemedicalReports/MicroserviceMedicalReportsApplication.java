@@ -14,8 +14,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
 import com.mmedicalreport.microservicemedicalReports.repository.IMedicalReportRepository;
 
-@EnableDiscoveryClient
+
 @SpringBootApplication
+@EnableDiscoveryClient
 @EnableFeignClients("com.mmedicalreport")
 public class MicroserviceMedicalReportsApplication implements CommandLineRunner{
 	private static final Logger log = LogManager.getLogger(MicroserviceMedicalReportsApplication.class);
@@ -30,12 +31,13 @@ public class MicroserviceMedicalReportsApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		 Optional<MedicalReport> medicalReportFoundByPatient = medicalReportRepository.findByPatient("TestNone");
+		// Optional<MedicalReport> medicalReportFoundById = medicalReportRepository.findByPatId(1);
 		 if ( medicalReportFoundByPatient .isPresent()) {
-			 log.info("MedicalReport find by Patient name {}", medicalReportFoundByPatient .get().getNote().get(0));
+			 log.info("MedicalReport find by Patient name {} id: {}", medicalReportFoundByPatient.get().getNote().get(0),medicalReportFoundByPatient.get().getPatId());
      } else {
-    	 log.error("MediaclaReport not found");
+    	 log.error("MedicalReport not found");
      }
-		 
+		// log.info("MedicalReport find by patient  id: {}",  medicalReportFoundById.get().getPatId());
 	}
 
 }
