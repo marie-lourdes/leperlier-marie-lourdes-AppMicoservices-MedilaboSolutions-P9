@@ -1,9 +1,13 @@
 package com.mmedicalreport.microservicemedicalReports.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.medilabo.microservicepatients.model.MedicalReport;
 import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
 import com.mmedicalreport.microservicemedicalReports.repository.IMedicalReportRepository;
 
@@ -21,5 +25,23 @@ public class MedicalReportService {
 		log.debug("Adding patient's medical report : {} {}",medicalReportCreated.getId(), medicalReportCreated.getPatient());
 
 		return medicalReportRepository.save(medicalReportCreated);
+	}
+	
+	public MedicalReport getMedicalReportByNamePatient(String namePatient) {
+		log.debug("Retrieving  one medical report by name patient {}", namePatient);
+
+		MedicalReport patientFoundByFullname = new MedicalReport();
+		patientFoundByFullname = medicalReportRepository.findByPatient(namePatient)
+				.orElseThrow(() -> new NullPointerException("MedicalReport not found by full name"));
+
+		log.debug("MedicalReport retrieved successfully for : {}", namePatient);
+		return patientFoundByFullname;
+	}
+
+	public List<MedicalReport> getAllMedicalReports() throws NullPointerException {
+		log.debug("Retrieving  all medical reports");
+		List<MedicalReport> allMedicalReports = new ArrayList<>();
+		allMedicalReports = medicalReportRepository.findAll();
+		return allMedicalReports;
 	}
 }
