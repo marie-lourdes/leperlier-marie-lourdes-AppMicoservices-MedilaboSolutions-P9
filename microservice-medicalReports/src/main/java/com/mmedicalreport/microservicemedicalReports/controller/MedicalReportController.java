@@ -28,8 +28,9 @@ public class MedicalReportController {
 	@Autowired
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 
-	@PostMapping("/creationRapportMedical")
-	public MedicalReport createMedicalReport(@Valid @RequestBody MedicalReport medicalReport) {
+	@PostMapping("/creationRapportMedical/{id}")
+	public MedicalReport createMedicalReport(@PathVariable Integer id,
+			@Valid @RequestBody MedicalReport medicalReport) {
 		MedicalReport medicalReportCreated = new MedicalReport();
 		PatientBean patientFoundById = new PatientBean();
 		patientFoundById = microservicePatientsProxy.getPatientById(medicalReport.getPatId());
@@ -48,7 +49,7 @@ public class MedicalReportController {
 		return medicalReportCreated;
 	}
 
-	@GetMapping("/rapport-medical/{namePatient}")
+	@GetMapping("/rapport-medical-byPatient/{namePatient}")
 	public MedicalReport getMedicalReportByPatient(@PathVariable String namePatient) {
 		MedicalReport medicalReportFoundByPatient = new MedicalReport();
 
@@ -61,15 +62,16 @@ public class MedicalReportController {
 		}
 		return medicalReportFoundByPatient;
 	}
-	
-	public MedicalReport getPatientByPatient(@PathVariable String namePatient) {
+
+	@GetMapping("/rapport-medical-byId/{id}")
+	public MedicalReport getPatientByPatient(@PathVariable String id) {
 		MedicalReport medicalReportFoundByPatient = new MedicalReport();
 		try {
-			medicalReportFoundByPatient  = medicalReportService.getMedicalReportByNamePatient(namePatient) ;
+			medicalReportFoundByPatient = medicalReportService.getMedicalReportById(id);
 
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			//throw new PatientNotFoundException("Patient not found for id " + id);
+			// throw new PatientNotFoundException("Patient not found for id " + id);
 		}
 		return medicalReportFoundByPatient;
 	}
