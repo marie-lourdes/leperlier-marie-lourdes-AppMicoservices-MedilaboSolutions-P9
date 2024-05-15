@@ -47,11 +47,12 @@
 						<td><span th:text="${patient.dateDeNaissance}"> Date de naissance</span></td>
 						<td><span th:text="${patient.genre}"> Genre</span></td>
 						<td><span th:text="${patient.adresse}"> Adresse </span></td>
+						<td><span th:text="${patient.telephone}"> Téléphone</span></td>
 					</tr>
 				</tbody>
 			</table>
 			</section>
-			<section>
+			<section>	
 				<h2 style="color: red;"> Rapport médical du patient</h2>
 				<table class="table table-striped-columns" aria-describedby="patients">
 				<thead>
@@ -59,15 +60,11 @@
 						<th>Rendez-vous </th>
 						<th>Notes</th>
 					</tr>
-				</
+				</thead>
 				<tbody>
 					<tr th:each="medicalReport: ${medicalReports}">
 						<td style="line-height: 10;"><span th:text= "${#strings.substring(medicalReport.id, 5, #strings.length(medicalReport.id)-1)}"> Rendez- vous </span></td>
 						<td th:if="${medicalReport.note}" style="line-height: 2;"><div th:each="lineNote: ${medicalReport.note}" th:text=" '- ' + ${lineNote}" > Notes</div></td>
-						<!--<td><span th:text="${medicalReport.dateDeNaissance}"> Date de naissance</span></td>
-						<td><span th:text="${medicalReport.genre}"> Genre</span></td>
-						<td><span th:text="${medicalReport.adresse}"> Adresse </span></td>
-						<td><span th:text="${medicalReport.telephone}"> Téléphone</span></td>-->			
 					</tr>
 				</tbody>
 			</table>

@@ -99,8 +99,8 @@ public class PatientController {
 		return "UpdateFormPatient";
 	}
 
-	@GetMapping("/info-patient/{id}")
-	public String infoPatientPage(@PathVariable Integer id, Model model) {
+	@GetMapping("/medicalReport-patient/{id}")
+	public String reportMedicalPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientFoundById = new PatientBean();
 		List<MedicalReportBean> medicalReportsFoundByPatientId = new ArrayList<>();
 
@@ -111,9 +111,11 @@ public class PatientController {
 			log.error(e.getMessage());
 			// return Constants.ERROR_404_PAGE;
 		}
-	
+
 		model.addAttribute("patient", patientFoundById);
-		model.addAttribute("medicalReports", medicalReportsFoundByPatientId);
+		if (medicalReportsFoundByPatientId != null) {
+			model.addAttribute("medicalReports", medicalReportsFoundByPatientId);
+		}
 
 		return "Info-Patient";
 	}
