@@ -45,7 +45,7 @@ public class MedicalReportController {
 		return medicalReportCreated;
 	}
 
-	@GetMapping("/rapport-medical-byPatId/{patId}")
+	@GetMapping("/rapport-medical/{patId}")
 	public List<MedicalReport> getPatientByPatId(@PathVariable Integer patId) {
 		List<MedicalReport> medicalReportFoundByPatId = new ArrayList<>();
 		try {
