@@ -52,6 +52,34 @@
 			</table>
 			<div class="btn btn-success"><a th:href="@{/home/formPatient}"class="button-form"style="color: white;">Ajouter un compte rendu</a ></div>
 			</section>
+			<section>
+				<h2> Rapport médical du patient</h2>
+				<table class="table table-striped-columns" aria-describedby="patients">
+				<thead>
+					<tr>
+						<th>Rendez-vous </th>
+						<th>Notes</th>
+						<th>Date de naissance</th>
+						<th>Genre</th>
+						<th>Adresse</th>
+						<th>Téléphone</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="medicalReport: ${medicalReports}">
+						<td><span th:text="${medicalReport.id}"> Rendez- vous </span></td>
+						<td th:if="${medicalReport.note}"><span th:each="lineNote: ${medicalReport.note}" th:text="${lineNote}"> Notes</span></td>
+						<!--<td><span th:text="${medicalReport.dateDeNaissance}"> Date de naissance</span></td>
+						<td><span th:text="${medicalReport.genre}"> Genre</span></td>
+						<td><span th:text="${medicalReport.adresse}"> Adresse </span></td>
+						<td><span th:text="${medicalReport.telephone}"> Téléphone</span></td>-->
+						<td style="width: 15%" class="text-center">
+							<a th:href="@{/home/updateFormPatient/{id}(id=${patient.id})}" style="color: red;">Modifier</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</section>
 		</main>
 	</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

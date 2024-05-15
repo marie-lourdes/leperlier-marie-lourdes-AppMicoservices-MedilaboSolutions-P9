@@ -103,16 +103,17 @@ public class PatientController {
 	@GetMapping("/info-patient/{id}")
 	public String infoPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientFoundById = new PatientBean();
-		List<MedicalReportBean>  medicalReportBeanFoundByPatientId = new ArrayList<>();
+		List<MedicalReportBean>  medicalReportsFoundByPatientId = new ArrayList<>();
 
 		try {
 			patientFoundById = microservicePatientsProxy.getPatientById(id);
-			medicalReportBeanFoundByPatientId= microserviceMedicalReportsProxy.getPatientByPatId(id);
+			medicalReportsFoundByPatientId= microserviceMedicalReportsProxy.getPatientByPatId(id);
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			// return Constants.ERROR_404_PAGE;
 		}
 		model.addAttribute("patient", patientFoundById);
+		model.addAttribute("medicalReports", medicalReportsFoundByPatientId);
 
 		return "Info-Patient";
 	}
