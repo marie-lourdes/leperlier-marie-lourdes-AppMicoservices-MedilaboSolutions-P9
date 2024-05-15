@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mclient.microserviceclient.bean.MedicalReportBean;
 import com.mclient.microserviceclient.bean.PatientBean;
+import com.mclient.microserviceclient.proxy.IMicroserviceMedicalReportsProxy;
 import com.mclient.microserviceclient.proxy.IMicroservicePatientsProxy;
 
 import jakarta.validation.Valid;
@@ -27,6 +29,9 @@ public class PatientController {
 
 	@Autowired
 	private IMicroservicePatientsProxy microservicePatientsProxy;
+	
+	@Autowired
+	private  IMicroserviceMedicalReportsProxy  microserviceMedicalReportsProxy; 
 
 	@PostMapping("/validateFormPatient")
 	public String addPatient(@Valid @ModelAttribute PatientBean patientCreated, BindingResult result) {
@@ -98,10 +103,11 @@ public class PatientController {
 	@GetMapping("/info-patient/{id}")
 	public String infoPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientFoundById = new PatientBean();
+		List<MedicalReportBean>  medicalReportBeanFoundByPatientId = new ArrayList<>();
 
 		try {
 			patientFoundById = microservicePatientsProxy.getPatientById(id);
-			
+			medicalReportBeanFoundByPatientId= microserviceMedicalReportsProxy.getPatientByPatId(id);
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			// return Constants.ERROR_404_PAGE;
