@@ -23,6 +23,7 @@ public class AuthenticationWebSecurity {
 		http.authorizeHttpRequests(request -> {
 			request.requestMatchers("/home").permitAll();	
 			request.requestMatchers(HttpMethod.GET, "/home/all-patients").hasRole("USER");
+			request.requestMatchers( "/home/info-patient/**").hasRole("USER");
 			request.requestMatchers("/home/**").hasRole("ADMIN");	
 			request.anyRequest().authenticated();
 

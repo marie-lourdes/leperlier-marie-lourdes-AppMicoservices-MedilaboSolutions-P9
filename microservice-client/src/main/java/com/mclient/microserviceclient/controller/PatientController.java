@@ -95,6 +95,21 @@ public class PatientController {
 		return "UpdateFormPatient";
 	}
 
+	@GetMapping("/info-patient/{id}")
+	public String infoPatientPage(@PathVariable Integer id, Model model) {
+		PatientBean patientFoundById = new PatientBean();
+
+		try {
+			patientFoundById = microservicePatientsProxy.getPatientById(id);
+			
+		} catch (NullPointerException e) {
+			log.error(e.getMessage());
+			// return Constants.ERROR_404_PAGE;
+		}
+		model.addAttribute("patient", patientFoundById);
+
+		return "Info-Patient";
+	}
 	@GetMapping("/all-patients")
 	public String listPatientsPage(Model model) {
 		List<PatientBean> patients = new ArrayList<>();
@@ -112,19 +127,5 @@ public class PatientController {
 		
 	}
 
-	@GetMapping("/info-patient/{id}")
-	public String infoPatientPage(@PathVariable Integer id, Model model) {
-		PatientBean patientFoundById = new PatientBean();
 
-		try {
-			patientFoundById = microservicePatientsProxy.getPatientById(id);
-			
-		} catch (NullPointerException e) {
-			log.error(e.getMessage());
-			// return Constants.ERROR_404_PAGE;
-		}
-		model.addAttribute("patient", patientFoundById);
-
-		return "Info-Patient";
-	}
 }
