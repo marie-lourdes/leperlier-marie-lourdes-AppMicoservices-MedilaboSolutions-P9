@@ -2,6 +2,7 @@ package com.mmedicalreport.microservicemedicalReports.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,46 +21,49 @@ public class MedicalReportService {
 		this.medicalReportRepository = medicalReportRepository;
 	}
 
-	public MedicalReport addMedicalReport(MedicalReport medicalReportCreated)
-			throws IllegalArgumentException {
+	public MedicalReport addMedicalReport(MedicalReport medicalReportCreated) {
 		log.debug("Adding patient's medical report : {} {}", medicalReportCreated.getId(),
 				medicalReportCreated.getPatient());
 
 		return medicalReportRepository.save(medicalReportCreated);
 	}
 
-	public MedicalReport getMedicalReportByNamePatient(String namePatient) {
-		log.debug("Retrieving  one medical report by name patient {}", namePatient);
+	public List<MedicalReport> getMedicalReportByPatId(Integer patId) {
+		log.debug("Retrieving  one medical report by patient id{}", patId);
 
-		MedicalReport medicalReportFoundByPatient = new MedicalReport();
-		medicalReportFoundByPatient= medicalReportRepository.findByPatient(namePatient)
-				.orElseThrow(() -> new NullPointerException("MedicalReport not found by full name"));
+		List<MedicalReport> medicalRecordsFoundByPatId = new ArrayList<>();
+		medicalRecordsFoundByPatId = medicalReportRepository.findAll().stream()
+				.filter(report -> report.getPatId() == patId).collect(Collectors.toList());
 
-		log.debug("MedicalReport retrieved successfully for : {}", namePatient);
-		return medicalReportFoundByPatient;
+		if (medicalRecordsFoundByPatId.isEmpty()) {
+			throw new NullPointerException("MedicalReport not found by patient id :" + patId);
+		}
+
+		log.debug("MedicalReport retrieved successfully for : {}", patId);
+		return medicalRecordsFoundByPatId;
 	}
 	
-	public MedicalReport getMedicalReportById(String id) {
+	/*public MedicalReport getMedicalReportByNamePatient(String namePatient) {
+	log.debug("Retrieving  one medical report by name patient {}", namePatient);
+
+	MedicalReport medicalReportFoundByPatient = new MedicalReport();
+	medicalReportFoundByPatient= medicalReportRepository.findByPatient(namePatient)
+			.orElseThrow(() -> new NullPointerException("MedicalReport not found by full name"));
+
+	log.debug("MedicalReport retrieved successfully for : {}", namePatient);
+	return medicalReportFoundByPatient;
+     }*/
+	/*public MedicalReport getMedicalReportById(String id) {
 		log.debug("Retrieving  one medical report by id{}", id);
 
-		MedicalReport patientFoundById = new MedicalReport();
-		patientFoundById= medicalReportRepository.findById(id)
+		MedicalReport medicalReportFoundById = new MedicalReport();
+		medicalReportFoundById = medicalReportRepository.findById(id)
 				.orElseThrow(() -> new NullPointerException("MedicalReport not found by id"));
 
 		log.debug("MedicalReport retrieved successfully for : {}", id);
-		return patientFoundById;
-	}
-	
-	public MedicalReport getMedicalReportByPatId(String patId) {
-		log.debug("Retrieving  one medical report by patient id{}", patId);
+		return medicalReportFoundById;
+	}*/
 
-		MedicalReport patientFoundById = new MedicalReport();
-		patientFoundById= medicalReportRepository.getByPatId(patId)
-				.orElseThrow(() -> new NullPointerException("MedicalReport not found by patient id :"+patId));
-
-		log.debug("MedicalReport retrieved successfully for : {}", patId);
-		return patientFoundById;
-	}
 	public List<MedicalReport> getAllMedicalReports() throws NullPointerException {
 		log.debug("Retrieving  all medical reports");
 		List<MedicalReport> allMedicalReports = new ArrayList<>();

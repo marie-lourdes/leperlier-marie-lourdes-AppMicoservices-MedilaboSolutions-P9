@@ -1,5 +1,6 @@
 package com.mmedicalreport.microservicemedicalReports.model;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +18,15 @@ public class MedicalReport {
 	
 	@Field(name="patid")
     private Integer patId;
-    
+
     private String patient;
+     
+    private List<String> note= new ArrayList<>(); 
     
-    private List<String> note= new ArrayList<>();  
-    
-  /*  @Override
+      
+    @Override
 	public String toString() {
-		return "MedicalReport{" + "id=" + id + ",  patId='" +patId+ '\'' + ", patient='" + patient + '\''
-				+'}';
-	}*/
+		return "MedicalReport{" + "id=" + id + ",  patId=" +patId+ '\'' + ", patient=" + patient + '\''
+				+", note=" + note +'}';
+	}
 }

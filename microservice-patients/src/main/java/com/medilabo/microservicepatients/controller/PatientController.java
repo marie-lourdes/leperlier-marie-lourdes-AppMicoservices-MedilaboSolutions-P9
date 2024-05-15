@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medilabo.microservicepatients.exceptions.PatientConflictException;
@@ -89,19 +88,7 @@ public class PatientController {
 		}
 		return patientFoundById;
 	}
-	@GetMapping("/info-patient-ByName")
-	public Patient getPatientByName( @RequestParam String name) {
 
-		Patient patientFoundById = new Patient();
-		try {
-			patientFoundById = patientService.getPatientByName(name);
-
-		} catch (NullPointerException e) {
-			log.error(e.getMessage());
-			throw new PatientNotFoundException("Patient not found for id and name"+name);
-		}
-		return patientFoundById;
-	}
 	@GetMapping("/list")
 	public List<Patient> getAllPatients() {
 

@@ -1,5 +1,6 @@
 package com.mmedicalreport.microservicemedicalReports.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -13,5 +14,5 @@ public interface IMedicalReportRepository  extends MongoRepository<MedicalReport
      Optional< MedicalReport> findByPatient(String namePatient);
      
      @Query("{ 'patid' : ?0 }")
-     Optional< MedicalReport> getByPatId(String patId);
+     List< MedicalReport> getByPatId(Integer patId);
 }
