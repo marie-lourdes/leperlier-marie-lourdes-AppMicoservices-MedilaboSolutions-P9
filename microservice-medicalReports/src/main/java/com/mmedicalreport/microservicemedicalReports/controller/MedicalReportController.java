@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmedicalreport.microservicemedicalReports.exceptions.ReportMedicalNotFoundException;
 import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
 import com.mmedicalreport.microservicemedicalReports.service.MedicalReportService;
 
@@ -31,14 +32,12 @@ public class MedicalReportController {
 			@Valid @RequestBody MedicalReport medicalReport) {
 		MedicalReport medicalReportCreated = new MedicalReport();
 		try {
-
-			log.debug("MedicalReport added: {}", medicalReportCreated);
 			medicalReportCreated.setPatId(id);
 			medicalReportCreated.setPatient(medicalReport.getPatient());
 			medicalReportCreated.setNote(medicalReport.getNote());
-
+			
 			medicalReportCreated = medicalReportService.addMedicalReport(medicalReportCreated);
-
+			log.info("Medical report sucessfully created: {}", medicalReportCreated);
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 		}
@@ -50,12 +49,14 @@ public class MedicalReportController {
 		List<MedicalReport> medicalReportFoundByPatId = new ArrayList<>();
 		try {
 			medicalReportFoundByPatId = medicalReportService.getMedicalReportByPatId(patId);
-
+			
+			log.info("Medical report sucessfully retrieved for patient id: {}, {}", patId, medicalReportFoundByPatId);
+			return medicalReportFoundByPatId;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			// throw new PatientNotFoundException("Patient not found for id " + id);
+			 throw new ReportMedicalNotFoundException(" ReportMedical not found for id " + patId);
 		}
-		return medicalReportFoundByPatId;
+	
 	}
 
 	/*@GetMapping("/rapport-medical-byPatient/{namePatient}")

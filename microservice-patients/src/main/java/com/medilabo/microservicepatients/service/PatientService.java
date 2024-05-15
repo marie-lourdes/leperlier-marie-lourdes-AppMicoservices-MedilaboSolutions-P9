@@ -20,7 +20,7 @@ public class PatientService {
 		this.patientRepository = patientRepository;
 	}
 
-	public Patient addPatient(Patient patientCreated) throws IllegalArgumentException {
+	public Patient addPatient(Patient patientCreated) /*throws IllegalArgumentException*/ {
 		log.debug("Adding patient: {} {}", patientCreated.getPrenom(), patientCreated.getNom());
 
 		return patientRepository.save(patientCreated);

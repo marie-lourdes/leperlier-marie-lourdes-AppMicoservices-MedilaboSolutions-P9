@@ -37,14 +37,13 @@ public class PatientController {
 			if (isPatientDuplicated(patient)) {
 				throw new PatientConflictException("Failed to add this patient, this person already exist" + patient);
 			}
-			log.debug("Patient added: {}", patientCreated);
 			patientCreated = patientService.addPatient(patient);
-
+			
+			log.debug("Patient successfully added: {}", patientCreated);
+			
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-
 		}
-
 		return patientCreated;
 	}
 
@@ -66,10 +65,10 @@ public class PatientController {
 					}).orElseThrow(() -> new NullPointerException("Failed to update patient, :" + patientUpdated));
 
 			patientService.updatePatient(existingPatientUpdated, id);
+			log.info("Patient successfully updated : {}", existingPatientUpdated);
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			throw new PatientNotFoundException("Patient not found " + id);
-
+			throw new PatientNotFoundException("Patient not found to update for id  " + id);
 		}
 
 		return existingPatientUpdated;
@@ -81,26 +80,29 @@ public class PatientController {
 		Patient patientFoundById = new Patient();
 		try {
 			patientFoundById = patientService.getPatientById(id);
-
+			
+			log.info("Patient successfully retrieved for id : {}, {}",id,patientFoundById);
+			return patientFoundById;	
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			throw new PatientNotFoundException("Patient not found for id " + id);
-		}
-		return patientFoundById;
+		}	
 	}
 
 	@GetMapping("/list")
 	public List<Patient> getAllPatients() {
 
-		List<Patient> patientFoundById = new ArrayList<>();
+		List<Patient> allPatients = new ArrayList<>();
 		try {
-			patientFoundById = patientService.getAllPatients();
+			 allPatients = patientService.getAllPatients();
+			
+			log.info("List of Patient successfully retrieved : {}",  allPatients );
+			return  allPatients ;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			throw new PatientNotFoundException("list of patients not found");
+			throw new PatientNotFoundException("List of patients not found");
 		}
 
-		return patientFoundById;
 	}
 
 	private boolean isPatientDuplicated(Patient patientCreated) {
@@ -115,7 +117,5 @@ public class PatientController {
 			return true;
 		}
 		return false;
-
 	}
-
 }
