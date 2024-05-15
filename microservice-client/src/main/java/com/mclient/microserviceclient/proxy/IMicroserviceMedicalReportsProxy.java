@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.mclient.microserviceclient.bean.MedicalReportBean;
-import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
 
 import jakarta.validation.Valid;
 
