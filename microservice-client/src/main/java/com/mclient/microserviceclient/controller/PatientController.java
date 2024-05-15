@@ -98,7 +98,19 @@ public class PatientController {
 		log.info(" Patient  form update page successfully retrieved");
 		return "UpdateFormPatient";
 	}
-
+	
+	@GetMapping("/formMedicalReport/{id}")
+	public String formMedicalReportPage(@PathVariable Integer id,Model model) {
+		MedicalReportBean medicalReport = new MedicalReportBean();
+		PatientBean patientFoundById = new PatientBean();
+		patientFoundById = microservicePatientsProxy.getPatientById(id);
+		medicalReport.setPatId(patientFoundById.getId());
+		medicalReport.setPatient(patientFoundById.getNom());
+		model.addAttribute("medicalReport", medicalReport);
+		log.info(" MedicalReport  form  page successfully retrieved");
+		return "FormMedicalReport";
+	}
+	
 	@GetMapping("/medicalReport-patient/{id}")
 	public String reportMedicalPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientFoundById = new PatientBean();

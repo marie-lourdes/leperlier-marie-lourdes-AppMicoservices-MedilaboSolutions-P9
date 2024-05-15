@@ -24,7 +24,10 @@ public class MedicalReportService {
 	public MedicalReport addMedicalReport(MedicalReport medicalReportCreated) {
 		log.debug("Adding patient's medical report : {} {}", medicalReportCreated.getId(),
 				medicalReportCreated.getPatient());
-
+		//List<String> notes =medicalReportCreated.getNote();
+		/*for(String note:notes) {
+			medicalReportCreated.addNotes(note);
+		}*/
 		return medicalReportRepository.save(medicalReportCreated);
 	}
 

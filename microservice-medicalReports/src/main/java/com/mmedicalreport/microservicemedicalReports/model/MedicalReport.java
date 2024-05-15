@@ -22,8 +22,11 @@ public class MedicalReport {
     private String patient;
      
     private List<String> note= new ArrayList<>(); 
+       
+    public void addNotes(String line) {
+    	this.note.add(line);
+    }
     
-      
     @Override
 	public String toString() {
 		return "MedicalReport{" + "id=" + id + ",  patId=" +patId+ '\'' + ", patient=" + patient + '\''
