@@ -49,4 +49,10 @@ public class Patient {
 	@Pattern(regexp = RegexConstant.REGEX_PHONE, message = MessageErrorValidationCustomized.ERROR_MSG_PHONE_PATTERN)
 	private String telephone;
 
+	@Override
+	public String toString() {
+		return "ProductBean{" + "id=" + id + ",  prenom='" + prenom + '\'' + ", nom='" + nom + '\''
+				+ ", dateDeNaissance='" + dateDeNaissance + '\'' + ", genre='" + genre + '\'' + ",adresse='" + adresse
+				+ '\'' + ", telephone=" + telephone + '}';
+	}
 }
