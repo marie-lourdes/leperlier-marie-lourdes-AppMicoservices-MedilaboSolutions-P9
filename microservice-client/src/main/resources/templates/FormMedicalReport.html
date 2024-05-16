@@ -35,17 +35,13 @@
 						<div>
 							<b>Nom du Patient:</b>	<span th:text="${medicalReport.patient}"> Nom </span>
 						</div>
-				
-				    </div>	
-				
-			<form th:action="@{/home/validateFormMedicalReport}" method="post" th:object="${medicalReport}">
-				<tr th:each="line, itemStat : ${medicalReport.note}">	
-					<td>
-						<input hidden th:name="|medicalReport.note[${index}]|" th:value="${line}"/>
-						<!--<input type="text"  th:field="*{note[__${index}__]}"class="form-control" name="note" required placeholder="Notes"/>-->	
-										<!--<input type="text"  th:field="*{note}"class="form-control" name="note" required placeholder="Notes"/>-->	
-						</td>				
-				</tr>
+				    </div>			  		
+			<form action="#" th:action="@{/home/validateFormMedicalReport}" th:object="${medicalReport}"method="post">
+				<div>
+					<div >	
+							<input type="text"   th:each="line : #{medicalReport.${note}}" th:field="*{note}" class="form-control" name="line"  th:value="${line}" required placeholder="Notes"/>
+					</div>				
+				</div>  				     			
 				<div><input class="button-form btn btn-success" type="submit" value="Ajouter"/></div>
 			</form>
 		</main>

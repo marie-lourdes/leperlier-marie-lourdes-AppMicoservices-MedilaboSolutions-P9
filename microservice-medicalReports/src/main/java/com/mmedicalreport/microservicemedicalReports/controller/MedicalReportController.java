@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmedicalreport.microservicemedicalReports.beans.PatientBean;
 import com.mmedicalreport.microservicemedicalReports.exceptions.ReportMedicalNotFoundException;
 import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
+import com.mmedicalreport.microservicemedicalReports.proxy.IMicroservicePatientsProxy;
 import com.mmedicalreport.microservicemedicalReports.service.MedicalReportService;
 
 import jakarta.validation.Valid;
@@ -26,14 +28,19 @@ public class MedicalReportController {
 
 	@Autowired
 	private MedicalReportService medicalReportService;
+	
+	@Autowired
+	private IMicroservicePatientsProxy microservicePatientsProxy;
 
 	@PostMapping("/creationRapportMedical/{id}")
 	public MedicalReport createMedicalReport(@PathVariable Integer id,
 			@Valid @RequestBody MedicalReport medicalReport) {
 		MedicalReport medicalReportCreated = new MedicalReport();
+		
 		try {
-			medicalReportCreated.setPatId(id);
-			medicalReportCreated.setPatient(medicalReport.getPatient());
+			PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(id);
+			medicalReportCreated.setPatId(PatientFoundById.getId());
+			medicalReportCreated.setPatient(PatientFoundById.getNom());
 			medicalReportCreated.setNote(medicalReport.getNote());
 			medicalReportCreated = medicalReportService.addMedicalReport(medicalReportCreated);
 			log.info("Medical report sucessfully created: {}", medicalReportCreated);
@@ -47,6 +54,8 @@ public class MedicalReportController {
 	public List<MedicalReport> getPatientByPatId(@PathVariable Integer patId) {
 		List<MedicalReport> medicalReportFoundByPatId = new ArrayList<>();
 		try {
+			PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(patId);
+			log.info("*************PATIENT ID FROM MICROSERVICE MEDICALREPORT patient id: {}, {}*********", patId,PatientFoundById );
 			medicalReportFoundByPatId = medicalReportService.getMedicalReportByPatId(patId);
 
 			log.info("Medical report sucessfully retrieved for patient id: {}, {}", patId, medicalReportFoundByPatId);
