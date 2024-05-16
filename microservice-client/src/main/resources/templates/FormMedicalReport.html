@@ -39,7 +39,7 @@
 			<form action="#" th:action="@{/home/validateFormMedicalReport}" th:object="${medicalReport}"method="post">
 				<div>
 					<div >	
-							<input type="text"   th:each="line : #{medicalReport.${note}}" th:field="*{note}" class="form-control" name="line"  th:value="${line}" required placeholder="Notes"/>
+							<input type="text"   th:each="line:#{medicalReport.${note}}" th:field="*{note}" class="form-control" name="line"  th:value="${line}" required placeholder="Notes"/>
 					</div>				
 				</div>  				     			
 				<div><input class="button-form btn btn-success" type="submit" value="Ajouter"/></div>

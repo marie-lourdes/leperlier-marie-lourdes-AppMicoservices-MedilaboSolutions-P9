@@ -42,9 +42,9 @@ public class MedicalReportController {
 			medicalReportCreated.setPatId(PatientFoundById.getId());
 			medicalReportCreated.setPatient(PatientFoundById.getNom());
 			medicalReportCreated.setNote(medicalReport.getNote());
-			medicalReportCreated = medicalReportService.addMedicalReport(medicalReportCreated);
+			medicalReportService.addMedicalReport(medicalReportCreated);
 			log.info("Medical report sucessfully created: {}", medicalReportCreated);
-		} catch (Exception e) {
+		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 		}
 		return medicalReportCreated;
@@ -56,7 +56,7 @@ public class MedicalReportController {
 		try {
 			PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(patId);
 			log.info("*************PATIENT ID FROM MICROSERVICE MEDICALREPORT patient id: {}, {}*********", patId,PatientFoundById );
-			medicalReportFoundByPatId = medicalReportService.getMedicalReportByPatId(patId);
+			medicalReportFoundByPatId = medicalReportService.getMedicalReportByPatId( microservicePatientsProxy.getPatientById(patId).getId());
 
 			log.info("Medical report sucessfully retrieved for patient id: {}, {}", patId, medicalReportFoundByPatId);
 			return medicalReportFoundByPatId;

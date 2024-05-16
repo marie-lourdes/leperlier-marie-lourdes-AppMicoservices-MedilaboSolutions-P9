@@ -100,20 +100,23 @@ public class PatientController {
 	}
 	
 	@PostMapping("/validateFormMedicalReport")
-	public String addMedicalReport(@Valid @ModelAttribute MedicalReportBean  medicalReportCreated,BindingResult result) {
+	public String addMedicalReport(@Valid @ModelAttribute MedicalReportBean medicalReportCreated,
+			BindingResult result) {
 
 		try {
 			if (result.hasErrors()) {
-				return "FormMedicalReport";
+				//return "FormMedicalReport";
 			}
-			 medicalReportCreated = microserviceMedicalReportsProxy.createMedicalReport( medicalReportCreated.getPatId(), medicalReportCreated);
-	
+			medicalReportCreated = microserviceMedicalReportsProxy.createMedicalReport(medicalReportCreated.getPatId(),
+					medicalReportCreated);
+
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			//return "FormMedicalReport";
+			// return "FormMedicalReport";
 		}
 		log.info("medicalReport created sucessfully{} :", medicalReportCreated);
-		return "redirect:/home/medicalReport-patient/{id}";
+		return "Info-Patient";
+		//return "redirect:/home/medicalReport-patient/{id}";
 	}
 	
 	@GetMapping("/formMedicalReport/{id}")

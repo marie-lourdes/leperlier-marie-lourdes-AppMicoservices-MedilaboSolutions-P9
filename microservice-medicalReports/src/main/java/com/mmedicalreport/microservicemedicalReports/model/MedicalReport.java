@@ -21,7 +21,7 @@ public class MedicalReport {
 
     private String patient;
     
-    private List<String> note= new ArrayList<>(); 
+    private List<String> note= new ArrayList<String>(); 
        
     public void addNotes(String line) {
     	this.note.add(line);
