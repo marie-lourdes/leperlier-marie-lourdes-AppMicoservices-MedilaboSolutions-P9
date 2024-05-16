@@ -35,10 +35,9 @@ public class MedicalReportController {
 			medicalReportCreated.setPatId(id);
 			medicalReportCreated.setPatient(medicalReport.getPatient());
 			medicalReportCreated.setNote(medicalReport.getNote());
-			
 			medicalReportCreated = medicalReportService.addMedicalReport(medicalReportCreated);
 			log.info("Medical report sucessfully created: {}", medicalReportCreated);
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
 		return medicalReportCreated;
@@ -49,40 +48,35 @@ public class MedicalReportController {
 		List<MedicalReport> medicalReportFoundByPatId = new ArrayList<>();
 		try {
 			medicalReportFoundByPatId = medicalReportService.getMedicalReportByPatId(patId);
-			
+
 			log.info("Medical report sucessfully retrieved for patient id: {}, {}", patId, medicalReportFoundByPatId);
 			return medicalReportFoundByPatId;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			 throw new ReportMedicalNotFoundException(" ReportMedical not found for id " + patId);
+			throw new ReportMedicalNotFoundException(" ReportMedical not found for id " + patId);
 		}
-	
+
 	}
 
-	/*@GetMapping("/rapport-medical-byPatient/{namePatient}")
-	public MedicalReport getMedicalReportByPatient(@PathVariable String namePatient) {
-		MedicalReport medicalReportFoundByPatient = new MedicalReport();
-
-		try {
-			medicalReportFoundByPatient = medicalReportService.getMedicalReportByNamePatient(namePatient);
-
-		} catch (NullPointerException e) {
-			log.error(e.getMessage());
-			// throw new PatientNotFoundException("Patient not found for id " + id);
-		}
-		return medicalReportFoundByPatient;
-	}
-	
-	@GetMapping("/rapport-medical-byId/{id}")
-	public MedicalReport getPatientByPatient(@PathVariable String id) {
-		MedicalReport medicalReportFoundByPatient = new MedicalReport();
-		try {
-			medicalReportFoundByPatient = medicalReportService.getMedicalReportById(id);
-
-		} catch (NullPointerException e) {
-			log.error(e.getMessage());
-			// throw new PatientNotFoundException("Patient not found for id " + id);
-		}
-		return medicalReportFoundByPatient;
-	}*/
+	/*
+	 * @GetMapping("/rapport-medical-byPatient/{namePatient}") public MedicalReport
+	 * getMedicalReportByPatient(@PathVariable String namePatient) { MedicalReport
+	 * medicalReportFoundByPatient = new MedicalReport();
+	 * 
+	 * try { medicalReportFoundByPatient =
+	 * medicalReportService.getMedicalReportByNamePatient(namePatient);
+	 * 
+	 * } catch (NullPointerException e) { log.error(e.getMessage()); // throw new
+	 * PatientNotFoundException("Patient not found for id " + id); } return
+	 * medicalReportFoundByPatient; }
+	 * 
+	 * @GetMapping("/rapport-medical-byId/{id}") public MedicalReport
+	 * getPatientByPatient(@PathVariable String id) { MedicalReport
+	 * medicalReportFoundByPatient = new MedicalReport(); try {
+	 * medicalReportFoundByPatient = medicalReportService.getMedicalReportById(id);
+	 * 
+	 * } catch (NullPointerException e) { log.error(e.getMessage()); // throw new
+	 * PatientNotFoundException("Patient not found for id " + id); } return
+	 * medicalReportFoundByPatient; }
+	 */
 }

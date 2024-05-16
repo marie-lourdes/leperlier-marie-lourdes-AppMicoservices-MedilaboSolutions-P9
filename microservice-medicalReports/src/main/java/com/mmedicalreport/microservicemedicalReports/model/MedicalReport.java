@@ -20,7 +20,7 @@ public class MedicalReport {
     private Integer patId;
 
     private String patient;
-     
+    
     private List<String> note= new ArrayList<>(); 
        
     public void addNotes(String line) {
