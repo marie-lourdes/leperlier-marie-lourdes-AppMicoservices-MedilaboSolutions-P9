@@ -37,7 +37,7 @@
 						</div>
 				    </div>	
 				
-			<form action="#" th:action="@{/home/validateFormMedicalReport}" th:object="${medicalReport}"method="post">
+			<form action="#" th:action="@{/home/validateFormMedicalReport/{id}(id=${medicalReport.patId})}" th:object="${medicalReport}"method="post">
 					<div>
 						<div >	
 							<input type="text"   th:each="line : #{medicalReport.${note}}" th:field="*{note}" class="form-control" name="line"  th:value="${line}" required placeholder="Notes"/>

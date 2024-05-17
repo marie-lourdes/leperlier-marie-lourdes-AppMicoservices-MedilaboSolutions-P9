@@ -66,7 +66,6 @@ public class PatientController {
 			if (result.hasErrors()) {
 				return "UpdateFormPatient";
 			}
-
 			microservicePatientsProxy.updateOnePatientById(patientUpdated, id);
 
 		} catch (NullPointerException e) {
@@ -76,7 +75,6 @@ public class PatientController {
 
 		log.info("Patient updated sucessfully{}, id: {}", patientUpdated, id);
 		return "redirect:/home/all-patients";
-
 	}
 
 	@GetMapping("/updateFormPatient/{id}")
@@ -87,27 +85,25 @@ public class PatientController {
 			if (patientToUpdate != null) {
 				model.addAttribute("patient", patientToUpdate);
 			}
-
-			// return Constants.USER_UPDATE_PAGE;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			return "UpdateFormPatient";
-			// return Constants.ERROR_404_PAGE;
 		}
 
 		log.info(" Patient  form update page successfully retrieved");
 		return "UpdateFormPatient";
 	}
 	
-	@PostMapping("/validateFormMedicalReport")
-	public String addMedicalReport(@Valid @ModelAttribute MedicalReportBean medicalReportCreated,
+	@PostMapping("/validateFormMedicalReport/{id}")
+	public String addMedicalReport(@PathVariable Integer id,@Valid @ModelAttribute MedicalReportBean medicalReportCreated,
 			BindingResult result) {
 
 		try {
 			if (result.hasErrors()) {
-				//return "FormMedicalReport";
+				return "FormMedicalReport";
 			}
-			medicalReportCreated = microserviceMedicalReportsProxy.createMedicalReport(medicalReportCreated.getPatId(),
+			PatientBean patientToUpdate = microservicePatientsProxy.getPatientById( id);
+			medicalReportCreated = microserviceMedicalReportsProxy.createMedicalReport(patientToUpdate.getId(),
 					medicalReportCreated);
 
 		} catch (NullPointerException e) {
@@ -115,8 +111,8 @@ public class PatientController {
 			// return "FormMedicalReport";
 		}
 		log.info("medicalReport created sucessfully{} :", medicalReportCreated);
-		return "Info-Patient";
-		//return "redirect:/home/medicalReport-patient/{id}";
+		//return "Info-Patient";
+		return "redirect:/home/medicalReport/{id}";
 	}
 	
 	@GetMapping("/formMedicalReport/{id}")
@@ -131,7 +127,7 @@ public class PatientController {
 		return "FormMedicalReport";
 	}
 	
-	@GetMapping("/medicalReport-patient/{id}")
+	@GetMapping("/medicalReport/{id}")
 	public String reportMedicalPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientFoundById = new PatientBean();
 		List<MedicalReportBean> medicalReportsFoundByPatientId = new ArrayList<>();
