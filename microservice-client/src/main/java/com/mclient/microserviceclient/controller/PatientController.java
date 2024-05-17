@@ -102,8 +102,8 @@ public class PatientController {
 			if (result.hasErrors()) {
 				return "FormMedicalReport";
 			}
-			PatientBean patientToUpdate = microservicePatientsProxy.getPatientById( id);
-			medicalReportCreated = microserviceMedicalReportsProxy.createMedicalReport(patientToUpdate.getId(),
+			PatientBean patientToCreate= microservicePatientsProxy.getPatientById( id);
+			medicalReportCreated = microserviceMedicalReportsProxy.createMedicalReport(patientToCreate.getId(),
 					medicalReportCreated);
 
 		} catch (NullPointerException e) {
