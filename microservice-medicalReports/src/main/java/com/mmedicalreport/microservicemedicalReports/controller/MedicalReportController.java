@@ -54,8 +54,8 @@ public class MedicalReportController {
 	public List<MedicalReport> getPatientByPatId(@PathVariable Integer patId) {
 		List<MedicalReport> medicalReportFoundByPatId = new ArrayList<>();
 		try {
-			PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(patId);
-			log.info("*************PATIENT ID FROM MICROSERVICE MEDICALREPORT patient id: {}, {}*********", patId,PatientFoundById );
+			//PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(patId);
+			//log.info("*************PATIENT ID FROM MICROSERVICE MEDICALREPORT patient id: {}, {}*********", patId,PatientFoundById );
 			medicalReportFoundByPatId = medicalReportService.getMedicalReportByPatId( microservicePatientsProxy.getPatientById(patId).getId());
 
 			log.info("Medical report sucessfully retrieved for patient id: {}, {}", patId, medicalReportFoundByPatId);
