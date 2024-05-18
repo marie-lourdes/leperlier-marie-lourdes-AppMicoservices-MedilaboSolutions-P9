@@ -1,5 +1,5 @@
 package com.massessment.microserviceassessment.utils;
 
-public class ConnstantsTriggersTerms {
+public class ConstantTriggerTerm {
 
 }
