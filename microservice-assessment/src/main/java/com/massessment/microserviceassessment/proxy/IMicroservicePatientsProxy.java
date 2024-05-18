@@ -10,5 +10,5 @@ import com.massessment.microserviceassessment.beans.PatientBean;
 public interface IMicroservicePatientsProxy {
 
 	@GetMapping("/MICROSERVICE-PATIENTS/patient/info-patient/{id}")
-	PatientBean getPatientById(@PathVariable Integer id) ;
+	PatientBean getPatientById(@PathVariable Integer id);
 }

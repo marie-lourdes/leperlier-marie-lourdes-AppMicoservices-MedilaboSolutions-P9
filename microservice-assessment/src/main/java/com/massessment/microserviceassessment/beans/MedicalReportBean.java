@@ -7,19 +7,16 @@ import lombok.Data;
 
 @Data
 public class MedicalReportBean {
-private String id;	
-	
-    private Integer patId;
+	private String id;
+	private Integer patId;
+	private String patient;
+	private List<String> note = new ArrayList<String>();
 
-    private String patient;
-    
-    private List<String> note= new ArrayList<String>(); 
-       
-    public MedicalReportBean (){
-    	
-    }
-    
-    public void addNotes(String line) {
-    	this.note.add(line);
-    }
+	public MedicalReportBean() {
+
+	}
+
+	public void addNotes(String line) {
+		this.note.add(line);
+	}
 }
