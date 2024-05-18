@@ -63,10 +63,4 @@ public class MedicalReportService {
 		return medicalReportFoundById;
 	}*/
 
-	public List<MedicalReport> getAllMedicalReports() throws NullPointerException {
-		log.debug("Retrieving  all medical reports");
-		List<MedicalReport> allMedicalReports = new ArrayList<>();
-		allMedicalReports = medicalReportRepository.findAll();
-		return allMedicalReports;
-	}
 }
