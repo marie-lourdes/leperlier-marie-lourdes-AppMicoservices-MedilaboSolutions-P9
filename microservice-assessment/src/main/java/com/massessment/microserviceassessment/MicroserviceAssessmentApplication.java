@@ -10,7 +10,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import com.massessment.microserviceassessment.service.CalculatorAgeImpl;
-import com.massessment.microserviceassessment.service.DiabetesAssessmentService;
+import com.massessment.microserviceassessment.service.FilterInfoPatientImpl;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -18,21 +18,20 @@ import com.massessment.microserviceassessment.service.DiabetesAssessmentService;
 public class MicroserviceAssessmentApplication implements CommandLineRunner {
 
 	@Autowired
-	private DiabetesAssessmentService diabetesAssessmentService;
+	private FilterInfoPatientImpl filterInfoPatientImpl;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroserviceAssessmentApplication.class, args);
 	}
 
-	// Testing request Microservice-patient and Microservice-MedicalReport with
-	// DiabetesAssessmentService
+	// Testing request Microservice-patient and Microservice-MedicalReport with FilterInfoPatientImpl
 	@Override
 	public void run(String... args) throws Exception {
 		// *****************test calculator age*********************/
 		CalculatorAgeImpl calculatorAge = new CalculatorAgeImpl();
 		System.out.println(calculatorAge.calculateAge(LocalDate.of(1986, 8, 3), LocalDate.now()));
 
-		int patientBeanTest = diabetesAssessmentService.calculateAgeOfPatient(1);
+		int patientBeanTest = filterInfoPatientImpl.calculateAgeOfPatient(1);
 		System.out.println(
 				"********************PATIENT BEAN AGE CALCULATED TEST FROM MICROSERVICE ASSESSMENT DIABETE ************************"
 						+ patientBeanTest);
