@@ -1,24 +1,40 @@
 package com.massessment.microserviceassessment.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Component;
 
 import com.massessment.microserviceassessment.beans.PatientBean;
 import com.massessment.microserviceassessment.proxy.IMicroserviceMedicalReportsProxy;
 import com.massessment.microserviceassessment.proxy.IMicroservicePatientsProxy;
 
+import lombok.Data;
+
+@Data
 @Component
 public class DiabetesAssessmentService {
 
-	@Autowired
 	private IMicroservicePatientsProxy microservicePatientsProxy;
-
-	@Autowired
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
+	private ICalculatorAge  calculatorAge;
 	
-	public PatientBean getPatientBean(Integer id) {
-		PatientBean patientBean= microservicePatientsProxy.getPatientById(id);
-		return patientBean;
+	public DiabetesAssessmentService( IMicroservicePatientsProxy microservicePatientsProxy,
+			IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy){
+		this.microservicePatientsProxy= microservicePatientsProxy;
+		this.microserviceMedicalReportsProxy= microserviceMedicalReportsProxy;
+		this.calculatorAge= new CalculatorAgeImpl();
 		
 	}
+
+	public int calculateAgeOfPatient(Integer id) {
+		PatientBean patientBean=this.getPatientBean(id);
+		return calculatorAge.calculateAge(patientBean.getDateDeNaissance(), LocalDate.now());
+	}
+
+
+	
+	private  PatientBean getPatientBean(Integer id) {
+		return microservicePatientsProxy.getPatientById(id);		
+	}
+	
 }

@@ -3,17 +3,17 @@ package com.massessment.microserviceassessment.service;
 import java.time.LocalDate;
 import java.time.Period;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Data
+@Component
 public class CalculatorAgeImpl implements ICalculatorAge{
-	private int ageCalculated;
-	
-	private CalculatorAgeImpl(){}
 	
 	@Override
 	public  int calculateAge( LocalDate birthDate,LocalDate currentDate) {
-		 return this.ageCalculated=Period.between(birthDate, currentDate).getYears();
+		 return Period.between(birthDate, currentDate).getYears();
 	}
 
 }

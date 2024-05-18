@@ -1,5 +1,7 @@
 package com.massessment.microserviceassessment.beans;
 
+import java.time.LocalDate;
+
 import lombok.Data;
 
 @Data
@@ -7,7 +9,7 @@ public class PatientBean {
 	private Integer id;
 	private String prenom;
 	private String nom;
-	private String dateDeNaissance;
+	private LocalDate dateDeNaissance;
 	private String genre;
 	private String adresse;
 	private String telephone;

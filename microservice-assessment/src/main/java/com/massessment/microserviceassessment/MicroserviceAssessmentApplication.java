@@ -25,7 +25,7 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 	//Testing request Microservice-patient and Microservice-MedicalReport with DiabetesAssessmentService
 	@Override
 	public void run(String... args) throws Exception {
-		PatientBean patientBeanTest= diabetesAssessmentService.getPatientBean(1);
-		System.out.println("********************PATIENT BEAN TEST FROM MICROSERVICE ASSESSMENT DIABETE ************************"+patientBeanTest);
+		int patientBeanTest= diabetesAssessmentService.calculateAgeOfPatient(1);
+		System.out.println("********************PATIENT BEAN AGE CALCULATED TEST FROM MICROSERVICE ASSESSMENT DIABETE ************************"+patientBeanTest);
 	}
 }
