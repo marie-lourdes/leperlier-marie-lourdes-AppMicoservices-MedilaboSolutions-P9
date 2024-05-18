@@ -1,4 +1,4 @@
-package com.mclient.microserviceclient.exception;
+package com.mclient.microserviceclient.exceptions;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
