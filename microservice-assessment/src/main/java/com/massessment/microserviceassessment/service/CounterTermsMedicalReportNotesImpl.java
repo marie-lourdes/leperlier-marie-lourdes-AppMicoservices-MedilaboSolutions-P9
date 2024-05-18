@@ -1,5 +1,5 @@
 package com.massessment.microserviceassessment.service;
 
-public class FilterAgePatientImpl {
+public class CounterTermsMedicalReportNotesImpl {
 
 }
