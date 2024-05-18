@@ -1,5 +1,9 @@
 package com.medilabo.microservicepatients.model;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.medilabo.microservicepatients.utils.MessageErrorValidationCustomized;
 import com.medilabo.microservicepatients.utils.RegexConstant;
 
@@ -10,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
@@ -31,10 +36,11 @@ public class Patient {
 	@Column(name = "nom")
 	private String nom;
 	
-	@NotBlank
+	@NotNull
 	@Column(name = "date_de_naissance")
-	@Pattern(regexp = RegexConstant.REGEX_DATE, message = MessageErrorValidationCustomized.ERROR_MSG_BIRTHDATE_PATTERN)
-	private String dateDeNaissance;
+	//@Pattern(regexp = RegexConstant.REGEX_DATE, message = MessageErrorValidationCustomized.ERROR_MSG_BIRTHDATE_PATTERN)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dateDeNaissance;
 	
 	@NotBlank
 	@Column(name = "genre")

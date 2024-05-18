@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ class PatientServiceTest {
 		patientTest.setId(6);
 		patientTest.setPrenom("prenomtest2");
 		patientTest.setNom("nomtest2");
-		patientTest.setDateDeNaissance("1970-01-01");
+		patientTest.setDateDeNaissance(LocalDate.parse("1970-01-01"));
 		patientTest.setAdresse("33 Hazelton Avenue 2nd Floor Toronto,");
 		patientTest.setTelephone("778-945-3170");
 		patientTest.setGenre("F");
@@ -50,7 +51,7 @@ class PatientServiceTest {
 		patient.setId(5);
 		patient.setPrenom("prenomtest");
 		patient.setNom("nomtest");
-		patient.setDateDeNaissance("1970-01-01");
+		patient.setDateDeNaissance(LocalDate.parse("1970-01-01"));
 		patient.setAdresse("2540, boulevard Daniel-Johnson");
 		patient.setTelephone("450-978-9555");
 		patient.setGenre("F");
@@ -82,11 +83,11 @@ class PatientServiceTest {
 
 	@Test
 	void testUpdatePatient() throws Exception {
-		String existingPatientbirthDate = patientServiceUnderTest.getPatientById(6).getDateDeNaissance();
+		LocalDate existingPatientbirthDate = patientServiceUnderTest.getPatientById(6).getDateDeNaissance();
 		assertEquals(existingPatientbirthDate, patientTest.getDateDeNaissance());
 
 		try {
-			patientTest.setDateDeNaissance("1970-01-02");
+			patientTest.setDateDeNaissance(LocalDate.parse("1970-01-02"));
 			patientServiceUnderTest.updatePatient(patientTest, 6);
 			Patient resultPatientFoundByIdUpdated = patientServiceUnderTest.getPatientById(6);
 
@@ -101,7 +102,7 @@ class PatientServiceTest {
 		when(patientServiceUnderTest.getPatientById(1)).thenThrow(NullPointerException.class);
 	    
 		try {	  
-			patientTest.setDateDeNaissance("1970-01-02");
+			patientTest.setDateDeNaissance(LocalDate.parse("1970-01-02"));
 			patientServiceUnderTest.updatePatient(patientTest, 1);
 			Patient resultPatientFoundByIdUpdated= patientServiceUnderTest.getPatientById(1);
 		
