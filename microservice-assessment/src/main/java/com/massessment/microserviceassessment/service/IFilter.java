@@ -1,5 +1,10 @@
 package com.massessment.microserviceassessment.service;
 
-public interface IFilter {
+import java.util.List;
 
+import com.massessment.microserviceassessment.beans.PatientBean;
+
+public interface IFilter {
+     PatientBean filterAgePatient(List<PatientBean> AllPatients);
 }
+ 
