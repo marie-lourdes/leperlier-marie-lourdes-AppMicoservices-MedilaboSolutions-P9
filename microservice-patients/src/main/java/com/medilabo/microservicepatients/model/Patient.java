@@ -41,7 +41,7 @@ public class Patient {
 	//@Pattern(regexp = RegexConstant.REGEX_DATE, message = MessageErrorValidationCustomized.ERROR_MSG_BIRTHDATE_PATTERN)
 	@DateTimeFormat(pattern = "yyyy-MM-dd", fallbackPatterns=MessageErrorValidationCustomized.ERROR_MSG_BIRTHDATE_PATTERN)
 	private LocalDate dateDeNaissance;
-	
+
 	@NotBlank
 	@Column(name = "genre")
 	@Pattern(regexp = RegexConstant.REGEX_GENDER, message = MessageErrorValidationCustomized.ERROR_MSG_GENDER_PATTERN)
