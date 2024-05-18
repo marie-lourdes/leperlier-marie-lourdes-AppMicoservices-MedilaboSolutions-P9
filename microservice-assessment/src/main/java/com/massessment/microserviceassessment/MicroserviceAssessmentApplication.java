@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import com.massessment.microserviceassessment.beans.PatientBean;
-import com.massessment.microserviceassessment.proxy.IMicroservicePatientsProxy;
+import com.massessment.microserviceassessment.service.DiabetesAssessmentService;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -16,16 +16,16 @@ import com.massessment.microserviceassessment.proxy.IMicroservicePatientsProxy;
 public class MicroserviceAssessmentApplication implements CommandLineRunner {
 	
 	@Autowired
-	private IMicroservicePatientsProxy microservicePatientsProxy;
+	private DiabetesAssessmentService diabetesAssessmentService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroserviceAssessmentApplication.class, args);
 	}
 	
-	//Testing request Microservice-patient and Microservice-MedicalReport
+	//Testing request Microservice-patient and Microservice-MedicalReport with DiabetesAssessmentService
 	@Override
 	public void run(String... args) throws Exception {
-		PatientBean patientBeanTest= microservicePatientsProxy.getPatientById(1);
+		PatientBean patientBeanTest= diabetesAssessmentService.getPatientBean(1);
 		System.out.println("********************PATIENT BEAN TEST FROM MICROSERVICE ASSESSMENT DIABETE ************************"+patientBeanTest);
 	}
 }
