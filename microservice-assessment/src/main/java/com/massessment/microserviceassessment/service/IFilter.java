@@ -1,5 +1,5 @@
 package com.massessment.microserviceassessment.service;
 
-public interface IFilterPatient {
+public interface IFilter {
 
 }
