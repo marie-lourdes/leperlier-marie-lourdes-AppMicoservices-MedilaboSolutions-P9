@@ -1,5 +1,7 @@
 package com.massessment.microserviceassessment.service;
 
-public interface ICounter {
+import java.util.List;
 
+public interface ICounter {
+	Integer countSymptomFromMedicalReportNotes(List<String> notes);
 }
