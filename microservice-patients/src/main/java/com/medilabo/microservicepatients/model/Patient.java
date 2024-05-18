@@ -39,7 +39,7 @@ public class Patient {
 	@NotNull
 	@Column(name = "date_de_naissance")
 	//@Pattern(regexp = RegexConstant.REGEX_DATE, message = MessageErrorValidationCustomized.ERROR_MSG_BIRTHDATE_PATTERN)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd", fallbackPatterns=MessageErrorValidationCustomized.ERROR_MSG_BIRTHDATE_PATTERN)
 	private LocalDate dateDeNaissance;
 	
 	@NotBlank
