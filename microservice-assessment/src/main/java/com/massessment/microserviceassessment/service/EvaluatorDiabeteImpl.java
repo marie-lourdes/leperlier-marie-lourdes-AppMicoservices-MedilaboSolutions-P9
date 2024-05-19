@@ -17,8 +17,7 @@ public class EvaluatorDiabeteImpl  implements IEvaluatorRiskDiabete{
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
 	private Integer numberOfSymptoms;
 	
-	public EvaluatorDiabeteImpl (IMicroservicePatientsProxy microservicePatientsProxy,
-			IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy, IFilter filterInfoPatient,ICounter counterTermsMedicalReportNotes
+	public EvaluatorDiabeteImpl (IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,ICounter counterTermsMedicalReportNotes
 			) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
@@ -36,11 +35,15 @@ public class EvaluatorDiabeteImpl  implements IEvaluatorRiskDiabete{
 		}
 		return numberOfSymptoms;
 	}
+	
 	@Override
-	public boolean evaluateAsRiskNone(MedicalReportBean medicalReport ) {
-		//List<String>  patientBean =this.getMedicalReportNotes(medicalReport.getPatId());
-		// getMedicalReportNotes(patientBean.) 
-		return false;
+	public boolean evaluateAsRiskNone(Integer id, MedicalReportBean medicalReport ) {
+		numberOfSymptoms= countSymptomFromMedicalReportNotes( id);
+		if(numberOfSymptoms ==0) {
+			return true;
+		}else {
+			return true;
+		}
 	}
 	
 	@Override
