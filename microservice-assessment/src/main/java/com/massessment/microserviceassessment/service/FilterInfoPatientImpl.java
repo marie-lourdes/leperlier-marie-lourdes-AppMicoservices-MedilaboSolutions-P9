@@ -27,19 +27,16 @@ public class FilterInfoPatientImpl implements IFilter {
 	}
 
 	public int calculateAgeOfPatient(Integer id) {
-		PatientBean patientBean = this.getPatientBean(id);
+		PatientBean patientBean = microservicePatientsProxy.getPatientById(id);
 		return calculatorAge.calculateAge(patientBean.getDateDeNaissance(), LocalDate.now());
 	}
 
 	@Override
-	public String filterSexPatient(Integer id) {
-		PatientBean patientBean = this.getPatientBean(id);
+	public String filterSexPatient(PatientBean patientBean) {
+		//PatientBean patientBean = this.getPatientBean(id);
 		String isMasculinOrFeminin = patientBean.getGenre().equals(Constants.MASCULIN) ? Constants.MASCULIN
 				: Constants.FEMININ;
 		return isMasculinOrFeminin;
 	}
 
-	private PatientBean getPatientBean(Integer id) {
-		return microservicePatientsProxy.getPatientById(id);
-	}
 }

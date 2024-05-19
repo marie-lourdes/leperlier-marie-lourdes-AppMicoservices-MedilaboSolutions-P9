@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.massessment.microserviceassessment.beans.MedicalReportBean;
+import com.massessment.microserviceassessment.beans.PatientBean;
 import com.massessment.microserviceassessment.proxy.IMicroserviceMedicalReportsProxy;
 import com.massessment.microserviceassessment.proxy.IMicroservicePatientsProxy;
 import com.massessment.microserviceassessment.utils.ConstantRiskDiabete;
@@ -17,8 +18,9 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
 	private Integer numberOfSymptoms;
+	private String riskEvaluated;
 
-	public EvaluatorDiabeteImpl(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,
+	public EvaluatorDiabeteImpl(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,IMicroservicePatientsProxy microservicePatientsProxy,
 			ICounter counterTermsMedicalReportNotes) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
@@ -37,31 +39,46 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 		return numberOfSymptoms;
 	}
 
+	public String evaluateRiskDiabeteOfPatient(Integer id) throws NullPointerException {
+		PatientBean patientBean= this.getPatientBean( id);
+		riskEvaluated="";
+		riskEvaluated=evaluateAsRiskNone(patientBean.getId())? ConstantRiskDiabete.RISK_NONE:null;
+		if(riskEvaluated==null) {
+			System.out.println("Failed to evaluate risk diabete for patient "+ id);
+		}
+		return riskEvaluated;
+				
+	}
+	
 	@Override
-	public String evaluateAsRiskNone(Integer id, MedicalReportBean medicalReport) {
+	public boolean evaluateAsRiskNone(Integer id) {
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
-		return numberOfSymptoms == 0 ? ConstantRiskDiabete.RISK_NONE : null;
+		return numberOfSymptoms == 0 ? true : false;
 	}
 
 	@Override
-	public String evaluateAsRiskBorderLine(MedicalReportBean medicalReport) {
-		return null;
+	public boolean evaluateAsRiskBorderLine(MedicalReportBean medicalReport) {
+		return false;
 	}
 
 	@Override
-	public String evaluateAsRiskDanger(MedicalReportBean medicalReport) {
-		return null;
+	public boolean evaluateAsRiskDanger(MedicalReportBean medicalReport) {
+		return false;
 	}
 
 	@Override
-	public String evaluateAsRiskEarlyOnSet(MedicalReportBean medicalReport) {
-		return null;
+	public boolean evaluateAsRiskEarlyOnSet(MedicalReportBean medicalReport) {
+		return false;
 	}
 
 	public List<MedicalReportBean> getMedicalReportBean(Integer patientId) {
 		return microserviceMedicalReportsProxy.getMedicalReportsByPatId(patientId);
 	}
 	
+
+	private PatientBean getPatientBean(Integer id) {
+		return microservicePatientsProxy.getPatientById(id);
+	}
 	/*public List<List<String>>  getMedicalReportNotes(Integer patientId) {
 		List<List<String>> listMedicalReportOfPatient=this.getMedicalReportBean(patientId).stream()
 				.map(medicalReport-> medicalReport.getNote())

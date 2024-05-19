@@ -19,8 +19,8 @@ public class CounterTermsMedicalReportNotesImpl implements ICounter {
 		symptoms.add("microalbumine");
 		symptoms.add("Taille");
 		symptoms.add("taille");
-		symptoms.add("Poids");
-		symptoms.add("poids");
+		//symptoms.add("Poids");
+	   //symptoms.add("poids");
 		symptoms.add("Fumeur");
 		symptoms.add("Fumeuse");
 		symptoms.add("fumeur");
