@@ -41,11 +41,19 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 
 	public String evaluateRiskDiabeteOfPatient(Integer id) throws NullPointerException {
 		PatientBean patientBean= this.getPatientBean( id);
-		riskEvaluated="";
-		riskEvaluated=evaluateAsRiskNone(patientBean.getId());
-		riskEvaluated=evaluateAsRiskBorderLine(patientBean.getId());
-		riskEvaluated=evaluateAsRiskDanger(patientBean.getId());
-		riskEvaluated=evaluateAsRiskEarlyOnSet(patientBean.getId());
+		riskEvaluated=null;
+		if(riskEvaluated==null) {
+			riskEvaluated=evaluateAsRiskNone(patientBean.getId());
+		}
+		
+			
+	   if(riskEvaluated==null) {
+			riskEvaluated=evaluateAsRiskBorderLine(patientBean.getId());
+		}
+		
+	
+		//riskEvaluated=evaluateAsRiskDanger(patientBean.getId());
+		//riskEvaluated=evaluateAsRiskEarlyOnSet(patientBean.getId());
 		
 		if(riskEvaluated==null) {
 			System.out.println("Failed to evaluate risk diabete for patient "+ id);

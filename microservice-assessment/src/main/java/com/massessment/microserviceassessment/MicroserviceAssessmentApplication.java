@@ -58,7 +58,7 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 		// *****************test evaluator Diabete with 	EvaluatorDiabeteImpl *********************/
 		System.out.println(
 				"********************EVALUATOR DIABETE************************"
-						+  	evaluatorDiabete.evaluateRiskDiabeteOfPatient(1));
+						+  	evaluatorDiabete.evaluateRiskDiabeteOfPatient(2));
 	;
 		
 	}
