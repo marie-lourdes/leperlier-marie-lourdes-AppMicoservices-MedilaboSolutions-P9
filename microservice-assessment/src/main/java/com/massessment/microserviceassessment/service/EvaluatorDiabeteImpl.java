@@ -19,7 +19,7 @@ public class EvaluatorDiabeteImpl  implements IEvaluatorRiskDiabete{
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
 		this.counterTermsMedicalReportNotes = new CounterTermsMedicalReportNotesImpl();
-		this.filterInfoPatient = new FilterInfoPatientImpl(microservicePatientsProxy, microserviceMedicalReportsProxy);
+		this.filterInfoPatient = new FilterInfoPatientImpl(microservicePatientsProxy);
 	}
 	
 	public Integer countSymptomFromMedicalReportNotes(Integer id) {

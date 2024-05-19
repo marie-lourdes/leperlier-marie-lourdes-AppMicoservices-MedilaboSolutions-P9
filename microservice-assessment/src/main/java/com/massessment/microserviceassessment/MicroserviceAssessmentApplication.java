@@ -41,7 +41,7 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 		System.out.println(
 				"********************PATIENT BEAN AGE CALCULATED TEST FROM MICROSERVICE ASSESSMENT DIABETE ************************"
 						+ patientBeanTest);
-	
+
 		// *****************test countSymptom with 	CounterTermsMedicalReportNotesImpl*********************/
 		List<String> notes=new ArrayList<>();
 		notes.add("Le patient déclare qu'il ressent beaucoup de stress au travail Il se plaint également que son audition est anormale dernièrement");

@@ -46,8 +46,8 @@ public class CounterTermsMedicalReportNotesImpl implements ICounter {
 
 		this.setSymptoms();
 		for (String symptom : symptoms) {
-
-			for (String note : notes) {		
+			for (String note : notes) {
+				
 				if (note.contains(symptom)) {
 					System.out.println("symptom occurrence: "+symptom);
 					System.out.println("line note: "+note);

@@ -5,24 +5,20 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 import com.massessment.microserviceassessment.beans.PatientBean;
-import com.massessment.microserviceassessment.proxy.IMicroserviceMedicalReportsProxy;
 import com.massessment.microserviceassessment.proxy.IMicroservicePatientsProxy;
 import com.massessment.microserviceassessment.utils.Constants;
 
 @Component
 public class FilterInfoPatientImpl implements IFilter {
 	private IMicroservicePatientsProxy microservicePatientsProxy;
-	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
 	private ICalculatorAge calculatorAge;
 
-	public FilterInfoPatientImpl(IMicroservicePatientsProxy microservicePatientsProxy,
-			IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy) {
+	public FilterInfoPatientImpl(IMicroservicePatientsProxy microservicePatientsProxy) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
-		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
 		this.calculatorAge = new CalculatorAgeImpl();
 
 	}
-	
+
 	@Override
 	public boolean filterAgePatient(PatientBean patient, Integer ageFiltered) {
 		boolean isLessAgeFiltered = false;
@@ -35,7 +31,6 @@ public class FilterInfoPatientImpl implements IFilter {
 		return calculatorAge.calculateAge(patientBean.getDateDeNaissance(), LocalDate.now());
 	}
 
-	
 	@Override
 	public String filterSexPatient(PatientBean patient) {
 		PatientBean patientBean = this.getPatientBean(patient.getId());
