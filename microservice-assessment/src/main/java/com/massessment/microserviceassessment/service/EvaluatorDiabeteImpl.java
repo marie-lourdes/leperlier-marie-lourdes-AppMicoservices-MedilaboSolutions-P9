@@ -42,7 +42,11 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	public String evaluateRiskDiabeteOfPatient(Integer id) throws NullPointerException {
 		PatientBean patientBean= this.getPatientBean( id);
 		riskEvaluated="";
-		riskEvaluated=evaluateAsRiskNone(patientBean.getId())? ConstantRiskDiabete.RISK_NONE:null;
+		riskEvaluated=evaluateAsRiskNone(patientBean.getId());
+		riskEvaluated=evaluateAsRiskBorderLine(patientBean.getId());
+		riskEvaluated=evaluateAsRiskDanger(patientBean.getId());
+		riskEvaluated=evaluateAsRiskEarlyOnSet(patientBean.getId());
+		
 		if(riskEvaluated==null) {
 			System.out.println("Failed to evaluate risk diabete for patient "+ id);
 		}
@@ -51,24 +55,29 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	}
 	
 	@Override
-	public boolean evaluateAsRiskNone(Integer id) {
+	public String evaluateAsRiskNone(Integer id) {
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
-		return numberOfSymptoms == 0 ? true : false;
+		return numberOfSymptoms == 0 ? ConstantRiskDiabete.RISK_NONE:null;
 	}
 
 	@Override
-	public boolean evaluateAsRiskBorderLine(MedicalReportBean medicalReport) {
-		return false;
+	public String evaluateAsRiskBorderLine(Integer id) {
+		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
+		if(numberOfSymptoms >=2 && numberOfSymptoms<=5  ) {
+			return ConstantRiskDiabete.RISK_BORDERLINE;
+		}
+		
+		return null;
 	}
 
 	@Override
-	public boolean evaluateAsRiskDanger(MedicalReportBean medicalReport) {
-		return false;
+	public String evaluateAsRiskDanger(Integer id) {
+		return null;
 	}
 
 	@Override
-	public boolean evaluateAsRiskEarlyOnSet(MedicalReportBean medicalReport) {
-		return false;
+	public String evaluateAsRiskEarlyOnSet(Integer idt) {
+		return null;
 	}
 
 	public List<MedicalReportBean> getMedicalReportBean(Integer patientId) {

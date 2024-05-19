@@ -20,9 +20,9 @@ public class FilterInfoPatientImpl implements IFilter {
 	}
 
 	@Override
-	public boolean filterAgePatient(PatientBean patient, Integer ageFiltered) {
+	public boolean filterAgeLimitPatient(PatientBean patient, Integer ageLimitFiltered) {
 		boolean isLessAgeFiltered = false;
-		isLessAgeFiltered = calculateAgeOfPatient(patient.getId()) < ageFiltered ? true : false;
+		isLessAgeFiltered = calculateAgeOfPatient(patient.getId()) < ageLimitFiltered ? true : false;
 		return isLessAgeFiltered;
 	}
 
