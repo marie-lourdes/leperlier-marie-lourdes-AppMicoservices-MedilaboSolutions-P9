@@ -16,6 +16,7 @@ public class DiabetesAssessmentService {
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
 	private Integer numberOfSymptoms;
+	private EvaluatorDiabeteImpl  evaluatorDiabete;
 
 /*
 	public DiabetesAssessmentService(ICounter counterTermsMedicalReportNotes, FilterInfoPatientImpl filterInfoPatient) {

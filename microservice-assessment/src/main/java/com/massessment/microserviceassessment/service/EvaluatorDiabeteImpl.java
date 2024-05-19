@@ -37,7 +37,7 @@ public class EvaluatorDiabeteImpl  implements IEvaluatorRiskDiabete{
 	}
 	
 	@Override
-	public boolean evaluateAsRiskNone(Integer id, MedicalReportBean medicalReport ) {
+	public String evaluateAsRiskNone(Integer id, MedicalReportBean medicalReport ) {
 		numberOfSymptoms= countSymptomFromMedicalReportNotes( id);
 		if(numberOfSymptoms ==0) {
 			return true;
