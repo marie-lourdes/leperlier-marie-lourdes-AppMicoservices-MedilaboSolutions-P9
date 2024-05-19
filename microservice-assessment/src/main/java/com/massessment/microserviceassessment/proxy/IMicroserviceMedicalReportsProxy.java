@@ -10,6 +10,6 @@ import com.massessment.microserviceassessment.beans.MedicalReportBean;
 
 @FeignClient(name = "microservice-API-Gateway")
 public interface IMicroserviceMedicalReportsProxy {
-	@GetMapping("/MICROSERVICE-MEDICALREPORTS/rapport-medical/{patId}")
+	@GetMapping("/MICROSERVICE-MEDICALREPORTS/patient/rapport-medical/{patId}")
 	public List<MedicalReportBean>  getMedicalReportsByPatId(@PathVariable Integer patId);
 }

@@ -2,6 +2,7 @@ package com.massessment.microserviceassessment.service;
 
 import org.springframework.stereotype.Component;
 
+import com.massessment.microserviceassessment.beans.PatientBean;
 import com.massessment.microserviceassessment.proxy.IMicroserviceMedicalReportsProxy;
 import com.massessment.microserviceassessment.proxy.IMicroservicePatientsProxy;
 
@@ -26,8 +27,6 @@ public class DiabetesAssessmentService {
 
 	}*/
 
-	/*private PatientBean getPatientBean(Integer id) {
-		return microservicePatientsProxy.getPatientById(id);
-	}*/
+	
 
 }

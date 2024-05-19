@@ -32,8 +32,8 @@ public class FilterInfoPatientImpl implements IFilter {
 	}
 
 	@Override
-	public String filterSexPatient(PatientBean patient) {
-		PatientBean patientBean = this.getPatientBean(patient.getId());
+	public String filterSexPatient(Integer id) {
+		PatientBean patientBean = this.getPatientBean(id);
 		String isMasculinOrFeminin = patientBean.getGenre().equals(Constants.MASCULIN) ? Constants.MASCULIN
 				: Constants.FEMININ;
 		return isMasculinOrFeminin;

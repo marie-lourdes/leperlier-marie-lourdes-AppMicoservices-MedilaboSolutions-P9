@@ -4,5 +4,5 @@ import com.massessment.microserviceassessment.beans.PatientBean;
 
 public interface IFilter {
 	boolean filterAgePatient(PatientBean patient, Integer ageFiltered);
-	String filterSexPatient(PatientBean patient);
+	String filterSexPatient(Integer id);
 }

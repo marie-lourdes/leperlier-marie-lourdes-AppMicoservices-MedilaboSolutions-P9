@@ -13,6 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import com.massessment.microserviceassessment.service.CalculatorAgeImpl;
 import com.massessment.microserviceassessment.service.CounterTermsMedicalReportNotesImpl;
+import com.massessment.microserviceassessment.service.EvaluatorDiabeteImpl;
 import com.massessment.microserviceassessment.service.FilterInfoPatientImpl;
 
 @SpringBootApplication
@@ -25,6 +26,9 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 	
 	@Autowired
 	CounterTermsMedicalReportNotesImpl counterTermsMedicalReportNotes;
+	
+	@Autowired
+	EvaluatorDiabeteImpl evaluatorDiabete;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroserviceAssessmentApplication.class, args);
@@ -50,5 +54,12 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 		System.out.println(
 				"********************COUNTER SYMPTOMS DIABETE************************"
 						+  countSymptoms);
+		
+		// *****************test evaluator Diabete with 	EvaluatorDiabeteImpl *********************/
+		System.out.println(
+				"********************EVALUATOR DIABETE************************"
+						+  	evaluatorDiabete.countSymptomFromMedicalReportNotes(1));
+	;
+		
 	}
 }
