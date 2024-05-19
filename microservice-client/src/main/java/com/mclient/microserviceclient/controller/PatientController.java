@@ -134,7 +134,7 @@ public class PatientController {
 
 		try {
 			patientFoundById = microservicePatientsProxy.getPatientById(id);
-			medicalReportsFoundByPatientId = microserviceMedicalReportsProxy.getPatientByPatId(id);
+			medicalReportsFoundByPatientId = microserviceMedicalReportsProxy.getMedicalReportsByPatId(id);
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			// return Constants.ERROR_404_PAGE;

@@ -51,7 +51,7 @@ public class MedicalReportController {
 	}
 
 	@GetMapping("/rapport-medical/{patId}")
-	public List<MedicalReport> getPatientByPatId(@PathVariable Integer patId) {
+	public List<MedicalReport> getMedicalReportsByPatId(@PathVariable Integer patId) {
 		List<MedicalReport> medicalReportFoundByPatId = new ArrayList<>();
 		try {
 			//PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(patId);

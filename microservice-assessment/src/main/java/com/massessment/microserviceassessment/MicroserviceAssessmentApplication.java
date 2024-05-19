@@ -1,6 +1,8 @@
 package com.massessment.microserviceassessment;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import com.massessment.microserviceassessment.service.CalculatorAgeImpl;
+import com.massessment.microserviceassessment.service.CounterTermsMedicalReportNotesImpl;
 import com.massessment.microserviceassessment.service.FilterInfoPatientImpl;
 
 @SpringBootApplication
@@ -19,6 +22,9 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 
 	@Autowired
 	private FilterInfoPatientImpl filterInfoPatientImpl;
+	
+	@Autowired
+	CounterTermsMedicalReportNotesImpl counterTermsMedicalReportNotes;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroserviceAssessmentApplication.class, args);
@@ -35,5 +41,14 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 		System.out.println(
 				"********************PATIENT BEAN AGE CALCULATED TEST FROM MICROSERVICE ASSESSMENT DIABETE ************************"
 						+ patientBeanTest);
+	
+		// *****************test countSymptom*********************/
+		List<String> notes=new ArrayList<>();
+		notes.add("Le patient déclare qu'il ressent beaucoup de stress au travail Il se plaint également que son audition est anormale dernièrement");
+		notes.add("Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois Il remarque également que son audition continue d'être anormale");
+		Integer countSymptoms=counterTermsMedicalReportNotes.countSymptomFromMedicalReportNotes(notes);
+		System.out.println(
+				"********************COUNTER SYMPTOMS DIABETE************************"
+						+  countSymptoms);
 	}
 }
