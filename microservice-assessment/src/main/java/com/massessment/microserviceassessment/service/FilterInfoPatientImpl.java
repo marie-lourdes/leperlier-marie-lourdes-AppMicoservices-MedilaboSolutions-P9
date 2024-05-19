@@ -24,10 +24,10 @@ public class FilterInfoPatientImpl implements IFilter {
 	}
 	
 	@Override
-	public boolean filterAgePatient(PatientBean patient) {
-		boolean isLessThan30years = false;
-		isLessThan30years = calculateAgeOfPatient(patient.getId()) < 30 ? true : false;
-		return isLessThan30years;
+	public boolean filterAgePatient(PatientBean patient, Integer ageFiltered) {
+		boolean isLessAgeFiltered = false;
+		isLessAgeFiltered = calculateAgeOfPatient(patient.getId()) < ageFiltered ? true : false;
+		return isLessAgeFiltered;
 	}
 
 	public int calculateAgeOfPatient(Integer id) {
