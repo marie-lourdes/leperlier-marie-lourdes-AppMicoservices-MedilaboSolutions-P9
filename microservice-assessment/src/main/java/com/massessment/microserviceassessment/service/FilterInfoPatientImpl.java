@@ -22,33 +22,19 @@ public class FilterInfoPatientImpl implements IFilter {
 		this.calculatorAge = new CalculatorAgeImpl();
 
 	}
+	
+	@Override
+	public boolean filterAgePatient(PatientBean patient) {
+		boolean isLessThan30years = false;
+		isLessThan30years = calculateAgeOfPatient(patient.getId()) < 30 ? true : false;
+		return isLessThan30years;
+	}
 
 	public int calculateAgeOfPatient(Integer id) {
 		PatientBean patientBean = this.getPatientBean(id);
 		return calculatorAge.calculateAge(patientBean.getDateDeNaissance(), LocalDate.now());
 	}
 
-	@Override
-	public boolean filterRiskNone(PatientBean patient) {
-		return false;
-	}
-	
-	@Override
-	public boolean filterRiskBorderLine(PatientBean patient) {
-		boolean isLessThan30years = false;
-		isLessThan30years = calculateAgeOfPatient(patient.getId()) < 30 ? true : false;
-		return isLessThan30years;
-	}
-
-	@Override
-	public boolean filterRiskDanger(PatientBean patient) {
-		return false;
-	}
-	
-	@Override
-	public boolean  filterRiskEarlyOnSet(PatientBean patient) {
-		return false;
-	}
 	
 	@Override
 	public String filterSexPatient(PatientBean patient) {
