@@ -41,7 +41,7 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 		CalculatorAgeImpl calculatorAge = new CalculatorAgeImpl();
 		System.out.println(calculatorAge.calculateAge(LocalDate.of(1986, 8, 3), LocalDate.now()));
 
-		int patientBeanTest = filterInfoPatientImpl.calculateAgeOfPatient(1);
+		int patientBeanTest = filterInfoPatientImpl.calculateAgeOfPatient(6);
 		System.out.println(
 				"********************PATIENT BEAN AGE CALCULATED TEST FROM MICROSERVICE ASSESSMENT DIABETE ************************"
 						+ patientBeanTest);
@@ -58,7 +58,7 @@ public class MicroserviceAssessmentApplication implements CommandLineRunner {
 		// *****************test evaluator Diabete with 	EvaluatorDiabeteImpl *********************/
 		System.out.println(
 				"********************EVALUATOR DIABETE************************"
-						+  	evaluatorDiabete.evaluateRiskDiabeteOfPatient(2));
+						+  	evaluatorDiabete.evaluateRiskDiabeteOfPatient(6));
 	;
 		
 	}

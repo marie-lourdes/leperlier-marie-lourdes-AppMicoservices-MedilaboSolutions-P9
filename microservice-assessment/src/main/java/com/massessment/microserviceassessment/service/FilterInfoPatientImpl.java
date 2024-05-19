@@ -20,9 +20,9 @@ public class FilterInfoPatientImpl implements IFilter {
 	}
 
 	@Override
-	public boolean filterAgeLimitPatient(PatientBean patient, Integer ageLimitFiltered) {
+	public boolean filterAgeLimitPatient(Integer id, Integer ageLimitFiltered) {
 		boolean isLessAgeFiltered = false;
-		isLessAgeFiltered = calculateAgeOfPatient(patient.getId()) < ageLimitFiltered ? true : false;
+		isLessAgeFiltered = calculateAgeOfPatient(id) > ageLimitFiltered ? true : false;
 		return isLessAgeFiltered;
 	}
 
@@ -32,11 +32,11 @@ public class FilterInfoPatientImpl implements IFilter {
 	}
 
 	@Override
-	public String filterSexPatient(PatientBean patientBean) {
-		//PatientBean patientBean = this.getPatientBean(id);
-		String isMasculinOrFeminin = patientBean.getGenre().equals(Constants.MASCULIN) ? Constants.MASCULIN
+	public String filterSexPatient(Integer id) {
+		PatientBean patientBean = microservicePatientsProxy.getPatientById(id);
+		return patientBean.getGenre().equals(Constants.MASCULIN) ? Constants.MASCULIN
 				: Constants.FEMININ;
-		return isMasculinOrFeminin;
+		
 	}
 
 }

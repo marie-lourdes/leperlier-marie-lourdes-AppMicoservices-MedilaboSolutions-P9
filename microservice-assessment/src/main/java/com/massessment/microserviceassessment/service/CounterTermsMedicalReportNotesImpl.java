@@ -19,8 +19,8 @@ public class CounterTermsMedicalReportNotesImpl implements ICounter {
 		symptoms.add("microalbumine");
 		symptoms.add("Taille");
 		symptoms.add("taille");
-		//symptoms.add("Poids");
-	   //symptoms.add("poids");
+		symptoms.add("Poids");
+	    symptoms.add("poids");
 		symptoms.add("Fumeur");
 		symptoms.add("Fumeuse");
 		symptoms.add("fumeur");
@@ -29,8 +29,8 @@ public class CounterTermsMedicalReportNotesImpl implements ICounter {
 		symptoms.add("anormal");
 		symptoms.add("Cholestérol");
 		symptoms.add("cholestérol");
-		symptoms.add("Vertiges");
-		symptoms.add("vertiges");
+		symptoms.add("Vertige");
+		symptoms.add("vertige");
 		symptoms.add("Rechute");
 		symptoms.add("rechute");
 		symptoms.add("Réaction");
