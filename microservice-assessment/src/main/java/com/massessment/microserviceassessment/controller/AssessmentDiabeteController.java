@@ -17,7 +17,7 @@ public class AssessmentDiabeteController {
 	@Autowired
 	DiabetesAssessmentService diabetesAssessmentService;
 
-	@GetMapping("/assessment-diabetes-patient/{id}")
+	@GetMapping("/patient/assessment-diabetes/{id}")
 	public String evaluateRiskDiabetePatientById(@PathVariable Integer id) {
 
 		String riskEvaluated = "";

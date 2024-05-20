@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mclient.microserviceclient.bean.MedicalReportBean;
 import com.mclient.microserviceclient.bean.PatientBean;
+import com.mclient.microserviceclient.proxy.IMicroserviceAssessmentDiabetesProxy;
 import com.mclient.microserviceclient.proxy.IMicroserviceMedicalReportsProxy;
 import com.mclient.microserviceclient.proxy.IMicroservicePatientsProxy;
 
@@ -32,6 +33,9 @@ public class PatientController {
 
 	@Autowired
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
+	
+	@Autowired
+	private IMicroserviceAssessmentDiabetesProxy  microserviceAssessmentDiabetesProxy;
 
 	@PostMapping("/validateFormPatient")
 	public String addPatient(@Valid @ModelAttribute PatientBean patientCreated, BindingResult result) {
@@ -131,11 +135,12 @@ public class PatientController {
 	public String reportMedicalPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientFoundById = new PatientBean();
 		List<MedicalReportBean> medicalReportsFoundByPatientId = new ArrayList<>();
-
+        String riskDiabeteEvaluated="";
 		try {
 			patientFoundById = microservicePatientsProxy.getPatientById(id);
 			medicalReportsFoundByPatientId = microserviceMedicalReportsProxy.getMedicalReportsByPatId(id);
-		} catch (NullPointerException e) {
+			riskDiabeteEvaluated=microserviceAssessmentDiabetesProxy.evaluateRiskDiabetePatientById(id);
+			} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			// return Constants.ERROR_404_PAGE;
 		}
@@ -144,6 +149,7 @@ public class PatientController {
 		if (medicalReportsFoundByPatientId != null) {
 			model.addAttribute("medicalReports", medicalReportsFoundByPatientId);
 		}
+		model.addAttribute("riskDiabeteEvaluated",riskDiabeteEvaluated);
 
 		return "Info-Patient";
 	}
