@@ -34,10 +34,6 @@ public class MedicalReportService {
 		medicalRecordsFoundByPatId = medicalReportRepository.findAll().stream()
 				.filter(report -> report.getPatId() == patId).collect(Collectors.toList());
 
-		if (medicalRecordsFoundByPatId.isEmpty()) {
-			log.error("MedicalReport not found by patient id :" + patId);
-		}
-
 		log.debug("MedicalReport retrieved successfully for : {}", patId);
 		return medicalRecordsFoundByPatId;
 	}
