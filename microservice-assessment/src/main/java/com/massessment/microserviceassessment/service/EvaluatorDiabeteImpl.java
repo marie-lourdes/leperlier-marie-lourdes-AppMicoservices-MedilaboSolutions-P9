@@ -3,6 +3,8 @@ package com.massessment.microserviceassessment.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.massessment.microserviceassessment.beans.MedicalReportBean;
@@ -14,6 +16,8 @@ import com.massessment.microserviceassessment.utils.Constants;
 
 @Component
 public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
+	private static final Logger log = LogManager.getLogger( EvaluatorDiabeteImpl.class);
+	
 	private ICounter counterTermsMedicalReportNotes;
 	private IFilter filterInfoPatient;
 	private IMicroservicePatientsProxy microservicePatientsProxy;
@@ -42,9 +46,9 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	}
 
 	public String evaluateRiskDiabeteOfPatient(Integer id) throws NullPointerException {
+		log.debug("Evaluating risk of diabetes for patient: {}", id);
 		PatientBean patientBean = this.getPatientBean(id);
-		System.out.println("Evaluating risk dibete for patient:  " + id + " " + patientBean.getNom());
-
+		
 		riskEvaluated = null;
 		if (riskEvaluated == null) {
 			riskEvaluated = evaluateAsRiskNone(patientBean.getId());
@@ -70,12 +74,16 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 
 	@Override
 	public String evaluateAsRiskNone(Integer id) {
+		log.debug("Evaluating risk 'None' of diabetes for patient: {}", id);
+		
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
 		return numberOfSymptoms == 0 ? ConstantRiskDiabete.RISK_NONE : null;
 	}
 
 	@Override
 	public String evaluateAsRiskBorderLine(Integer id) {
+		log.debug("Evaluating risk 'Borderline' of diabetes for patient: {}", id);
+		
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
 		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
 		if (numberOfSymptoms >= 2 && numberOfSymptoms <= 5 && isMoreThan30Years) {
@@ -87,6 +95,8 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 
 	@Override
 	public String evaluateAsRiskDanger(Integer id) {
+		log.debug("Evaluating risk 'In Danger' of diabetes for patient: {}", id);
+		
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
 		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
 		String isMasculinOrFeminin = filterInfoPatient.filterSexPatient(id);
@@ -109,6 +119,8 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 
 	@Override
 	public String evaluateAsRiskEarlyOnSet(Integer id) {
+		log.debug("Evaluating risk 'Early On Set' of diabetes for patient: {}", id);
+		
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
 		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
 		String isMasculinOrFeminin = filterInfoPatient.filterSexPatient(id);
@@ -136,12 +148,4 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	private PatientBean getPatientBean(Integer id) {
 		return microservicePatientsProxy.getPatientById(id);
 	}
-	/*public List<List<String>>  getMedicalReportNotes(Integer patientId) {
-		List<List<String>> listMedicalReportOfPatient=this.getMedicalReportBean(patientId).stream()
-				.map(medicalReport-> medicalReport.getNote())
-				.collect(Collectors.toList());
-		//listMedicalReportOfPatient.stream().
-		System.out.println("-----------------------listMedicalReportOfPatientNotes--------------------: "+listMedicalReportOfPatient);
-		return listMedicalReportOfPatient;
-	}*/
 }
