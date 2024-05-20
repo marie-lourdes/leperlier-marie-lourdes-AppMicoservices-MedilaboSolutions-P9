@@ -25,8 +25,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	private Integer numberOfSymptoms;
 	private String riskEvaluated;
 
-	public EvaluatorDiabeteImpl(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,
-			IMicroservicePatientsProxy microservicePatientsProxy, ICounter counterTermsMedicalReportNotes) {
+	public EvaluatorDiabeteImpl(IMicroservicePatientsProxy microservicePatientsProxy,IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy, ICounter counterTermsMedicalReportNotes) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
 		this.filterInfoPatient = new FilterInfoPatientImpl(microservicePatientsProxy);
@@ -44,7 +43,8 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 		}
 		return numberOfSymptoms;
 	}
-
+	
+	@Override
 	public String evaluateRiskDiabeteOfPatient(Integer id) throws NullPointerException {
 		log.debug("Evaluating risk of diabetes for patient: {}", id);
 		PatientBean patientBean = this.getPatientBean(id);
@@ -67,7 +67,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 		}
 
 		if (riskEvaluated == null) {
-			System.out.println("Failed to evaluate risk diabete for patient " + id);
+			throw new NullPointerException("Failed to evaluate risk diabete for patient " + id);
 		}
 		return riskEvaluated;
 	}

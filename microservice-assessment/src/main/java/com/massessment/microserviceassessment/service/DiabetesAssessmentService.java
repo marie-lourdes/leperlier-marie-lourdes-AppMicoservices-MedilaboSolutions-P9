@@ -1,33 +1,59 @@
 package com.massessment.microserviceassessment.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.massessment.microserviceassessment.beans.PatientBean;
 import com.massessment.microserviceassessment.proxy.IMicroserviceMedicalReportsProxy;
 import com.massessment.microserviceassessment.proxy.IMicroservicePatientsProxy;
 
 import lombok.Data;
 
+/* 
+ * this class apply Design Pattern Strategy with class  EvaluatorDiabeteImpl and abstraction  Interface IEvaluatorRiskDiabete
+ * 
+ */
 @Data
-@Component
-public class DiabetesAssessmentService {
+@Service
+public class DiabetesAssessmentService implements IEvaluatorRiskDiabete  {
 	private ICounter counterTermsMedicalReportNotes;
 	private IFilter filterInfoPatient;
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
 	private Integer numberOfSymptoms;
-	private EvaluatorDiabeteImpl  evaluatorDiabete;
+	private IEvaluatorRiskDiabete evaluatorDiabete;
 
-/*
-	public DiabetesAssessmentService(ICounter counterTermsMedicalReportNotes, FilterInfoPatientImpl filterInfoPatient) {
 
+	public DiabetesAssessmentService(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,
+			IMicroservicePatientsProxy microservicePatientsProxy, ICounter counterTermsMedicalReportNotes) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
-		this.counterTermsMedicalReportNotes = new CounterTermsMedicalReportNotesImpl();
-		this.filterInfoPatient = new FilterInfoPatientImpl(microservicePatientsProxy, microserviceMedicalReportsProxy);
-
-	}*/
-
+		this.counterTermsMedicalReportNotes = counterTermsMedicalReportNotes;
+		this.evaluatorDiabete = new EvaluatorDiabeteImpl(microservicePatientsProxy,microserviceMedicalReportsProxy,counterTermsMedicalReportNotes);
 	
+	}
+	
+	@Override
+	public String evaluateRiskDiabeteOfPatient(Integer id) {
+		return evaluatorDiabete.evaluateRiskDiabeteOfPatient(id);
+	}
+	
+	@Override
+	public String evaluateAsRiskNone(Integer id) {
+		return evaluatorDiabete.evaluateAsRiskNone(id);
+	}
+	
+	@Override
+	public String evaluateAsRiskBorderLine(Integer id) {
+		return evaluatorDiabete.evaluateAsRiskBorderLine(id);
+	}
+	
+	@Override
+	public String evaluateAsRiskDanger(Integer id) {
+		return evaluatorDiabete.evaluateAsRiskDanger(id);
+	}
+	
+	@Override
+	public String evaluateAsRiskEarlyOnSet(Integer id) {
+		return evaluatorDiabete.evaluateAsRiskEarlyOnSet(id);		
+	}
 
 }
