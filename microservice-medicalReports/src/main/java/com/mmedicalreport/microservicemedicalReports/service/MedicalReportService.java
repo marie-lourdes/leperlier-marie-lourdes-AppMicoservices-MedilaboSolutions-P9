@@ -35,32 +35,10 @@ public class MedicalReportService {
 				.filter(report -> report.getPatId() == patId).collect(Collectors.toList());
 
 		if (medicalRecordsFoundByPatId.isEmpty()) {
-			throw new NullPointerException("MedicalReport not found by patient id :" + patId);
+			log.error("MedicalReport not found by patient id :" + patId);
 		}
 
 		log.debug("MedicalReport retrieved successfully for : {}", patId);
 		return medicalRecordsFoundByPatId;
 	}
-	
-	/*public MedicalReport getMedicalReportByNamePatient(String namePatient) {
-	log.debug("Retrieving  one medical report by name patient {}", namePatient);
-
-	MedicalReport medicalReportFoundByPatient = new MedicalReport();
-	medicalReportFoundByPatient= medicalReportRepository.findByPatient(namePatient)
-			.orElseThrow(() -> new NullPointerException("MedicalReport not found by full name"));
-
-	log.debug("MedicalReport retrieved successfully for : {}", namePatient);
-	return medicalReportFoundByPatient;
-     }*/
-	/*public MedicalReport getMedicalReportById(String id) {
-		log.debug("Retrieving  one medical report by id{}", id);
-
-		MedicalReport medicalReportFoundById = new MedicalReport();
-		medicalReportFoundById = medicalReportRepository.findById(id)
-				.orElseThrow(() -> new NullPointerException("MedicalReport not found by id"));
-
-		log.debug("MedicalReport retrieved successfully for : {}", id);
-		return medicalReportFoundById;
-	}*/
-
 }

@@ -143,6 +143,7 @@ public class PatientController {
 		}
 
 		model.addAttribute("patient", patientFoundById);
+		//fixer erreur 404 pour un patient et  creation medical report si pas de notes existant du patient
 		if (medicalReportsFoundByPatientId != null) {
 			model.addAttribute("medicalReports", medicalReportsFoundByPatientId);
 		}
