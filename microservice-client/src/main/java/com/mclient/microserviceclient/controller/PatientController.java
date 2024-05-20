@@ -112,10 +112,8 @@ public class PatientController {
 
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			// return "FormMedicalReport";
 		}
 		log.info("medicalReport created sucessfully{} :", medicalReportCreated);
-		//return "Info-Patient";
 		return "redirect:/home/medicalReport/{id}";
 	}
 	
@@ -142,7 +140,6 @@ public class PatientController {
 			riskDiabeteEvaluated=microserviceAssessmentDiabetesProxy.evaluateRiskDiabetePatientById(id);
 			} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			// return Constants.ERROR_404_PAGE;
 		}
 
 		model.addAttribute("patient", patientFoundById);
@@ -163,7 +160,6 @@ public class PatientController {
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			return "error-404";
-			// return Constants.ERROR_404_PAGE;
 		}
 		model.addAttribute("patients", patients);
 		return "Patients";
