@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.massessment.microserviceassessment.exceptions.AssessmentDiabeteNotFoundException;
-import com.massessment.microserviceassessment.exceptions.ReportMedicalNotFoundException;
 import com.massessment.microserviceassessment.service.DiabetesAssessmentService;
 
 @RestController
@@ -24,13 +23,13 @@ public class AssessmentDiabeteController {
 		String riskEvaluated = "";
 		try {
 			riskEvaluated = diabetesAssessmentService.evaluateRiskDiabeteOfPatient(id);
-			
+
 			log.info("Risk evaluated successfully retrieved for patient id : {}, {}", id, riskEvaluated);
 			return riskEvaluated;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			throw new AssessmentDiabeteNotFoundException ("Failed to evaluate risk diabete for patient id  " + id);
-			
+			throw new AssessmentDiabeteNotFoundException("Failed to evaluate risk diabete for patient id  " + id);
+
 		}
 	}
 }
