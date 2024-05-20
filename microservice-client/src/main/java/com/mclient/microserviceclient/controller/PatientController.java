@@ -143,9 +143,9 @@ public class PatientController {
 		}
 
 		model.addAttribute("patient", patientFoundById);
-		if (medicalReportsFoundByPatientId != null) {
+		//if (medicalReportsFoundByPatientId != null) {
 			model.addAttribute("medicalReports", medicalReportsFoundByPatientId);
-		}
+		//}
 		model.addAttribute("riskDiabeteEvaluated",riskDiabeteEvaluated);
 
 		return "Info-Patient";
