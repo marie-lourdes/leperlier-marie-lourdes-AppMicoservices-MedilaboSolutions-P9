@@ -24,15 +24,15 @@ public class DiabetesAssessmentService implements IEvaluatorRiskDiabete  {
 
 	public DiabetesAssessmentService(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,
 			IMicroservicePatientsProxy microservicePatientsProxy, ICounter counterTermsMedicalReportNotes) {
+		
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
 		this.counterTermsMedicalReportNotes = counterTermsMedicalReportNotes;
-		this.evaluatorDiabete = new EvaluatorDiabeteImpl(microservicePatientsProxy,microserviceMedicalReportsProxy,counterTermsMedicalReportNotes);
-	
+		this.evaluatorDiabete = new EvaluatorDiabeteImpl(microservicePatientsProxy,microserviceMedicalReportsProxy,counterTermsMedicalReportNotes);	
 	}
 	
 	@Override
-	public String evaluateRiskDiabeteOfPatient(Integer id) {
+	public String evaluateRiskDiabeteOfPatient(Integer id) throws NullPointerException{
 		return evaluatorDiabete.evaluateRiskDiabeteOfPatient(id);
 	}
 	

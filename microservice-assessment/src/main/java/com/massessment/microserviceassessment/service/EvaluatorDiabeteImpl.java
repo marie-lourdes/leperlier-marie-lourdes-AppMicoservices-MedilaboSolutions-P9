@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.massessment.microserviceassessment.beans.MedicalReportBean;
 import com.massessment.microserviceassessment.beans.PatientBean;
+import com.massessment.microserviceassessment.exceptions.PatientNotFoundException;
+import com.massessment.microserviceassessment.exceptions.ReportMedicalNotFoundException;
 import com.massessment.microserviceassessment.proxy.IMicroserviceMedicalReportsProxy;
 import com.massessment.microserviceassessment.proxy.IMicroservicePatientsProxy;
 import com.massessment.microserviceassessment.utils.ConstantRiskDiabete;
@@ -16,8 +18,8 @@ import com.massessment.microserviceassessment.utils.Constants;
 
 @Component
 public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
-	private static final Logger log = LogManager.getLogger( EvaluatorDiabeteImpl.class);
-	
+	private static final Logger log = LogManager.getLogger(EvaluatorDiabeteImpl.class);
+
 	private ICounter counterTermsMedicalReportNotes;
 	private IFilter filterInfoPatient;
 	private IMicroservicePatientsProxy microservicePatientsProxy;
@@ -25,7 +27,8 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	private Integer numberOfSymptoms;
 	private String riskEvaluated;
 
-	public EvaluatorDiabeteImpl(IMicroservicePatientsProxy microservicePatientsProxy,IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy, ICounter counterTermsMedicalReportNotes) {
+	public EvaluatorDiabeteImpl(IMicroservicePatientsProxy microservicePatientsProxy,
+			IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy, ICounter counterTermsMedicalReportNotes) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
 		this.filterInfoPatient = new FilterInfoPatientImpl(microservicePatientsProxy);
@@ -43,12 +46,12 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 		}
 		return numberOfSymptoms;
 	}
-	
+
 	@Override
 	public String evaluateRiskDiabeteOfPatient(Integer id) throws NullPointerException {
 		log.debug("Evaluating risk of diabetes for patient: {}", id);
 		PatientBean patientBean = this.getPatientBean(id);
-		
+
 		riskEvaluated = null;
 		if (riskEvaluated == null) {
 			riskEvaluated = evaluateAsRiskNone(patientBean.getId());
@@ -75,7 +78,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	@Override
 	public String evaluateAsRiskNone(Integer id) {
 		log.debug("Evaluating risk 'None' of diabetes for patient: {}", id);
-		
+
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
 		return numberOfSymptoms == 0 ? ConstantRiskDiabete.RISK_NONE : null;
 	}
@@ -83,7 +86,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	@Override
 	public String evaluateAsRiskBorderLine(Integer id) {
 		log.debug("Evaluating risk 'Borderline' of diabetes for patient: {}", id);
-		
+
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
 		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
 		if (numberOfSymptoms >= 2 && numberOfSymptoms <= 5 && isMoreThan30Years) {
@@ -96,7 +99,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	@Override
 	public String evaluateAsRiskDanger(Integer id) {
 		log.debug("Evaluating risk 'In Danger' of diabetes for patient: {}", id);
-		
+
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
 		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
 		String isMasculinOrFeminin = filterInfoPatient.filterSexPatient(id);
@@ -120,7 +123,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	@Override
 	public String evaluateAsRiskEarlyOnSet(Integer id) {
 		log.debug("Evaluating risk 'Early On Set' of diabetes for patient: {}", id);
-		
+
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
 		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
 		String isMasculinOrFeminin = filterInfoPatient.filterSexPatient(id);
@@ -142,10 +145,18 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	}
 
 	public List<MedicalReportBean> getMedicalReportBean(Integer patientId) {
-		return microserviceMedicalReportsProxy.getMedicalReportsByPatId(patientId);
+		try {
+			return microserviceMedicalReportsProxy.getMedicalReportsByPatId(patientId);
+		} catch (NullPointerException e) {
+			throw new ReportMedicalNotFoundException("Failed to retrieve medical report for patient id  " + patientId);
+		}
 	}
 
 	private PatientBean getPatientBean(Integer id) {
-		return microservicePatientsProxy.getPatientById(id);
+		try {
+			return microservicePatientsProxy.getPatientById(id);
+		} catch (NullPointerException e) {
+			throw new PatientNotFoundException("Failed to retrieve patient id  " + id);
+		}
 	}
 }
