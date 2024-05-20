@@ -21,8 +21,8 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	private Integer numberOfSymptoms;
 	private String riskEvaluated;
 
-	public EvaluatorDiabeteImpl(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,IMicroservicePatientsProxy microservicePatientsProxy,
-			ICounter counterTermsMedicalReportNotes) {
+	public EvaluatorDiabeteImpl(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,
+			IMicroservicePatientsProxy microservicePatientsProxy, ICounter counterTermsMedicalReportNotes) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
 		this.filterInfoPatient = new FilterInfoPatientImpl(microservicePatientsProxy);
@@ -34,6 +34,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 		List<MedicalReportBean> medicalReportsBeans = this.getMedicalReportBean(id);
 		List<List<String>> notes = medicalReportsBeans.stream().map(medicalReport -> medicalReport.getNote())
 				.collect(Collectors.toList());
+
 		for (List<String> note : notes) {
 			numberOfSymptoms = counterTermsMedicalReportNotes.countSymptomFromMedicalReportNotes(note);
 		}
@@ -41,90 +42,87 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	}
 
 	public String evaluateRiskDiabeteOfPatient(Integer id) throws NullPointerException {
-		PatientBean patientBean= this.getPatientBean( id);
-		System.out.println("Evaluating risk dibete for patient:  "+ id +" "+ patientBean.getNom());
-		
-		riskEvaluated=null;
-		if(riskEvaluated==null) {
-			riskEvaluated=evaluateAsRiskNone(patientBean.getId());
-		}
-		
-			
-	   if(riskEvaluated==null) {
-			riskEvaluated=evaluateAsRiskBorderLine(patientBean.getId());
-		}
-	   
-	   if(riskEvaluated==null) {
-		   riskEvaluated=evaluateAsRiskDanger(patientBean.getId());
-		}
-	   
-	   if(riskEvaluated==null) {
-		   riskEvaluated=evaluateAsRiskEarlyOnSet(patientBean.getId());
+		PatientBean patientBean = this.getPatientBean(id);
+		System.out.println("Evaluating risk dibete for patient:  " + id + " " + patientBean.getNom());
+
+		riskEvaluated = null;
+		if (riskEvaluated == null) {
+			riskEvaluated = evaluateAsRiskNone(patientBean.getId());
 		}
 
-		if(riskEvaluated==null) {
-			System.out.println("Failed to evaluate risk diabete for patient "+ id);
+		if (riskEvaluated == null) {
+			riskEvaluated = evaluateAsRiskBorderLine(patientBean.getId());
+		}
+
+		if (riskEvaluated == null) {
+			riskEvaluated = evaluateAsRiskDanger(patientBean.getId());
+		}
+
+		if (riskEvaluated == null) {
+			riskEvaluated = evaluateAsRiskEarlyOnSet(patientBean.getId());
+		}
+
+		if (riskEvaluated == null) {
+			System.out.println("Failed to evaluate risk diabete for patient " + id);
 		}
 		return riskEvaluated;
-				
 	}
-	
+
 	@Override
 	public String evaluateAsRiskNone(Integer id) {
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
-		return numberOfSymptoms == 0 ? ConstantRiskDiabete.RISK_NONE:null;
+		return numberOfSymptoms == 0 ? ConstantRiskDiabete.RISK_NONE : null;
 	}
 
 	@Override
 	public String evaluateAsRiskBorderLine(Integer id) {
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
-		boolean isMoreThan30Years= filterInfoPatient.filterAgeLimitPatient( id, 30);
-		if(numberOfSymptoms >=2 && numberOfSymptoms<=5 && isMoreThan30Years ) {
+		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
+		if (numberOfSymptoms >= 2 && numberOfSymptoms <= 5 && isMoreThan30Years) {
 			return ConstantRiskDiabete.RISK_BORDERLINE;
 		}
-		
+
 		return null;
 	}
 
 	@Override
 	public String evaluateAsRiskDanger(Integer id) {
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
-		boolean isMoreThan30Years= filterInfoPatient.filterAgeLimitPatient( id, 30);
-		String isMasculinOrFeminin=filterInfoPatient.filterSexPatient(id);
-		
-		if( !isMoreThan30Years) {
-			if(numberOfSymptoms == 3 && isMasculinOrFeminin.equals(Constants.MASCULIN)  ) {
+		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
+		String isMasculinOrFeminin = filterInfoPatient.filterSexPatient(id);
+
+		if (!isMoreThan30Years) {
+			if (numberOfSymptoms == 3 && isMasculinOrFeminin.equals(Constants.MASCULIN)) {
 				return ConstantRiskDiabete.RISK_IN_DANGER;
-			}else if(numberOfSymptoms ==4 && isMasculinOrFeminin.equals(Constants.FEMININ)) {
+			} else if (numberOfSymptoms == 4 && isMasculinOrFeminin.equals(Constants.FEMININ)) {
 				return ConstantRiskDiabete.RISK_IN_DANGER;
 			}
-		}	
-		
-		if( isMoreThan30Years) {
-			if(numberOfSymptoms == 6 || numberOfSymptoms == 7 ) {
+		}
+
+		if (isMoreThan30Years) {
+			if (numberOfSymptoms == 6 || numberOfSymptoms == 7) {
 				return ConstantRiskDiabete.RISK_IN_DANGER;
 			}
 		}
 		return null;
-		
 	}
 
 	@Override
 	public String evaluateAsRiskEarlyOnSet(Integer id) {
 		numberOfSymptoms = countSymptomFromMedicalReportNotes(id);
-		boolean isMoreThan30Years= filterInfoPatient.filterAgeLimitPatient( id, 30);
-		String isMasculinOrFeminin=filterInfoPatient.filterSexPatient(id);
-		
-		if( !isMoreThan30Years) {
-			if(numberOfSymptoms >= 5 && isMasculinOrFeminin.equals(Constants.MASCULIN)  ) {
+		boolean isMoreThan30Years = filterInfoPatient.filterAgeLimitPatient(id, 30);
+		String isMasculinOrFeminin = filterInfoPatient.filterSexPatient(id);
+
+		if (!isMoreThan30Years) {
+			if (numberOfSymptoms >= 5 && isMasculinOrFeminin.equals(Constants.MASCULIN)) {
 				return ConstantRiskDiabete.RISK_EARLY_ON_SET;
-			}else if(numberOfSymptoms >=7 && isMasculinOrFeminin.equals(Constants.FEMININ)) {
+			} else if (numberOfSymptoms >= 7 && isMasculinOrFeminin.equals(Constants.FEMININ)) {
 				return ConstantRiskDiabete.RISK_EARLY_ON_SET;
 			}
-		}	
-		
-		if( isMoreThan30Years) {
-			if(numberOfSymptoms > 8 ) {
+		}
+
+		if (isMoreThan30Years) {
+			if (numberOfSymptoms > 8) {
 				return ConstantRiskDiabete.RISK_EARLY_ON_SET;
 			}
 		}
@@ -134,7 +132,6 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	public List<MedicalReportBean> getMedicalReportBean(Integer patientId) {
 		return microserviceMedicalReportsProxy.getMedicalReportsByPatId(patientId);
 	}
-	
 
 	private PatientBean getPatientBean(Integer id) {
 		return microservicePatientsProxy.getPatientById(id);
