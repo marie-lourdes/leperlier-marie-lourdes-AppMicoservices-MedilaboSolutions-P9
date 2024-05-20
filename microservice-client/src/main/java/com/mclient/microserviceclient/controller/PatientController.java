@@ -33,9 +33,9 @@ public class PatientController {
 
 	@Autowired
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
-	
+
 	@Autowired
-	private IMicroserviceAssessmentDiabetesProxy  microserviceAssessmentDiabetesProxy;
+	private IMicroserviceAssessmentDiabetesProxy microserviceAssessmentDiabetesProxy;
 
 	@PostMapping("/validateFormPatient")
 	public String addPatient(@Valid @ModelAttribute PatientBean patientCreated, BindingResult result) {
@@ -97,16 +97,16 @@ public class PatientController {
 		log.info(" Patient  form update page successfully retrieved");
 		return "UpdateFormPatient";
 	}
-	
+
 	@PostMapping("/validateFormMedicalReport/{id}")
-	public String addMedicalReport(@PathVariable Integer id,@Valid @ModelAttribute MedicalReportBean medicalReportCreated,
-			BindingResult result) {
+	public String addMedicalReport(@PathVariable Integer id,
+			@Valid @ModelAttribute MedicalReportBean medicalReportCreated, BindingResult result) {
 
 		try {
 			if (result.hasErrors()) {
 				return "FormMedicalReport";
 			}
-			PatientBean patientToCreate= microservicePatientsProxy.getPatientById( id);
+			PatientBean patientToCreate = microservicePatientsProxy.getPatientById(id);
 			medicalReportCreated = microserviceMedicalReportsProxy.createMedicalReport(patientToCreate.getId(),
 					medicalReportCreated);
 
@@ -116,9 +116,9 @@ public class PatientController {
 		log.info("medicalReport created sucessfully{} :", medicalReportCreated);
 		return "redirect:/home/medicalReport/{id}";
 	}
-	
+
 	@GetMapping("/formMedicalReport/{id}")
-	public String formMedicalReportPage(@PathVariable Integer id,Model model) {
+	public String formMedicalReportPage(@PathVariable Integer id, Model model) {
 		MedicalReportBean medicalReport = new MedicalReportBean();
 		PatientBean patientFoundById = new PatientBean();
 		patientFoundById = microservicePatientsProxy.getPatientById(id);
@@ -128,25 +128,25 @@ public class PatientController {
 		log.info(" MedicalReport  form  page successfully retrieved");
 		return "FormMedicalReport";
 	}
-	
+
 	@GetMapping("/medicalReport/{id}")
 	public String reportMedicalPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientFoundById = new PatientBean();
 		List<MedicalReportBean> medicalReportsFoundByPatientId = new ArrayList<>();
-        String riskDiabeteEvaluated="";
+		String riskDiabeteEvaluated = "";
 		try {
 			patientFoundById = microservicePatientsProxy.getPatientById(id);
 			medicalReportsFoundByPatientId = microserviceMedicalReportsProxy.getMedicalReportsByPatId(id);
-			riskDiabeteEvaluated=microserviceAssessmentDiabetesProxy.evaluateRiskDiabetePatientById(id);
-			} catch (NullPointerException e) {
+			riskDiabeteEvaluated = microserviceAssessmentDiabetesProxy.evaluateRiskDiabetePatientById(id);
+		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 		}
 
 		model.addAttribute("patient", patientFoundById);
-		//if (medicalReportsFoundByPatientId != null) {
+		if (medicalReportsFoundByPatientId != null) {
 			model.addAttribute("medicalReports", medicalReportsFoundByPatientId);
-		//}
-		model.addAttribute("riskDiabeteEvaluated",riskDiabeteEvaluated);
+		}
+		model.addAttribute("riskDiabeteEvaluated", riskDiabeteEvaluated);
 
 		return "Info-Patient";
 	}
