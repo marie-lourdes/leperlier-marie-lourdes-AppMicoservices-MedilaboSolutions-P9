@@ -6,11 +6,12 @@ import org.springframework.cloud.gateway.discovery.DiscoveryLocatorProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@RefreshScope
 @Configuration
 public class RouteLocatorConfig {
+	
 	@Bean
 	public  DiscoveryClientRouteDefinitionLocator locator(ReactiveDiscoveryClient dc, DiscoveryLocatorProperties dlp) {
 		return new DiscoveryClientRouteDefinitionLocator(dc,dlp);
 	}	
+
 }
