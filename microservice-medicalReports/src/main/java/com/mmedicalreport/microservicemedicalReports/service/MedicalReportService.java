@@ -32,7 +32,7 @@ public class MedicalReportService {
 
 		List<MedicalReport> medicalRecordsFoundByPatId = new ArrayList<>();
 		medicalRecordsFoundByPatId = medicalReportRepository.findAll().stream()
-				.filter(report -> report.getPatId() == patId).collect(Collectors.toList());
+				.filter(report -> report.getPatId().equals(patId)).collect(Collectors.toList());
 
 		log.debug("MedicalReport retrieved successfully for : {}", patId);
 		return medicalRecordsFoundByPatId;
