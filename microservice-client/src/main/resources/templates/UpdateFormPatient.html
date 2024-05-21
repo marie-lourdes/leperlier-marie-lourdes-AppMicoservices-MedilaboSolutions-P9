@@ -6,8 +6,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-	<!--<link th:href="@{/css/main.css}" rel="stylesheet" />-->
 	<title> Modification des données du Patient</title>
+		<style>
+		.field{
+			margin-bottom: 1vh;
+		}
+	</style>
 </head>
 
 <body>
@@ -26,51 +30,42 @@
 		</div>
 	</header>
 	<div class="container">
-		<div class="login-error" th:if="${param.error}">
-			Invalid infomations
-		</div>
 		<main>
 			<h1 style="color: red;">  Modifier un patient</h1>
-			<!--<form th:action="@{/home/patient/updatePatient/{id}(id=${patient.id})}"  method="post"  th:object="${patient}">-->
 				<form  th:action="@{/home/updateFormPatient/{id}(id=${patient.id})}" th:object="${patient}" method="post">
-				<div >
-					<div >
-						<input class="form-control" type="text"  th:field="*{prenom}" name="prenom" required placeholder="Prenom"/>
-					</div>
-				</div>
-				
-				<div >
-					<div >
+					<div class="field">
+					  <div >
+					     <input class="form-control" type="text"  th:field="*{prenom}" name="prenom" required placeholder="Prenom"/>
+					   </div>
+				     </div>
+				   <div class="field">
+					  <div >
 						<input class="form-control" type="text" th:field="*{nom}" name="nom" required placeholder="Nom"/>
-					</div>
-				</div>
-				
-				<div >
+				      </div>
+				   </div>		
+				  <div class="field">
 					<div >
 						<input class="form-control"  type="text"  th:field="*{dateDeNaissance}" name="dateDeNaissance" required  placeholder="Date de naissance"/>
 					</div>
+				   </div>				
+				<div class="field" >
+				  <div >
+				    <input type="radio" class="custom-control-input" id="genreM" th:field="*{genre}" value="M" >
+                    <label class="custom-control-label" for="genreM">M</label>
+					<input type="radio" class="custom-control-input" id="genreF" th:field="*{genre}" value="F" >
+                    <label class="custom-control-label" for="genreF">F</label>				  
+				  </div>
 				</div>
-				
-				<div >
-					<div >
-					<input type="radio" class="custom-control-input" id="genreM" th:field="*{genre}" value="M" >
-                         <label class="custom-control-label" for="genreM">M</label>
-						 <input type="radio" class="custom-control-input" id="genreF" th:field="*{genre}" value="F" >
-                         <label class="custom-control-label" for="genreF">F</label>
-					</div>
-				</div>
-				<div >
+				<div class="field">
 					<div >
 						<input class="form-control" type="text" th:field="*{adresse}"  name="adresse" placeholder="Adresse"/>
 					</div>
-				</div>
-				
-				<div >
+				</div>	
+				<div class="field">
 					<div >
 						<input class="form-control"  type="text" th:field="*{telephone}"  name="telephone" placeholder="Telephone"/>
 					</div>
-				</div>
-				
+				</div>				
 				<div><input class="button-form btn btn-success" type="submit" value="Modifier"/></div>
 			</form>
 		</main>
