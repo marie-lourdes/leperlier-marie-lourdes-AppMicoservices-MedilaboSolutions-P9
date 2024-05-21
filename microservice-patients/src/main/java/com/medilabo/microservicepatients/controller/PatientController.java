@@ -38,9 +38,9 @@ public class PatientController {
 				throw new PatientConflictException("Failed to add this patient, this person already exist" + patient);
 			}
 			patientCreated = patientService.addPatient(patient);
-			
+
 			log.debug("Patient successfully added: {}", patientCreated);
-			
+
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 		}
@@ -50,10 +50,11 @@ public class PatientController {
 	@PutMapping("/modification/{id}")
 	public Patient updateOnePatientById(@Valid @RequestBody Patient patientUpdated, @PathVariable Integer id) {
 		Patient existingPatientUpdated = new Patient();
+		
 		try {
 
-			existingPatientUpdated = patientService.getAllPatients().stream().filter(patient -> patient.getId().equals(id))
-					.findFirst().map(existingPatient -> {
+			existingPatientUpdated = patientService.getAllPatients().stream()
+					.filter(patient -> patient.getId().equals(id)).findFirst().map(existingPatient -> {
 						existingPatient.setId(patientUpdated.getId());
 						existingPatient.setNom(patientUpdated.getNom());
 						existingPatient.setPrenom(patientUpdated.getPrenom());
@@ -76,28 +77,28 @@ public class PatientController {
 
 	@GetMapping("/info-patient/{id}")
 	public Patient getPatientById(@PathVariable Integer id) {
-
 		Patient patientFoundById = new Patient();
+		
 		try {
 			patientFoundById = patientService.getPatientById(id);
-			
-			log.info("Patient successfully retrieved for id : {}, {}",id,patientFoundById);
-			return patientFoundById;	
+
+			log.info("Patient successfully retrieved for id : {}, {}", id, patientFoundById);
+			return patientFoundById;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			throw new PatientNotFoundException("Patient not found for id " + id);
-		}	
+		}
 	}
 
 	@GetMapping("/list")
 	public List<Patient> getAllPatients() {
-
 		List<Patient> allPatients = new ArrayList<>();
+		
 		try {
-			 allPatients = patientService.getAllPatients();
-			
-			log.info("List of Patient successfully retrieved : {}",  allPatients );
-			return  allPatients ;
+			allPatients = patientService.getAllPatients();
+
+			log.info("List of Patient successfully retrieved : {}", allPatients);
+			return allPatients;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 			throw new PatientNotFoundException("List of patients not found");

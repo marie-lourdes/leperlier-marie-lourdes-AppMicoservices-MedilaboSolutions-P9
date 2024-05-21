@@ -33,10 +33,9 @@ public class Patient {
 	@NotBlank
 	@Column(name = "nom")
 	private String nom;
-	
+
 	@NotNull
 	@Column(name = "date_de_naissance")
-	//@Pattern(regexp = RegexConstant.REGEX_DATE, message = MessageErrorValidationCustomized.ERROR_MSG_BIRTHDATE_PATTERN)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateDeNaissance;
 
@@ -55,8 +54,8 @@ public class Patient {
 
 	@Override
 	public String toString() {
-		return "Patient {" + "id=" + id + ",  prenom='" + prenom + '\'' + ", nom='" + nom + '\''
-				+ ", dateDeNaissance='" + dateDeNaissance + '\'' + ", genre='" + genre + '\'' + ",adresse='" + adresse
-				+ '\'' + ", telephone=" + telephone + '}';
+		return "Patient {" + "id=" + id + ",  prenom='" + prenom + '\'' + ", nom='" + nom + '\'' + ", dateDeNaissance='"
+				+ dateDeNaissance + '\'' + ", genre='" + genre + '\'' + ",adresse='" + adresse + '\'' + ", telephone="
+				+ telephone + '}';
 	}
 }

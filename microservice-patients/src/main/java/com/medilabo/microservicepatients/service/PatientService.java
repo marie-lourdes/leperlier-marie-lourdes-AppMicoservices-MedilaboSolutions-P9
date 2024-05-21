@@ -40,7 +40,7 @@ public class PatientService {
 
 		Patient patientFoundById = new Patient();
 		patientFoundById = patientRepository.findById(id)
-				.orElseThrow(() -> new NullPointerException("patient by id test not found"));
+				.orElseThrow(() -> new NullPointerException("Patient by id test not found"));
 
 		log.debug("Patient retrieved successfully for id : {}", id);
 		return patientFoundById;
