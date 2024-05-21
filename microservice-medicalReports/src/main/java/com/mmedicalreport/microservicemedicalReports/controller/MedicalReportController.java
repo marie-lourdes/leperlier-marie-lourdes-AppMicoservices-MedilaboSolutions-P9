@@ -27,7 +27,7 @@ public class MedicalReportController {
 
 	@Autowired
 	private MedicalReportService medicalReportService;
-	
+
 	@Autowired
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 
@@ -35,34 +35,33 @@ public class MedicalReportController {
 	public MedicalReport createMedicalReport(@PathVariable Integer id,
 			@Valid @RequestBody MedicalReport medicalReport) {
 		MedicalReport medicalReportCreated = new MedicalReport();
-		
+
 		try {
 			PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(id);
 			medicalReportCreated.setPatId(PatientFoundById.getId());
 			medicalReportCreated.setPatient(PatientFoundById.getNom());
 			medicalReportCreated.setNote(medicalReport.getNote());
 			medicalReportService.addMedicalReport(medicalReportCreated);
-			log.info("Medical report sucessfully created: {}", medicalReportCreated);
+
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 		}
+
+		log.info("Medical report sucessfully created: {}", medicalReportCreated);
 		return medicalReportCreated;
 	}
 
 	@GetMapping("/rapport-medical/{id}")
 	public List<MedicalReport> getMedicalReportsByPatId(@PathVariable Integer id) {
 		List<MedicalReport> medicalReportFoundByPatId = new ArrayList<>();
-		try {
-			//PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(patId);
-			//log.info("*************PATIENT ID FROM MICROSERVICE MEDICALREPORT patient id: {}, {}*********", patId,PatientFoundById );
-			medicalReportFoundByPatId = medicalReportService.getMedicalReportByPatId( microservicePatientsProxy.getPatientById(id).getId());
 
-			/*if(	medicalReportFoundByPatId.isEmpty()) {
-				throw new ReportMedicalNotFoundException(" ReportMedical not found for id " + id);
-			}	*/	
+		try {
+			medicalReportFoundByPatId = medicalReportService
+					.getMedicalReportByPatId(microservicePatientsProxy.getPatientById(id).getId());
 		} catch (NullPointerException e) {
-			log.error(e.getMessage());	
+			log.error(e.getMessage());
 		}
+
 		log.info("Medical report sucessfully retrieved for patient id: {}, {}", id, medicalReportFoundByPatId);
 		return medicalReportFoundByPatId;
 	}

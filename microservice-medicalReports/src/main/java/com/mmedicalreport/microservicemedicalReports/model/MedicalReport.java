@@ -1,6 +1,5 @@
 package com.mmedicalreport.microservicemedicalReports.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,25 +10,23 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Data;
 
 @Data
-@Document(collection="medicalreports")
-public class MedicalReport { 
+@Document(collection = "medicalreports")
+public class MedicalReport {
 	@Id
-    private String id;	
+	private String id;
 	
-	@Field(name="patid")
-    private Integer patId;
+	@Field(name = "patid")
+	private Integer patId;
+	private String patient;
+	private List<String> note = new ArrayList<String>();
 
-    private String patient;
-    
-    private List<String> note= new ArrayList<String>(); 
-       
-    public void addNotes(String line) {
-    	this.note.add(line);
-    }
-    
-    @Override
+	public void addNotes(String line) {
+		this.note.add(line);
+	}
+
+	@Override
 	public String toString() {
-		return "MedicalReport{" + "id=" + id + ",  patId=" +patId+ '\'' + ", patient=" + patient + '\''
-				+", note=" + note +'}';
+		return "MedicalReport{" + "id=" + id + ",  patId=" + patId + '\'' + ", patient=" + patient + '\'' + ", note="
+				+ note + '}';
 	}
 }
