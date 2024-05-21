@@ -9,7 +9,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients("com.massessment.microserviceassessment")
 public class MicroserviceAssessmentApplication {
+	
 	public static void main(String[] args) {
 		SpringApplication.run(MicroserviceAssessmentApplication.class, args);
 	}
+	
 }

@@ -6,7 +6,6 @@ import java.time.Period;
 import lombok.Data;
 
 @Data
-//@Component
 public class CalculatorAgeImpl implements ICalculatorAge {
 
 	@Override

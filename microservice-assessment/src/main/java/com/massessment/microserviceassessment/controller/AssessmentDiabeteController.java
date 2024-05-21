@@ -22,7 +22,7 @@ public class AssessmentDiabeteController {
 		String riskEvaluated = null;
 		try {
 			riskEvaluated = diabetesAssessmentService.evaluateRiskDiabeteOfPatient(id);
-		} catch (Exception e) {
+		} catch (NullPointerException e) {
 			log.error("Failed to evaluate risk diabete for patient id: {} ", id);
 		}
 

@@ -1,7 +1,7 @@
 package com.massessment.microserviceassessment.service;
 
 public interface IEvaluatorRiskDiabete {
-	// several methods with same signature , but will be possible override them later with rules different in class impl
+	// several methods with same signature , but will be possible override them later with rules differents in class impl
 	String evaluateRiskDiabeteOfPatient(Integer id);
 	
 	String evaluateAsRiskNone(Integer id);

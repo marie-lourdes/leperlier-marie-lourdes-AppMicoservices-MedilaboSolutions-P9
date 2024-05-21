@@ -1,4 +1,4 @@
-package com.massessment.microserviceassessment.exceptions;
+package com.mmedicalreport.microservicemedicalReports.exceptions;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;

@@ -19,17 +19,17 @@ public class CounterTermsMedicalReportNotesImpl implements ICounter {
 	private Set<String> setSymptoms() {
 		symptoms.add("Hémoglobine A1C");
 		symptoms.add("Microalbumine");
-		symptoms.add("Taille");	
+		symptoms.add("Taille");
 		symptoms.add("Poids");
 		symptoms.add("Fumeur");
-		symptoms.add("Fumeuse");	
+		symptoms.add("Fumeuse");
 		symptoms.add("Anormal");
 		symptoms.add("Cholestérol");
 		symptoms.add("Vertige");
 		symptoms.add("Rechute");
 		symptoms.add("Réaction");
 		symptoms.add("Anticorps");
-		
+
 		return symptoms;
 	}
 
@@ -37,16 +37,16 @@ public class CounterTermsMedicalReportNotesImpl implements ICounter {
 	public Integer countSymptomFromMedicalReportNotes(List<String> notes) {
 		numberOfSymptoms = 0;
 		log.debug("Counting  number of symptoms in notes of patient: {}", notes);
+
 		this.setSymptoms();
 		for (String symptom : symptoms) {
-			for (String note : notes) {			
-				if(StringUtils.containsIgnoreCase(note, symptom)) {;
+			for (String note : notes) {
+				if (StringUtils.containsIgnoreCase(note, symptom)) {
 					numberOfSymptoms += 1;
-					;
 				}
 			}
 		}
-		log.debug("Number occurrence of list symptoms in notes medicalreport"+numberOfSymptoms);
+		log.debug("Number occurrence of list symptoms in notes medicalreport" + numberOfSymptoms);
 		return numberOfSymptoms;
 	}
 }
