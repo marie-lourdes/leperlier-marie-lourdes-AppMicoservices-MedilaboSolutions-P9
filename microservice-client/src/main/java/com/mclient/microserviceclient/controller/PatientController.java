@@ -133,22 +133,22 @@ public class PatientController {
 	public String reportMedicalPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientFoundById = new PatientBean();
 		List<MedicalReportBean> medicalReportsFoundByPatientId = new ArrayList<>();
-		String riskDiabeteEvaluated = "";
+		String riskDiabeteEvaluated = null;
 		try {
 			patientFoundById = microservicePatientsProxy.getPatientById(id);
 			medicalReportsFoundByPatientId = microserviceMedicalReportsProxy.getMedicalReportsByPatId(id);
 			riskDiabeteEvaluated = microserviceAssessmentDiabetesProxy.evaluateRiskDiabetePatientById(id);
+
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 		}
-
 		model.addAttribute("patient", patientFoundById);
-		//fixer erreur 404 pour un patient et  creation medical report si pas de notes existant du patient
+
 		if (medicalReportsFoundByPatientId != null) {
 			model.addAttribute("medicalReports", medicalReportsFoundByPatientId);
 		}
-		model.addAttribute("riskDiabeteEvaluated", riskDiabeteEvaluated);
 
+		model.addAttribute("riskDiabeteEvaluated", riskDiabeteEvaluated);
 		return "Info-Patient";
 	}
 

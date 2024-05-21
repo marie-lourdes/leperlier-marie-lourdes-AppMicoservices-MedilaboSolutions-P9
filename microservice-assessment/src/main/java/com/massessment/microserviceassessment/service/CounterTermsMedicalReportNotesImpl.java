@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class CounterTermsMedicalReportNotesImpl implements ICounter {
 	private static final Logger log = LogManager.getLogger(CounterTermsMedicalReportNotesImpl.class);
 
-	private Integer numberOfSymptoms;
+	private int numberOfSymptoms;
 	private Set<String> symptoms = new HashSet<String>();
 
 	private Set<String> setSymptoms() {

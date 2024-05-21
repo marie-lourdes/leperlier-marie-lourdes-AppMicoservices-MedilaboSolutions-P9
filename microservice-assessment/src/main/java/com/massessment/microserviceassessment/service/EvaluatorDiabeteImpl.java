@@ -41,6 +41,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 		List<List<String>> notes = medicalReportsBeans.stream().map(medicalReport -> medicalReport.getNote())
 				.collect(Collectors.toList());
 
+		numberOfSymptoms = 0;
 		for (List<String> note : notes) {
 			numberOfSymptoms = counterTermsMedicalReportNotes.countSymptomFromMedicalReportNotes(note);
 		}
@@ -53,6 +54,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 		PatientBean patientBean = this.getPatientBean(id);
 
 		riskEvaluated = null;
+
 		if (riskEvaluated == null) {
 			riskEvaluated = evaluateAsRiskNone(patientBean.getId());
 		}
@@ -69,9 +71,6 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 			riskEvaluated = evaluateAsRiskEarlyOnSet(patientBean.getId());
 		}
 
-		if (riskEvaluated == null) {
-			throw new NullPointerException("Failed to evaluate risk diabete for patient " + id);
-		}
 		return riskEvaluated;
 	}
 
