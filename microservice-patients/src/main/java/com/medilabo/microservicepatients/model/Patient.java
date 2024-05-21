@@ -3,8 +3,6 @@ package com.medilabo.microservicepatients.model;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.medilabo.microservicepatients.utils.MessageErrorValidationCustomized;
 import com.medilabo.microservicepatients.utils.RegexConstant;
 
 import jakarta.persistence.Column;
@@ -44,20 +42,20 @@ public class Patient {
 
 	@NotBlank
 	@Column(name = "genre")
-	@Pattern(regexp = RegexConstant.REGEX_GENDER, message = MessageErrorValidationCustomized.ERROR_MSG_GENDER_PATTERN)
+	@Pattern(regexp = RegexConstant.REGEX_GENDER)
 	private String genre;
 
 	@Column(name = "adresse")
-	@Pattern(regexp = RegexConstant.REGEX_ADDRESS, message = MessageErrorValidationCustomized.ERROR_MSG_ADDRESS_PATTERN)
+	@Pattern(regexp = RegexConstant.REGEX_ADDRESS)
 	private String adresse;
 
 	@Column(name = "telephone")
-	@Pattern(regexp = RegexConstant.REGEX_PHONE, message = MessageErrorValidationCustomized.ERROR_MSG_PHONE_PATTERN)
+	@Pattern(regexp = RegexConstant.REGEX_PHONE)
 	private String telephone;
 
 	@Override
 	public String toString() {
-		return "ProductBean{" + "id=" + id + ",  prenom='" + prenom + '\'' + ", nom='" + nom + '\''
+		return "Patient {" + "id=" + id + ",  prenom='" + prenom + '\'' + ", nom='" + nom + '\''
 				+ ", dateDeNaissance='" + dateDeNaissance + '\'' + ", genre='" + genre + '\'' + ",adresse='" + adresse
 				+ '\'' + ", telephone=" + telephone + '}';
 	}

@@ -32,33 +32,37 @@
 		<main>
 			<h1 style="color: red;"> Ajouter un Patient</h1>
 			<form th:action="@{/home/validateFormPatient}" method="post" th:object="${patient}">
-				<div class="login-field">
-					<div class="login-field--fontawesome">
-						<input  th:field="*{prenom}" type="text" class="form-control" name="prenom" required placeholder="Prénom"/>
+				<div >
+					<div >
+						<input  th:field="*{prenom}" type="text" class="form-control" name="prenom" required placeholder="Prénom"/>		
 					</div>
 				</div>
-				<div class="login-field">
-					<div class="login-field--fontawesome">
+				<div >
+					<div >
 						<input  th:field="*{nom}" type="text" class="form-control" name="nom" required placeholder="Nom"/>
 					</div>
 				</div>
-				<div class="login-field">
-					<div class="login-field--fontawesome">
+				<div >
+					<div >
 						<input th:field="*{dateDeNaissance}" type="date"  class="form-control" name="dateDeNaissance" required placeholder="Date de naissance"/>
 					</div>
 				</div>
-				<div class="login-field">
-					<div class="login-field--fontawesome">
-						<input  th:field="*{genre}" type="text" class="form-control" name="genre" required placeholder="genre"/>
+				<div >
+					<div >
+						<!--<input  th:field="*{genre}" type="text" class="form-control" name="genre" required placeholder="genre"/>-->
+						 <input type="radio" class="custom-control-input" id="genreM" th:field="*{genre}" value="M" >
+                         <label class="custom-control-label" for="genreM">M</label>
+						 <input type="radio" class="custom-control-input" id="genreF" th:field="*{genre}" value="F" >
+                         <label class="custom-control-label" for="genreF">F</label>
 					</div>
 				</div>
-					<div class="login-field">
-					<div class="login-field--fontawesome">
+					<div >
+					<div >
 						<input class="form-control" th:field="*{adresse}" type="text" name="adresse" placeholder="Adresse"/>
 					</div>
 				</div>
-					<div class="login-field">
-					<div class="login-field--fontawesome">
+					<div >
+					<div >
 						<input class="form-control" th:field="*{telephone}" type="text" name="telephone" placeholder="Téléphone"/>
 					</div>
 				</div>

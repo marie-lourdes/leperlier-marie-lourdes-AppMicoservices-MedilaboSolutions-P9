@@ -20,13 +20,13 @@ public class PatientService {
 		this.patientRepository = patientRepository;
 	}
 
-	public Patient addPatient(Patient patientCreated) /*throws IllegalArgumentException*/ {
+	public Patient addPatient(Patient patientCreated) {
 		log.debug("Adding patient: {} {}", patientCreated.getPrenom(), patientCreated.getNom());
 
 		return patientRepository.save(patientCreated);
 	}
 
-	public Patient updatePatient(Patient patientUpdated,Integer id) {
+	public Patient updatePatient(Patient patientUpdated, Integer id) {
 		log.debug("Adding patient: {} {}", patientUpdated.getPrenom(), patientUpdated.getNom());
 
 		patientRepository.save(patientUpdated);
@@ -39,20 +39,21 @@ public class PatientService {
 		log.debug("Retrieving  one patient for id {}", id);
 
 		Patient patientFoundById = new Patient();
-		patientFoundById = patientRepository.findById(id).orElseThrow(()-> new NullPointerException("patient by id test not found"));
+		patientFoundById = patientRepository.findById(id)
+				.orElseThrow(() -> new NullPointerException("patient by id test not found"));
 
 		log.debug("Patient retrieved successfully for id : {}", id);
 		return patientFoundById;
 	}
 
 	public Patient getPatientByName(String nom) {
-		log.debug("Retrieving  one patient by id and name {}"+ nom);
+		log.debug("Retrieving  one patient by id and name {}" + nom);
 
 		Patient patientFoundByFullname = new Patient();
 		patientFoundByFullname = patientRepository.findByNom(nom)
 				.orElseThrow(() -> new NullPointerException("Patient not found by id and name "));
 
-		log.debug("Patient retrieved successfully for : {}"+ nom);
+		log.debug("Patient retrieved successfully for : {}" + nom);
 		return patientFoundByFullname;
 	}
 
