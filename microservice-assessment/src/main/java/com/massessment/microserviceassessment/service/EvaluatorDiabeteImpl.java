@@ -70,7 +70,7 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 		if (riskEvaluated == null) {
 			riskEvaluated = evaluateAsRiskEarlyOnSet(patientBean.getId());
 		}
-
+	
 		return riskEvaluated;
 	}
 
