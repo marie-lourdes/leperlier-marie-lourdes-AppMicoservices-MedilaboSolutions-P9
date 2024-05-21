@@ -23,14 +23,14 @@ public class AuthenticationWebSecurity {
 		http.authorizeHttpRequests(request -> {
 			request.requestMatchers("/home").permitAll();	
 			request.requestMatchers(HttpMethod.GET, "/home/all-patients").hasRole("USER");
+			request.requestMatchers("/home/medicalReport/*").hasRole("USER");	
+			request.requestMatchers("/home/formMedicalReport/*").hasRole("USER");	
+			request.requestMatchers("/home/validateFormMedicalReport/*").hasRole("USER");	
 			request.requestMatchers( "/home/info-patient/**").hasRole("USER");
 			request.requestMatchers("/home/**").hasRole("ADMIN");	
 			request.anyRequest().authenticated();
 
 		}).httpBasic(Customizer.withDefaults());
-
-		//http.csrf(csrf -> csrf.ignoringRequestMatchers("home/validateFormPatient/**")); //desactive le header securité cors pour le path et test avec le serveur postman
-		//http.csrf(csrf -> csrf.ignoringRequestMatchers("home/updateFormPatient/**"));
 		return http.build();
 	}
 
