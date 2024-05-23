@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.medilabo.microservicepatients.model.Patient;
@@ -13,7 +14,7 @@ import com.medilabo.microservicepatients.repository.IPatientRepository;
 @Service
 public class PatientService {
 	private static final Logger log = LogManager.getLogger(PatientService.class);
-
+	@Autowired
 	private IPatientRepository patientRepository;
 
 	public PatientService(IPatientRepository patientRepository) {
@@ -44,17 +45,6 @@ public class PatientService {
 
 		log.debug("Patient retrieved successfully for id : {}", id);
 		return patientFoundById;
-	}
-
-	public Patient getPatientByName(String nom) {
-		log.debug("Retrieving  one patient by id and name {}" + nom);
-
-		Patient patientFoundByFullname = new Patient();
-		patientFoundByFullname = patientRepository.findByNom(nom)
-				.orElseThrow(() -> new NullPointerException("Patient not found by id and name "));
-
-		log.debug("Patient retrieved successfully for : {}" + nom);
-		return patientFoundByFullname;
 	}
 
 	public List<Patient> getAllPatients() throws NullPointerException {

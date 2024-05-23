@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medilabo.microservicepatients.exceptions.PatientConflictException;
 import com.medilabo.microservicepatients.exceptions.PatientNotFoundException;
+import com.medilabo.microservicepatients.model.Genre;
 import com.medilabo.microservicepatients.model.Patient;
+import com.medilabo.microservicepatients.service.GenrePatientService;
 import com.medilabo.microservicepatients.service.PatientService;
 
 import jakarta.validation.Valid;
@@ -28,6 +30,9 @@ public class PatientController {
 
 	@Autowired
 	private PatientService patientService;
+
+	@Autowired
+	private GenrePatientService genrePatientService;
 
 	@PostMapping("/creation")
 	public Patient createPatient(@Valid @RequestBody Patient patient) {
@@ -50,7 +55,7 @@ public class PatientController {
 	@PutMapping("/modification/{id}")
 	public Patient updateOnePatientById(@Valid @RequestBody Patient patientUpdated, @PathVariable Integer id) {
 		Patient existingPatientUpdated = new Patient();
-		
+
 		try {
 
 			existingPatientUpdated = patientService.getAllPatients().stream()
@@ -59,7 +64,7 @@ public class PatientController {
 						existingPatient.setNom(patientUpdated.getNom());
 						existingPatient.setPrenom(patientUpdated.getPrenom());
 						existingPatient.setDateDeNaissance(patientUpdated.getDateDeNaissance());
-						existingPatient.setGenre(patientUpdated.getGenre());
+						existingPatient.setGenreId(patientUpdated.getGenreId());
 						existingPatient.setAdresse(patientUpdated.getAdresse());
 						existingPatient.setTelephone(patientUpdated.getTelephone());
 						return existingPatient;
@@ -78,7 +83,7 @@ public class PatientController {
 	@GetMapping("/info-patient/{id}")
 	public Patient getPatientById(@PathVariable Integer id) {
 		Patient patientFoundById = new Patient();
-		
+
 		try {
 			patientFoundById = patientService.getPatientById(id);
 
@@ -90,10 +95,25 @@ public class PatientController {
 		}
 	}
 
+	@GetMapping("/genre-patient/{genreId}")
+	public Genre getPatientByGenre(@PathVariable String genreId) {
+		Genre genreFoundById = new Genre();
+
+		try {
+			genreFoundById = genrePatientService.getGenreByGenreId(genreId);
+
+			log.info("Genre with patients  successfully retrieved for genreId : {}, {}", genreId, genreFoundById);
+			return genreFoundById;
+		} catch (NullPointerException e) {
+			log.error(e.getMessage());
+			throw new PatientNotFoundException("Genre doesn't exist: " + genreId);
+		}
+	}
+
 	@GetMapping("/list")
 	public List<Patient> getAllPatients() {
 		List<Patient> allPatients = new ArrayList<>();
-		
+
 		try {
 			allPatients = patientService.getAllPatients();
 
