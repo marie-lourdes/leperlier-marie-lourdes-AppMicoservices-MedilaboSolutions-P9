@@ -29,7 +29,7 @@ public class Patient {
 
 	@NotNull
 	@Column(name = "genre_id")
-	private Integer genreId;
+	private String genreId;
 
 	@NotBlank
 	@Column(name = "prenom")

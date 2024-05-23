@@ -8,8 +8,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import com.medilabo.microservicepatients.model.Genre;
 import com.medilabo.microservicepatients.model.Patient;
-import com.medilabo.microservicepatients.repository.IGenrePatientRepository;
 import com.medilabo.microservicepatients.repository.IPatientRepository;
+import com.medilabo.microservicepatients.service.GenrePatientService;
 
 import jakarta.transaction.Transactional;
 
@@ -17,7 +17,7 @@ import jakarta.transaction.Transactional;
 @EnableDiscoveryClient
 public class MicroservicePatientsApplication implements CommandLineRunner{
 	@Autowired
-	private IGenrePatientRepository genrePatientRepository;
+	private GenrePatientService genrePatientService;
 	
 	@Autowired
 	IPatientRepository patientRepository ;
@@ -30,7 +30,7 @@ public class MicroservicePatientsApplication implements CommandLineRunner{
 	@Transactional
 	public void run(String... args) throws Exception {
 		Patient patient = patientRepository.findById(1).get();
-	   Genre listPatientFindByGenre = genrePatientRepository.findGenreByGenreId(1);
+	   Genre listPatientFindByGenre =  genrePatientService.getGenreByGenreId("M");
 		System.out.println( "*******************LIST PATIENT BY GENRE**********************"+listPatientFindByGenre);
 	}
 }

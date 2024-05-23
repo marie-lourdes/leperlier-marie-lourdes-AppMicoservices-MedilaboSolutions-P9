@@ -18,10 +18,10 @@ public class Genre {
 
 	@Id
 	@Column(name = "genre_id")
-	private Integer genreId;
+	private String genreId;
 
-	@Column(name = "sex")
-	private String sex;
+	/*@Column(name = "sex")
+	private String sex;*/
 
 	@OneToMany
 	@JoinColumn(name = "genre_id", referencedColumnName = "genre_id")
@@ -29,6 +29,6 @@ public class Genre {
 
 	@Override
 	public String toString() {
-		return "Genre {" + "genreId=" + genreId + ",  sex='" + sex + '\'' + ", patients='" + patients + '}';
+		return "Genre {" + "genreId=" + genreId + ","   +" patients='" + patients + '}';
 	}
 }

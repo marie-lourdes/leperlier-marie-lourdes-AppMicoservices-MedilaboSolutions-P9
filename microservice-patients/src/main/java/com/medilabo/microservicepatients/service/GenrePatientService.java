@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.medilabo.microservicepatients.model.Genre;
 import com.medilabo.microservicepatients.repository.IGenrePatientRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class GenrePatientService {
 	private static final Logger log = LogManager.getLogger(GenrePatientService.class);
@@ -15,17 +17,18 @@ public class GenrePatientService {
 	private IGenrePatientRepository genrePatientRepository;
 
 	public GenrePatientService(IGenrePatientRepository genrePatientRepository) {
-		this.genrePatientRepository =genrePatientRepository;
+		this.genrePatientRepository = genrePatientRepository;
 	}
-
-public Genre getGenreByGenreId(Integer genderId) {
-	log.debug("Retrieving  one patient by genre {}" + genderId);
-
-	Genre genreFoundById = new Genre();
-	genreFoundById = genrePatientRepository.findGenreByGenreId(genderId)
-			.orElseThrow(() -> new NullPointerException("Genre by id  not found: "+genderId ));
 	
-	log.debug("Genre found by id retrieved successfully for genre : {}" + genderId);
-	return genreFoundById ;
-}
+	@Transactional
+	public Genre getGenreByGenreId(String genderId) {
+		log.debug("Retrieving  one patient by genre {}" + genderId);
+
+		Genre genreFoundById = new Genre();
+		genreFoundById = genrePatientRepository.findGenreByGenreId(genderId)
+				.orElseThrow(() -> new NullPointerException("Genre by id  not found: " + genderId));
+
+		log.debug("Genre found by id retrieved successfully for genre : {}" + genderId);
+		return genreFoundById;
+	}
 }
