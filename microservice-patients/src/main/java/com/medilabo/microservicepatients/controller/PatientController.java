@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medilabo.microservicepatients.exceptions.PatientConflictException;
 import com.medilabo.microservicepatients.exceptions.PatientNotFoundException;
+import com.medilabo.microservicepatients.model.Genre;
 import com.medilabo.microservicepatients.model.Patient;
 import com.medilabo.microservicepatients.service.PatientService;
 
@@ -59,7 +60,7 @@ public class PatientController {
 						existingPatient.setNom(patientUpdated.getNom());
 						existingPatient.setPrenom(patientUpdated.getPrenom());
 						existingPatient.setDateDeNaissance(patientUpdated.getDateDeNaissance());
-						// existingPatient.setGenre(patientUpdated.getGenre());
+						existingPatient.setGenreId(patientUpdated.getGenreId());
 						existingPatient.setAdresse(patientUpdated.getAdresse());
 						existingPatient.setTelephone(patientUpdated.getTelephone());
 						return existingPatient;

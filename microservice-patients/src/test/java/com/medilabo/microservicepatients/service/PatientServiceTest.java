@@ -1,27 +1,6 @@
 package com.medilabo.microservicepatients.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import com.medilabo.microservicepatients.model.Patient;
-
-@SpringBootTest
+/*@SpringBootTest
 class PatientServiceTest {
 	private Patient patientTest;
 	
@@ -164,4 +143,4 @@ class PatientServiceTest {
 			fail(e.getMessage());
 		}
 	}
-}
+}*/

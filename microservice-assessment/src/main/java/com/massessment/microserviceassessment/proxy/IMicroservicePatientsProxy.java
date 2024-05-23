@@ -14,6 +14,10 @@ public interface IMicroservicePatientsProxy {
 	@GetMapping("/MICROSERVICE-PATIENTS/patient/info-patient/{id}")
 	PatientBean getPatientById(@PathVariable Integer id);
 
+	@GetMapping("/MICROSERVICE-PATIENTS/patient/genre-patient/{genreId}")
+	List<PatientBean> getPatientByGenre(@PathVariable Integer genreId);
+	
 	@GetMapping("/MICROSERVICE-PATIENTS/patient/list")
 	List<PatientBean> getAllPatients() ;
+
 }

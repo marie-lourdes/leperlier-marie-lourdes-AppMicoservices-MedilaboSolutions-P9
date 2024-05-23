@@ -22,8 +22,8 @@ public class Genre {
 	@Column(name = "id")
 	private Integer id;
 	
-	@Column(name = "genre")
-	private String genre;
+	@Column(name = "sex")
+	private String sex;
 	
 	@OneToMany(
 			   cascade = CascadeType.ALL, 
@@ -34,6 +34,6 @@ public class Genre {
 
 	@Override
 	public String toString() {
-		return "Genre {" + "id=" + id + ",  genre='" + genre+ '\'' + ", patients='" + patients + '}';
+		return "Genre {" + "id=" + id + ",  sex='" +sex+ '\'' + ", patients='" + patients + '}';
 	}
 }
