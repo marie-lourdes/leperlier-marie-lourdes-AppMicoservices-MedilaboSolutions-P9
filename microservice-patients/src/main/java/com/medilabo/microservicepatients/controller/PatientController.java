@@ -59,7 +59,7 @@ public class PatientController {
 						existingPatient.setNom(patientUpdated.getNom());
 						existingPatient.setPrenom(patientUpdated.getPrenom());
 						existingPatient.setDateDeNaissance(patientUpdated.getDateDeNaissance());
-						existingPatient.setGenre(patientUpdated.getGenre());
+					//	existingPatient.setGenre(patientUpdated.getGenre());
 						existingPatient.setAdresse(patientUpdated.getAdresse());
 						existingPatient.setTelephone(patientUpdated.getTelephone());
 						return existingPatient;

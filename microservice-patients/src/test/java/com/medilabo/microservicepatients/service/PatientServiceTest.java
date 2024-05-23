@@ -37,7 +37,7 @@ class PatientServiceTest {
 		patientTest.setDateDeNaissance(LocalDate.parse("1970-01-01"));
 		patientTest.setAdresse("33 Hazelton Avenue 2nd Floor Toronto,");
 		patientTest.setTelephone("778-945-3170");
-		patientTest.setGenre("F");
+		patientTest.setGenreId(2);
 		List<Patient> allPatients = new ArrayList<>();
 		allPatients.add(patientTest);
 		when(patientServiceUnderTest.addPatient(patientTest)).thenReturn(patientTest);
@@ -54,7 +54,7 @@ class PatientServiceTest {
 		patient.setDateDeNaissance(LocalDate.parse("1970-01-01"));
 		patient.setAdresse("2540, boulevard Daniel-Johnson");
 		patient.setTelephone("450-978-9555");
-		patient.setGenre("F");
+		patientTest.setGenreId(2);
 		when(patientServiceUnderTest.addPatient(any(Patient.class))).thenReturn(patient);
 
 		try {

@@ -3,6 +3,7 @@ package com.medilabo.microservicepatients.model;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 import com.medilabo.microservicepatients.utils.RegexConstant;
 
 import jakarta.persistence.Column;
@@ -26,6 +27,10 @@ public class Patient {
 	@Column(name = "id")
 	private Integer id;
 
+	@NotNull
+	@Column(name = "genre_id")
+	private Integer genreId;
+	
 	@NotBlank
 	@Column(name = "prenom")
 	private String prenom;
@@ -39,11 +44,6 @@ public class Patient {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateDeNaissance;
 
-	@NotBlank
-	@Column(name = "genre")
-	@Pattern(regexp = RegexConstant.REGEX_GENDER)
-	private String genre;
-
 	@Column(name = "adresse")
 	@Pattern(regexp = RegexConstant.REGEX_ADDRESS)
 	private String adresse;
@@ -55,7 +55,7 @@ public class Patient {
 	@Override
 	public String toString() {
 		return "Patient {" + "id=" + id + ",  prenom='" + prenom + '\'' + ", nom='" + nom + '\'' + ", dateDeNaissance='"
-				+ dateDeNaissance + '\'' + ", genre='" + genre + '\'' + ",adresse='" + adresse + '\'' + ", telephone="
+				+ dateDeNaissance + '\'' + ",adresse='" + adresse + '\'' + ", telephone="
 				+ telephone + '}';
 	}
 }
