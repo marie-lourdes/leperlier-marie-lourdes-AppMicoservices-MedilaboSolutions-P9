@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medilabo.microservicepatients.exceptions.PatientConflictException;
 import com.medilabo.microservicepatients.exceptions.PatientNotFoundException;
-import com.medilabo.microservicepatients.model.Genre;
 import com.medilabo.microservicepatients.model.Patient;
 import com.medilabo.microservicepatients.service.PatientService;
 
@@ -91,7 +90,7 @@ public class PatientController {
 		}
 	}
 
-	@GetMapping("/genre-patient/{genreId}")
+	/*@GetMapping("/genre-patient/{genreId}")
 	public List<Patient> getPatientByGenre(@PathVariable Integer genreId) {
 		List<Patient> patientsFoundByGenre = new ArrayList<>();
 
@@ -104,7 +103,7 @@ public class PatientController {
 			log.error(e.getMessage());
 			throw new PatientNotFoundException("List Patients not found for genreId " + genreId);
 		}
-	}
+	}*/
 
 	@GetMapping("/list")
 	public List<Patient> getAllPatients() {

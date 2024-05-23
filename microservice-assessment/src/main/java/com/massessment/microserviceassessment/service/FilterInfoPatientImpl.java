@@ -33,7 +33,7 @@ public class FilterInfoPatientImpl implements IFilter {
 	@Override
 	public String filterSexPatient(Integer id) {
 		PatientBean patientBean = microservicePatientsProxy.getPatientById(id);
-		return patientBean.getGenreId().equals(Constants.MASCULIN) ? Constants.MASCULIN : Constants.FEMININ;
+		return patientBean.getGenreId().equals(1) ? Constants.MASCULIN : Constants.FEMININ;
 	}
 
 }

@@ -30,7 +30,7 @@ public class Patient {
 	@NotNull
 	@Column(name = "genre_id")
 	private Integer genreId;
-	
+
 	@NotBlank
 	@Column(name = "prenom")
 	private String prenom;
@@ -55,7 +55,6 @@ public class Patient {
 	@Override
 	public String toString() {
 		return "Patient {" + "id=" + id + ",  prenom='" + prenom + '\'' + ", nom='" + nom + '\'' + ", dateDeNaissance='"
-				+ dateDeNaissance + '\'' + ",adresse='" + adresse + '\'' + ", telephone="
-				+ telephone + '}';
+				+ dateDeNaissance + '\'' + ",adresse='" + adresse + '\'' + ", telephone=" + telephone + '}';
 	}
 }

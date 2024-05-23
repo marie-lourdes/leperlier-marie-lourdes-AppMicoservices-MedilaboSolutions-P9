@@ -8,9 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.medilabo.microservicepatients.model.Genre;
 import com.medilabo.microservicepatients.model.Patient;
-import com.medilabo.microservicepatients.repository.IGenrePatientRepository;
 import com.medilabo.microservicepatients.repository.IPatientRepository;
 
 @Service
@@ -18,9 +16,6 @@ public class PatientService {
 	private static final Logger log = LogManager.getLogger(PatientService.class);
 	@Autowired
 	private IPatientRepository patientRepository;
-
-	@Autowired
-	private IGenrePatientRepository genrePatientRepository;
 
 	public PatientService(IPatientRepository patientRepository) {
 		this.patientRepository = patientRepository;
@@ -52,7 +47,7 @@ public class PatientService {
 		return patientFoundById;
 	}
 
-	public List<Patient> getPatientByGenre(Integer genderId) {
+	/*public List<Patient> getPatientByGenre(Integer genderId) {
 		log.debug("Retrieving  one patient by genre {}" + genderId);
 
 		List<Patient> patientsFoundByGenre = new ArrayList<>();
@@ -63,7 +58,7 @@ public class PatientService {
 
 		log.debug("List of patients found by genre id retrieved successfully for genre : {}" + genderId);
 		return patientsFoundByGenre;
-	}
+	}*/
 
 	public List<Patient> getAllPatients() throws NullPointerException {
 		log.debug("Retrieving  all patients");
