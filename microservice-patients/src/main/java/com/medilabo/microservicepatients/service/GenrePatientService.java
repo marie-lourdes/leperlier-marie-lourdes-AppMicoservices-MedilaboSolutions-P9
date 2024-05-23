@@ -13,16 +13,17 @@ import jakarta.transaction.Transactional;
 @Service
 public class GenrePatientService {
 	private static final Logger log = LogManager.getLogger(GenrePatientService.class);
+
 	@Autowired
 	private IGenrePatientRepository genrePatientRepository;
 
 	public GenrePatientService(IGenrePatientRepository genrePatientRepository) {
 		this.genrePatientRepository = genrePatientRepository;
 	}
-	
+
 	@Transactional
 	public Genre getGenreByGenreId(String genderId) {
-		log.debug("Retrieving  one patient by genre {}" + genderId);
+		log.debug("Retrieving  one genre  patient by genreId {}" + genderId);
 
 		Genre genreFoundById = new Genre();
 		genreFoundById = genrePatientRepository.findGenreByGenreId(genderId)

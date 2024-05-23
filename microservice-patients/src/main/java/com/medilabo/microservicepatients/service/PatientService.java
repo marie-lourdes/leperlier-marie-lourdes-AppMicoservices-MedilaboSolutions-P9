@@ -47,8 +47,6 @@ public class PatientService {
 		return patientFoundById;
 	}
 
-
-
 	public List<Patient> getAllPatients() throws NullPointerException {
 		log.debug("Retrieving  all patients");
 		List<Patient> allPatients = new ArrayList<>();

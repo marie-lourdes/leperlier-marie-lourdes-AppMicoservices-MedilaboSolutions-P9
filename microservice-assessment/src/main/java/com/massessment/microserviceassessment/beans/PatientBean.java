@@ -10,7 +10,7 @@ public class PatientBean {
 	private String prenom;
 	private String nom;
 	private LocalDate dateDeNaissance;
-	private Integer genreId;
+	private String genreId;
 
 	public PatientBean() {
 

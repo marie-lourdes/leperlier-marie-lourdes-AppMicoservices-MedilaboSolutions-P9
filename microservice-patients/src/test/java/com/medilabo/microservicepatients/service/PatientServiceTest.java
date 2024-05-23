@@ -1,6 +1,27 @@
 package com.medilabo.microservicepatients.service;
 
-/*@SpringBootTest
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.medilabo.microservicepatients.model.Patient;
+
+@SpringBootTest
 class PatientServiceTest {
 	private Patient patientTest;
 	
@@ -16,7 +37,7 @@ class PatientServiceTest {
 		patientTest.setDateDeNaissance(LocalDate.parse("1970-01-01"));
 		patientTest.setAdresse("33 Hazelton Avenue 2nd Floor Toronto,");
 		patientTest.setTelephone("778-945-3170");
-		patientTest.setGenreId(2);
+		patientTest.setGenreId("F");
 		List<Patient> allPatients = new ArrayList<>();
 		allPatients.add(patientTest);
 		when(patientServiceUnderTest.addPatient(patientTest)).thenReturn(patientTest);
@@ -33,7 +54,7 @@ class PatientServiceTest {
 		patient.setDateDeNaissance(LocalDate.parse("1970-01-01"));
 		patient.setAdresse("2540, boulevard Daniel-Johnson");
 		patient.setTelephone("450-978-9555");
-		patientTest.setGenreId(2);
+		patientTest.setGenreId("F");
 		when(patientServiceUnderTest.addPatient(any(Patient.class))).thenReturn(patient);
 
 		try {
@@ -143,4 +164,4 @@ class PatientServiceTest {
 			fail(e.getMessage());
 		}
 	}
-}*/
+}

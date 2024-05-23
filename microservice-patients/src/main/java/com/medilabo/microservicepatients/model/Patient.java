@@ -29,6 +29,7 @@ public class Patient {
 
 	@NotNull
 	@Column(name = "genre_id")
+	@Pattern(regexp = RegexConstant.REGEX_GENDER)
 	private String genreId;
 
 	@NotBlank

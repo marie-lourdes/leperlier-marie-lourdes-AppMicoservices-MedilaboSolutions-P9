@@ -102,7 +102,7 @@ public class PatientController {
 		try {
 			genreFoundById = genrePatientService.getGenreByGenreId(genreId);
 
-			log.info("List Patients  successfully retrieved for genreId : {}, {}", genreId, genreFoundById);
+			log.info("Genre with patients  successfully retrieved for genreId : {}, {}", genreId, genreFoundById);
 			return genreFoundById;
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());

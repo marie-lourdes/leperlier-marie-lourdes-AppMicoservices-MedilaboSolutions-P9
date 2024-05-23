@@ -20,9 +20,6 @@ public class Genre {
 	@Column(name = "genre_id")
 	private String genreId;
 
-	/*@Column(name = "sex")
-	private String sex;*/
-
 	@OneToMany
 	@JoinColumn(name = "genre_id", referencedColumnName = "genre_id")
 	private List<Patient> patients = new ArrayList<>();

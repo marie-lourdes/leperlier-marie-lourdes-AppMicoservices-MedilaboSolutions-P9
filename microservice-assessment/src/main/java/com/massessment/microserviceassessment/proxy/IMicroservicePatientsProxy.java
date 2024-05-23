@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.massessment.microserviceassessment.beans.GenreBean;
 import com.massessment.microserviceassessment.beans.PatientBean;
 
 @FeignClient(name = "microservice-API-Gateway")
@@ -15,7 +16,7 @@ public interface IMicroservicePatientsProxy {
 	PatientBean getPatientById(@PathVariable Integer id);
 
 	@GetMapping("/MICROSERVICE-PATIENTS/patient/genre-patient/{genreId}")
-	List<PatientBean> getPatientByGenre(@PathVariable Integer genreId);
+	GenreBean getPatientByGenre(@PathVariable String genreId);
 	
 	@GetMapping("/MICROSERVICE-PATIENTS/patient/list")
 	List<PatientBean> getAllPatients() ;
