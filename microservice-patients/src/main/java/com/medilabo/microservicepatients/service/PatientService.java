@@ -46,15 +46,17 @@ public class PatientService {
 		return patientFoundById;
 	}
 
-	public Patient getPatientByName(String nom) {
-		log.debug("Retrieving  one patient by id and name {}" + nom);
+	public List<Patient> getPatientByGenre(Integer genreId) {
+		log.debug("Retrieving  one patient by genre {}" + genreId);
 
-		Patient patientFoundByFullname = new Patient();
-		patientFoundByFullname = patientRepository.findByNom(nom)
-				.orElseThrow(() -> new NullPointerException("Patient not found by id and name "));
+		List<Patient> patientsFoundByGenre = new ArrayList<>();
+		patientsFoundByGenre = patientRepository.findByGenreId(genreId);
+		if (patientsFoundByGenre.isEmpty()) {
+			throw new NullPointerException("List of patients found by genre id " + genreId + "not found");
+		}
 
-		log.debug("Patient retrieved successfully for : {}" + nom);
-		return patientFoundByFullname;
+		log.debug("List of patients found by genre id retrieved successfully for genre : {}" + genreId);
+		return patientsFoundByGenre;
 	}
 
 	public List<Patient> getAllPatients() throws NullPointerException {
