@@ -50,7 +50,7 @@ public class PatientController {
 	@PutMapping("/modification/{id}")
 	public Patient updateOnePatientById(@Valid @RequestBody Patient patientUpdated, @PathVariable Integer id) {
 		Patient existingPatientUpdated = new Patient();
-		
+
 		try {
 
 			existingPatientUpdated = patientService.getAllPatients().stream()
@@ -59,7 +59,7 @@ public class PatientController {
 						existingPatient.setNom(patientUpdated.getNom());
 						existingPatient.setPrenom(patientUpdated.getPrenom());
 						existingPatient.setDateDeNaissance(patientUpdated.getDateDeNaissance());
-					//	existingPatient.setGenre(patientUpdated.getGenre());
+						// existingPatient.setGenre(patientUpdated.getGenre());
 						existingPatient.setAdresse(patientUpdated.getAdresse());
 						existingPatient.setTelephone(patientUpdated.getTelephone());
 						return existingPatient;
@@ -78,7 +78,7 @@ public class PatientController {
 	@GetMapping("/info-patient/{id}")
 	public Patient getPatientById(@PathVariable Integer id) {
 		Patient patientFoundById = new Patient();
-		
+
 		try {
 			patientFoundById = patientService.getPatientById(id);
 
@@ -90,10 +90,25 @@ public class PatientController {
 		}
 	}
 
+	@GetMapping("/genre-patient/{genreId}")
+	public List<Patient> getPatientByGenre(@PathVariable Integer genreId) {
+		List<Patient> patientsFoundByGenre = new ArrayList<>();
+
+		try {
+			patientsFoundByGenre = patientService.getPatientByGenre(genreId);
+
+			log.info("List Patients  successfully retrieved for genreId : {}, {}", genreId, patientsFoundByGenre);
+			return patientsFoundByGenre;
+		} catch (NullPointerException e) {
+			log.error(e.getMessage());
+			throw new PatientNotFoundException("List Patients not found for genreId " + genreId);
+		}
+	}
+
 	@GetMapping("/list")
 	public List<Patient> getAllPatients() {
 		List<Patient> allPatients = new ArrayList<>();
-		
+
 		try {
 			allPatients = patientService.getAllPatients();
 
