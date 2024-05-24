@@ -1,6 +1,5 @@
 package com.mclient.microserviceclient.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,13 +20,13 @@ public class AuthenticationWebSecurity {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(request -> {
-			request.requestMatchers("/home").permitAll();	
+			request.requestMatchers("/home").permitAll();
 			request.requestMatchers(HttpMethod.GET, "/home/all-patients").hasRole("USER");
-			request.requestMatchers("/home/medicalReport/*").hasRole("USER");	
-			request.requestMatchers("/home/formMedicalReport/*").hasRole("USER");	
-			request.requestMatchers("/home/validateFormMedicalReport/*").hasRole("USER");	
-			request.requestMatchers( "/home/info-patient/**").hasRole("USER");
-			request.requestMatchers("/home/**").hasRole("ADMIN");	
+			request.requestMatchers("/home/medicalReport/*").hasRole("USER");
+			request.requestMatchers("/home/formMedicalReport/*").hasRole("USER");
+			request.requestMatchers("/home/validateFormMedicalReport/*").hasRole("USER");
+			request.requestMatchers("/home/info-patient/**").hasRole("USER");
+			request.requestMatchers("/home/**").hasRole("ADMIN");
 			request.anyRequest().authenticated();
 
 		}).httpBasic(Customizer.withDefaults());
@@ -39,7 +38,7 @@ public class AuthenticationWebSecurity {
 		UserDetails user = User.builder().username("user").password(passwordEncoder().encode("user")).roles("USER")
 				.build();
 		UserDetails admin = User.builder().username("admin").password(passwordEncoder().encode("admin"))
-				.roles("USER","ADMIN").build();
+				.roles("USER", "ADMIN").build();
 		return new InMemoryUserDetailsManager(user, admin);
 	}
 

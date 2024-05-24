@@ -59,6 +59,7 @@ public class PatientController {
 		PatientBean patient = new PatientBean();
 
 		model.addAttribute("patient", patient);
+
 		log.info(" Patient  form  page successfully retrieved");
 		return "FormPatient";
 	}
@@ -84,6 +85,7 @@ public class PatientController {
 	@GetMapping("/updateFormPatient/{id}")
 	public String updateFormPatientPage(@PathVariable Integer id, Model model) {
 		PatientBean patientToUpdate = new PatientBean();
+
 		try {
 			patientToUpdate = microservicePatientsProxy.getPatientById(id);
 			if (patientToUpdate != null) {
@@ -113,6 +115,7 @@ public class PatientController {
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
 		}
+
 		log.info("medicalReport created sucessfully{} :", medicalReportCreated);
 		return "redirect:/home/medicalReport/{id}";
 	}
@@ -121,10 +124,12 @@ public class PatientController {
 	public String formMedicalReportPage(@PathVariable Integer id, Model model) {
 		MedicalReportBean medicalReport = new MedicalReportBean();
 		PatientBean patientFoundById = new PatientBean();
+
 		patientFoundById = microservicePatientsProxy.getPatientById(id);
 		medicalReport.setPatId(patientFoundById.getId());
 		medicalReport.setPatient(patientFoundById.getNom());
 		model.addAttribute("medicalReport", medicalReport);
+
 		log.info(" MedicalReport  form  page successfully retrieved");
 		return "FormMedicalReport";
 	}
@@ -134,6 +139,7 @@ public class PatientController {
 		PatientBean patientFoundById = new PatientBean();
 		List<MedicalReportBean> medicalReportsFoundByPatientId = new ArrayList<>();
 		String riskDiabeteEvaluated = null;
+
 		try {
 			patientFoundById = microservicePatientsProxy.getPatientById(id);
 			medicalReportsFoundByPatientId = microserviceMedicalReportsProxy.getMedicalReportsByPatId(id);
@@ -155,6 +161,7 @@ public class PatientController {
 	@GetMapping("/all-patients")
 	public String listPatientsPage(Model model) {
 		List<PatientBean> patients = new ArrayList<>();
+
 		try {
 			patients = microservicePatientsProxy.getAllPatients();
 

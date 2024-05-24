@@ -8,8 +8,8 @@ import com.mclient.microserviceclient.exceptions.CustomErrorDecoder;
 @Configuration
 public class FeignExceptionConfig {
 
-	   @Bean
-	   public CustomErrorDecoder mCustomErrorDecoder(){
-	       return new CustomErrorDecoder();
-	   }
+	@Bean
+	public CustomErrorDecoder mCustomErrorDecoder() {
+		return new CustomErrorDecoder();
+	}
 }

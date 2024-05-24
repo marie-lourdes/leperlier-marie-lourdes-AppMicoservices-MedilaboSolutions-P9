@@ -12,11 +12,13 @@ import com.mclient.microserviceclient.bean.MedicalReportBean;
 
 import jakarta.validation.Valid;
 
-@FeignClient(name="microservice-API-Gateway")
+@FeignClient(name = "microservice-API-Gateway")
 public interface IMicroserviceMedicalReportsProxy {
-	@GetMapping("/MICROSERVICE-MEDICALREPORTS/patient/rapport-medical/{patId}")
-    List<MedicalReportBean> getMedicalReportsByPatId(@PathVariable Integer patId);
 	
+	@GetMapping("/MICROSERVICE-MEDICALREPORTS/patient/rapport-medical/{patId}")
+	List<MedicalReportBean> getMedicalReportsByPatId(@PathVariable Integer patId);
+
 	@PostMapping("/MICROSERVICE-MEDICALREPORTS/patient/creationRapportMedical/{id}")
-	public MedicalReportBean createMedicalReport(@PathVariable Integer id,@Valid @RequestBody MedicalReportBean medicalReport) ;
+	public MedicalReportBean createMedicalReport(@PathVariable Integer id,
+			@Valid @RequestBody MedicalReportBean medicalReport);
 }
