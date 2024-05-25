@@ -94,7 +94,7 @@ The home page :http://localhost:8080/home
 - GET: **localhost:9003/patient/assessment-diabetes/{id}**
 
 #### microservice-client
-- GET: **localhost:8080/home/**
+- GET: **localhost:8080/home**
 
 -For authentication use login: user, password: user, 
 or login: admin, passaword: admin
