@@ -102,14 +102,14 @@ or login: admin, passaword: admin
 -For testing  all endpoints and forms, follow the menu and navigation in the application
 
 ### Use Docker image and  Docker Compose
-In each microservice folder , the file Sockerfile allow you to build Docker image:
+In each microservice folder , the file Dockerfile allow you to build Docker image:
 
 - Run command Docker in your favorite CLI:'docker build -t [name image  noted in docker-compose.yaml] .' for  creating  image of each microservice
 
 - Then run: 'docker run -d -p [port]:[port] [name image noted in docker-compose.yaml]' for running container of each microservice 
 you will see in the interface Docker images and containes of all microservices
 
-Then, in root of project, the file Docker-compose.yaml allow you to run all microservices together
+Then, in root of project, the file docker-compose.yaml allow you to run all microservices together
 
 - Run command Docker:'docker-compose up -d'
 
