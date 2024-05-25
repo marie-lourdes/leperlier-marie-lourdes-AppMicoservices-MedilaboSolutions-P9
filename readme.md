@@ -96,8 +96,8 @@ The home page :http://localhost:8080/home
 #### microservice-client
 - GET: **localhost:8080/home**
 
--For authentication use login: user, password: user, 
-or login: admin, passaword: admin
+-For authentication use **login:** user, **password**: user, 
+or **login:** admin, **password**: admin
 
 -For testing  all endpoints and forms, follow the menu and navigation in the application
 
