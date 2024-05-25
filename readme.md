@@ -11,8 +11,7 @@ Medilabo Solution is a Spring Boot application with architecture  microservices:
 
 ### Technologies
 
-> Java 17  
-
+- Java 17 
 - Spring Boot 3.X  
 - Spring Cloud
 - Spring Data Jpa
