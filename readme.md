@@ -20,6 +20,7 @@ Medilabo Solution is a Spring Boot application with architecture  microservices:
 - Spring security
 - Thymeleaf
 - MySQL 8.0
+- MongoDB Community Edition
 - Docker-desktop 4.30.00
 - Docker-compose v2.27.0-desktop.2
 
