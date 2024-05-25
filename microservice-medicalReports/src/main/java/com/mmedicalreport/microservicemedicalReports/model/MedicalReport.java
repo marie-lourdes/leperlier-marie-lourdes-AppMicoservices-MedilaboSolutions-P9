@@ -1,4 +1,4 @@
-package com.mmedicalreport.microservicemedicalReports.model;
+package com.mmedicalreport.microservicemedicalreports.model;
 
 import java.util.ArrayList;
 import java.util.List;

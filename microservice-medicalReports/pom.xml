@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mmedicalreport</groupId>
-	<artifactId>microservice-medicalReports</artifactId>
+	<artifactId>microservice-medicalreports</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Microservice back for getting medical report </description>
 	<properties>

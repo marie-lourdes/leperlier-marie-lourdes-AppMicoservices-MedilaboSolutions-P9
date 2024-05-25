@@ -1,4 +1,4 @@
-package com.mmedicalreport.microservicemedicalReports.beans;
+package com.mmedicalreport.microservicemedicalreports.beans;
 
 import lombok.Data;
 
