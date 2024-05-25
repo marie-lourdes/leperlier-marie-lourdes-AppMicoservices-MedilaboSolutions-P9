@@ -55,7 +55,7 @@ https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
 
 https://www.mongodb.com/try/download/compass
 
-8. Launch MongoDB compass, then:
+8.Launch MongoDB compass, then:
 - create database 'historypatients'
 - create collection 'medicalreports'
 - add  data from the collection with file medicalReports.json  in folder /resources of microservice-medicalReports 
