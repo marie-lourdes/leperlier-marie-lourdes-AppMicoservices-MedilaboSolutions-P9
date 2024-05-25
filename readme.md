@@ -39,12 +39,11 @@ https://maven.apache.org/install.html
 
 https://www.eclipse.org/community/eclipse_newsletter/2018/february/springboot.php
 
-
-5.Install Docker-desktop
+4.Install Docker-desktop
 
 https://www.docker.com/products/docker-desktop/
 
-6.Install MySQL WorkBench or other BDD
+5.Install MySQL WorkBench or other BDD
 
 https://www.mysql.com/products/workbench/
 
