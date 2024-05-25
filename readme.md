@@ -11,16 +11,16 @@ TourGuide is a Spring Boot application with microservices:
 
 ### Technologies
 
-> Java 17  
-> Spring Boot 3.X  
-> Spring Cloud
-> Spring Data Jpa
-> Spring Data MongoDB
-> Spring security
-> Thymeleaf
-> MySQL 8.0
-> Docker-desktop 4.30.00
-> Docker-compose v2.27.0-desktop.2
+- Java 17  
+- Spring Boot 3.X  
+- Spring Cloud
+- Spring Data Jpa
+- Spring Data MongoDB
+- Spring security
+- Thymeleaf
+- MySQL 8.0
+- Docker-desktop 4.30.00
+- Docker-compose v2.27.0-desktop.2
 
 
 ### Installing
