@@ -1,0 +1,58 @@
+services:
+  microservice-eureka:
+    image: microservice-eureka:v1
+    ports:
+      - "9102:9102" 
+    restart: always
+  microservice-config-server:
+    image: microservice-config-server:v1
+    depends_on:
+      - microservice-eureka
+    ports:
+      - "9101:9101"
+    restart: always
+  microservice-api-gateway:
+    image: microservice-api-gateway:v1
+    depends_on:
+      - microservice-eureka
+      - microservice-config-server
+    ports:
+      - "9103:9103"
+    restart: always
+  microservice-patients:
+    image: microservice-patients:v1
+    depends_on:
+      - microservice-eureka
+      - microservice-config-server
+    ports:
+      - "9001:9001"
+    restart: always
+  microservice-medicalreports:
+      image: microservice-medicalreports:v1
+      depends_on:
+        - microservice-eureka
+        - microservice-config-server
+        - microservice-api-gateway
+      ports:
+        - "9002:9002"
+      restart: always
+  microservice-assessment:
+      image: microservice-assessment:v1
+      depends_on:
+        - microservice-eureka
+        - microservice-config-server
+        - microservice-api-gateway
+      ports:
+        - "9003:9003"
+      restart: always
+  microservice-client:
+      image: microservice-client:v1
+      depends_on:
+        - microservice-eureka
+        - microservice-config-server
+        - microservice-api-gateway
+      ports:
+        - "8080:8080"
+      restart: always
+    
+   
