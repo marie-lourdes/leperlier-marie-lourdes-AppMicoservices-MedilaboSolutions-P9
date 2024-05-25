@@ -47,15 +47,15 @@ https://www.docker.com/products/docker-desktop/
 
 https://www.mysql.com/products/workbench/
 
-7. Upload structure BDD of file Data.sql in SQL BDD (in folder/config) or file Data.sql in folder /resources of microservice-patient and  then add your info connexion BDD in environment variable of your local system 
+6.Upload structure BDD of file Data.sql in SQL BDD (in folder/config) or file Data.sql in folder /resources of microservice-patient and  then add your info connexion BDD in environment variable of your local system 
 
-8.Install MongoDB and MongoDB Compass GUI
+7.Install MongoDB and MongoDB Compass GUI
 
 https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
 
 https://www.mongodb.com/try/download/compass
 
-9. Launch MongoDB compass, then:
+8. Launch MongoDB compass, then:
 - create database 'historypatients'
 - create collection 'medicalreports'
 - add  data from the collection with file medicalReports.json  in folder /resources of microservice-medicalReports 
