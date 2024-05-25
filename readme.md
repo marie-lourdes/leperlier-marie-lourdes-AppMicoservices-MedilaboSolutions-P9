@@ -11,16 +11,17 @@ TourGuide is a Spring Boot application with microservices:
 
 ### Technologies
 
-- Java 17  
-- Spring Boot 3.X  
-- Spring Cloud
-- Spring Data Jpa
-- Spring Data MongoDB
-- Spring security
-- Thymeleaf
-- MySQL 8.0
-- Docker-desktop 4.30.00
-- Docker-compose v2.27.0-desktop.2
+> Java 17  
+
+> Spring Boot 3.X  
+> Spring Cloud
+> Spring Data Jpa
+> Spring Data MongoDB
+> Spring security
+> Thymeleaf
+> MySQL 8.0
+> Docker-desktop 4.30.00
+> Docker-compose v2.27.0-desktop.2
 
 
 ### Installing
@@ -39,23 +40,24 @@ https://maven.apache.org/install.html
 
 https://www.eclipse.org/community/eclipse_newsletter/2018/february/springboot.php
 
-4.Install Docker-desktop
+
+5.Install Docker-desktop
 
 https://www.docker.com/products/docker-desktop/
 
-5.Install MySQL WorkBench or other BDD
+6.Install MySQL WorkBench or other BDD
 
 https://www.mysql.com/products/workbench/
 
-6.Upload structure BDD of file Data.sql in SQL BDD (in folder/config) or file Data.sql in folder /resources of microservice-patient and  then add your info connexion BDD in environment variable of your local system 
+7. Upload structure BDD of file Data.sql in SQL BDD (in folder/config) or file Data.sql in folder /resources of microservice-patient and  then add your info connexion BDD in environment variable of your local system 
 
-7.Install MongoDB and MongoDB Compass GUI
+8.Install MongoDB and MongoDB Compass GUI
 
 https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
 
 https://www.mongodb.com/try/download/compass
 
-8.Launch MongoDB compass, then:
+9. Launch MongoDB compass, then:
 - create database 'historypatients'
 - create collection 'medicalreports'
 - add  data from the collection with file medicalReports.json  in folder /resources of microservice-medicalReports 
@@ -101,14 +103,14 @@ or login: admin, passaword: admin
 -For testing  all endpoints and forms, follow the menu and navigation in the application
 
 ### Use Docker image and  Docker Compose
-In each microservice folder , the file Dockerfile allow you to build Docker image:
+In each microservice folder , the file Sockerfile allow you to build Docker image:
 
-- Run command Docker in your favorite CLI:'docker build -t <name image  noted in docker-compose.yaml> .' for  creating  image of each microservice
+- Run command Docker in your favorite CLI:'docker build -t [name image  noted in docker-compose.yaml] .' for  creating  image of each microservice
 
-- Then run: 'docker run -d -p <port>:<port> <name image noted in docker-compose.yaml>' for running container of each microservice 
+- Then run: 'docker run -d -p [port]:[port] [name image noted in docker-compose.yaml]' for running container of each microservice 
 you will see in the interface Docker images and containes of all microservices
 
-Then, in root of project, the file docker-compose.yaml allow you to run all microservices together
+Then, in root of project, the file Docker-compose.yaml allow you to run all microservices together
 
 - Run command Docker:'docker-compose up -d'
 
