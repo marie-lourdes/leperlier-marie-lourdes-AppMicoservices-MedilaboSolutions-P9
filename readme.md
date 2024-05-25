@@ -1,6 +1,6 @@
 # Application microservices Medilabo Solutions
 
-TourGuide is a Spring Boot application with microservices:
+Medilabo Solution is a Spring Boot application with architecture  microservices:
 - microservice-eureka back for register instance of all microservices
 - microservice-config-server back to call repository Config-repo-medilabo which stock all configuration of all microservices
 - microservice-API-Gateway back manange request HTTP between microservices
