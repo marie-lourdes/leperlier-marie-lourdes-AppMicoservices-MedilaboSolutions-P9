@@ -73,7 +73,7 @@ or with your CLI , mvn spring-boot:run :
 - microservice-assessment
 - microservice-client 
 
-Finally, you will be ready to  use API and request 
+Finally, you will be ready to  use  these microservice with user interface web (microservice-client) and request 
 The home page :http://localhost:8080/home
 
 ### Endpoints of microservices  
