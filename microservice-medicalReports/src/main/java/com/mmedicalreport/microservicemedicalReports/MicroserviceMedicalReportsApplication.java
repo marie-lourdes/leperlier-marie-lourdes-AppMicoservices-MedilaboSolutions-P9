@@ -1,4 +1,4 @@
-package com.mmedicalreport.microservicemedicalreports;
+package com.mmedicalreport.microservicemedicalReports;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients("com.mmedicalreport.microservicemedicalreports")
+@EnableFeignClients("com.mmedicalreport.microservicemedicalReports")
 public class MicroserviceMedicalReportsApplication {
 
 	public static void main(String[] args) {

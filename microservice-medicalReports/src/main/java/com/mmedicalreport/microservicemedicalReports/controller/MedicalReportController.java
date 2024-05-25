@@ -1,4 +1,4 @@
-package com.mmedicalreport.microservicemedicalreports.controller;
+package com.mmedicalreport.microservicemedicalReports.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mmedicalreport.microservicemedicalreports.beans.PatientBean;
-import com.mmedicalreport.microservicemedicalreports.model.MedicalReport;
-import com.mmedicalreport.microservicemedicalreports.proxy.IMicroservicePatientsProxy;
-import com.mmedicalreport.microservicemedicalreports.service.MedicalReportService;
+import com.mmedicalreport.microservicemedicalReports.beans.PatientBean;
+import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
+import com.mmedicalreport.microservicemedicalReports.proxy.IMicroservicePatientsProxy;
+import com.mmedicalreport.microservicemedicalReports.service.MedicalReportService;
 
 import jakarta.validation.Valid;
 

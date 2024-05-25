@@ -1,9 +1,9 @@
-package com.mmedicalreport.microservicemedicalreports.config;
+package com.mmedicalreport.microservicemedicalReports.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.mmedicalreport.microservicemedicalreports.exceptions.CustomErrorDecoder;
+import com.mmedicalreport.microservicemedicalReports.exceptions.CustomErrorDecoder;
 
 @Configuration
 public class FeignExceptionConfig {

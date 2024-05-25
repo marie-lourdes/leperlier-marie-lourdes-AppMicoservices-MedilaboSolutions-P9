@@ -1,4 +1,4 @@
-package com.mmedicalreport.microservicemedicalreports;
+package com.mmedicalreport.microservicemedicalReports;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

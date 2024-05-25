@@ -4,6 +4,7 @@ WORKDIR /lib
 
 COPY ./target/*.jar /lib
 
-EXPOSE 9102
+EXPOSE 9002
   
-CMD ["java","-jar","/lib/microservice-eureka-0.0.1-SNAPSHOT.jar"]
+CMD ["java","-jar","/lib/microservice-medicalReports-0.0.1-SNAPSHOT.jar"]
+

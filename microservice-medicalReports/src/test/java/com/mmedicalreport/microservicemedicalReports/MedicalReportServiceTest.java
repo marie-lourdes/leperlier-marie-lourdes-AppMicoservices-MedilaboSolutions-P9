@@ -1,4 +1,4 @@
-package com.mmedicalreport.microservicemedicalreports;
+package com.mmedicalreport.microservicemedicalReports;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.mmedicalreport.microservicemedicalreports.model.MedicalReport;
-import com.mmedicalreport.microservicemedicalreports.service.MedicalReportService;
+import com.mmedicalreport.microservicemedicalReports.model.MedicalReport;
+import com.mmedicalreport.microservicemedicalReports.service.MedicalReportService;
 
 @SpringBootTest
 public class MedicalReportServiceTest {

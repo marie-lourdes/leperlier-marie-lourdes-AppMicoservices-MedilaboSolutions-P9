@@ -1,4 +1,4 @@
-package com.mmedicalreport.microservicemedicalreports.exceptions;
+package com.mmedicalreport.microservicemedicalReports.exceptions;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
