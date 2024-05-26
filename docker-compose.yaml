@@ -1,8 +1,15 @@
+version: 'v2.27.0-desktop.2'
 services:
   microservice-eureka:
     image: microservice-eureka:v1
     ports:
       - "9102:9102" 
+    networks:
+      - microservice-network
+    environment:
+      - EUREKA_INSTANCE_HOSTNAME=microservice-eureka
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
     restart: always
   microservice-config-server:
     image: microservice-config-server:v1
@@ -10,6 +17,10 @@ services:
       - microservice-eureka
     ports:
       - "9101:9101"
+    networks:
+      - microservice-network
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://microservice-eureka:9102/eureka/
     restart: always
   microservice-api-gateway:
     image: microservice-api-gateway:v1
@@ -18,6 +29,11 @@ services:
       - microservice-config-server
     ports:
       - "9103:9103"
+    networks:
+      - microservice-network
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://microservice-eureka:9102/eureka/
+      - SPRING_CLOUD_CONFIG_URI=http://localhost:9101
     restart: always
   microservice-patients:
     image: microservice-patients:v1
@@ -54,5 +70,8 @@ services:
       ports:
         - "8080:8080"
       restart: always
+networks:
+  microservice-network:
+    driver: bridge
     
    
