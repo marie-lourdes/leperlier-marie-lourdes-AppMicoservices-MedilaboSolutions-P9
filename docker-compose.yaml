@@ -1,16 +1,35 @@
-version: 'v2.27.0-desktop.2'
+version: '2.27.0-desktop.2'
+
+networks:
+  microservice-network:
+    driver: bridge
+
 services:
+  db:
+    image: mysql:8.0.37
+    networks:
+      - microservice-network
+    restart: always
+    environment:
+      - MYSQL_DATABASE= db_testpatient
+      - MYSQL_ROOT_PASSWORD= rootroot
+      - MYSQL_USER= usermedilabo
+      - MYSQL_PASSWORD= rootroot
+    expose:
+     - '3306'
+
   microservice-eureka:
     image: microservice-eureka:v1
     ports:
       - "9102:9102" 
     networks:
       - microservice-network
+    restart: always
     environment:
       - EUREKA_INSTANCE_HOSTNAME=microservice-eureka
       - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
       - EUREKA_CLIENT_FETCH_REGISTRY=false
-    restart: always
+  
   microservice-config-server:
     image: microservice-config-server:v1
     depends_on:
@@ -19,9 +38,10 @@ services:
       - "9101:9101"
     networks:
       - microservice-network
-    environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://microservice-eureka:9102/eureka/
     restart: always
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/
+
   microservice-api-gateway:
     image: microservice-api-gateway:v1
     depends_on:
@@ -31,10 +51,10 @@ services:
       - "9103:9103"
     networks:
       - microservice-network
-    environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://microservice-eureka:9102/eureka/
-      - SPRING_CLOUD_CONFIG_URI=http://localhost:9101
     restart: always
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/
+   
   microservice-patients:
     image: microservice-patients:v1
     depends_on:
@@ -42,36 +62,51 @@ services:
       - microservice-config-server
     ports:
       - "9001:9001"
+    networks:
+      - microservice-network
     restart: always
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/
+      - db
+       
   microservice-medicalreports:
       image: microservice-medicalreports:v1
       depends_on:
         - microservice-eureka
-        - microservice-config-server
         - microservice-api-gateway
       ports:
         - "9002:9002"
+      networks:
+        - microservice-network
       restart: always
+      environment:
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/    
+
   microservice-assessment:
       image: microservice-assessment:v1
       depends_on:
         - microservice-eureka
-        - microservice-config-server
         - microservice-api-gateway
       ports:
         - "9003:9003"
+      networks:
+        - microservice-network
       restart: always
+      environment:
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/
+        
   microservice-client:
       image: microservice-client:v1
       depends_on:
         - microservice-eureka
-        - microservice-config-server
         - microservice-api-gateway
       ports:
         - "8080:8080"
+       networks:
+        - microservice-network
       restart: always
-networks:
-  microservice-network:
-    driver: bridge
+      environment:
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/
+
     
    
