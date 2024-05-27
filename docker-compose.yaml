@@ -14,10 +14,12 @@ services:
       - MYSQL_USER= usermedilabo
       - MYSQL_PASSWORD= rootroot
     ports:
-     - "3306"
+      - "3306"
 
   mongo:
     image:  mongodb/mongodb-community-server:7.0.9-ubi8
+    ports:
+      - "27017"
     networks:
       - microservice-network
     restart: always
