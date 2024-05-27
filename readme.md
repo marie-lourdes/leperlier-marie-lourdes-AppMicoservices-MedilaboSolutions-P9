@@ -1,6 +1,6 @@
 # Application microservices Medilabo Solutions
 
-TourGuide is a Spring Boot application with microservices:
+Medilabo Solution is a Spring Boot application with architecture  microservices:
 - microservice-eureka back for register instance of all microservices
 - microservice-config-server back to call repository Config-repo-medilabo which stock all configuration of all microservices
 - microservice-API-Gateway back manange request HTTP between microservices
@@ -11,17 +11,17 @@ TourGuide is a Spring Boot application with microservices:
 
 ### Technologies
 
-> Java 17  
-
-> Spring Boot 3.X  
-> Spring Cloud
-> Spring Data Jpa
-> Spring Data MongoDB
-> Spring security
-> Thymeleaf
-> MySQL 8.0
-> Docker-desktop 4.30.00
-> Docker-compose v2.27.0-desktop.2
+- Java 17 
+- Spring Boot 3.X  
+- Spring Cloud
+- Spring Data Jpa
+- Spring Data MongoDB
+- Spring security
+- Thymeleaf
+- MySQL 8.0
+- MongoDB Community Edition
+- Docker-desktop 4.30.00
+- Docker-compose v2.27.0-desktop.2
 
 
 ### Installing
@@ -40,7 +40,6 @@ https://maven.apache.org/install.html
 
 https://www.eclipse.org/community/eclipse_newsletter/2018/february/springboot.php
 
-
 5.Install Docker-desktop
 
 https://www.docker.com/products/docker-desktop/
@@ -49,7 +48,7 @@ https://www.docker.com/products/docker-desktop/
 
 https://www.mysql.com/products/workbench/
 
-7. Upload structure BDD of file Data.sql in SQL BDD (in folder/config) or file Data.sql in folder /resources of microservice-patient and  then add your info connexion BDD in environment variable of your local system 
+7.Upload structure BDD of file Data.sql in SQL BDD (in folder/config) or file Data.sql in folder /resources of microservice-patient and  then add your info connexion BDD in environment variable of your local system 
 
 8.Install MongoDB and MongoDB Compass GUI
 
@@ -57,7 +56,7 @@ https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
 
 https://www.mongodb.com/try/download/compass
 
-9. Launch MongoDB compass, then:
+9.Launch MongoDB compass, then:
 - create database 'historypatients'
 - create collection 'medicalreports'
 - add  data from the collection with file medicalReports.json  in folder /resources of microservice-medicalReports 
@@ -74,7 +73,7 @@ or with your CLI , mvn spring-boot:run :
 - microservice-assessment
 - microservice-client 
 
-Finally, you will be ready to  use API and request 
+Finally, you will be ready to  use  these microservices with user interface web (microservice-client) and request 
 The home page :http://localhost:8080/home
 
 ### Endpoints of microservices  
@@ -95,22 +94,22 @@ The home page :http://localhost:8080/home
 - GET: **localhost:9003/patient/assessment-diabetes/{id}**
 
 #### microservice-client
-- GET: **localhost:8080/home/**
+- GET: **localhost:8080/home**
 
--For authentication use login: user, password: user, 
-or login: admin, passaword: admin
+-For authentication use **login:** user, **password**: user, 
+or **login:** admin, **password**: admin
 
 -For testing  all endpoints and forms, follow the menu and navigation in the application
 
 ### Use Docker image and  Docker Compose
-In each microservice folder , the file Sockerfile allow you to build Docker image:
+In each microservice folder , the file Dockerfile allow you to build Docker image:
 
 - Run command Docker in your favorite CLI:'docker build -t [name image  noted in docker-compose.yaml] .' for  creating  image of each microservice
 
 - Then run: 'docker run -d -p [port]:[port] [name image noted in docker-compose.yaml]' for running container of each microservice 
 you will see in the interface Docker images and containes of all microservices
 
-Then, in root of project, the file Docker-compose.yaml allow you to run all microservices together
+Then, in root of project, the file docker-compose.yaml allow you to run all microservices together
 
 - Run command Docker:'docker-compose up -d'
 
