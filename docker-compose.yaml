@@ -1,5 +1,3 @@
-version: '2.27.0-desktop.2'
-
 networks:
   microservice-network:
     driver: bridge
@@ -15,9 +13,15 @@ services:
       - MYSQL_ROOT_PASSWORD= rootroot
       - MYSQL_USER= usermedilabo
       - MYSQL_PASSWORD= rootroot
-    expose:
-     - '3306'
+    ports:
+     - "3306"
 
+  mongo:
+    image:  mongodb/mongodb-community-server:7.0.9-ubi8
+    networks:
+      - microservice-network
+    restart: always
+     
   microservice-eureka:
     image: microservice-eureka:v1
     ports:
@@ -47,6 +51,9 @@ services:
     depends_on:
       - microservice-eureka
       - microservice-config-server
+      - microservice-patients
+      - microservice-medicalreports
+      - microservice-assessment
     ports:
       - "9103:9103"
     networks:
@@ -58,6 +65,7 @@ services:
   microservice-patients:
     image: microservice-patients:v1
     depends_on:
+      - db
       - microservice-eureka
       - microservice-config-server
     ports:
@@ -68,25 +76,24 @@ services:
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/
       - db
-       
+          
   microservice-medicalreports:
       image: microservice-medicalreports:v1
       depends_on:
         - microservice-eureka
-        - microservice-api-gateway
       ports:
         - "9002:9002"
       networks:
         - microservice-network
       restart: always
       environment:
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/    
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://microservice-eureka:9102/eureka/ 
+        - CONN_STR=mongodb://localhost:27017   
 
   microservice-assessment:
       image: microservice-assessment:v1
       depends_on:
         - microservice-eureka
-        - microservice-api-gateway
       ports:
         - "9003:9003"
       networks:
@@ -102,7 +109,7 @@ services:
         - microservice-api-gateway
       ports:
         - "8080:8080"
-       networks:
+      networks:
         - microservice-network
       restart: always
       environment:
