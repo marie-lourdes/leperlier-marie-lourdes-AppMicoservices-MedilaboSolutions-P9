@@ -48,7 +48,6 @@ public class PatientController {
 
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			// return "FormPatient";
 		}
 		log.info("Patient created sucessfully{} :", patientCreated);
 		return "redirect:/home/all-patients";
@@ -75,7 +74,6 @@ public class PatientController {
 
 		} catch (NullPointerException e) {
 			log.error(e.getMessage());
-			// return "UpdateFormPatient";
 		}
 
 		log.info("Patient updated sucessfully{}, id: {}", patientUpdated, id);

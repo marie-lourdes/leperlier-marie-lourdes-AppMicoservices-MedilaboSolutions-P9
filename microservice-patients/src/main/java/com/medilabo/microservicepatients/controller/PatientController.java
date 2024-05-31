@@ -57,7 +57,6 @@ public class PatientController {
 		Patient existingPatientUpdated = new Patient();
 
 		try {
-
 			existingPatientUpdated = patientService.getAllPatients().stream()
 					.filter(patient -> patient.getId().equals(id)).findFirst().map(existingPatient -> {
 						existingPatient.setId(patientUpdated.getId());

@@ -37,9 +37,9 @@ public class MedicalReportController {
 		MedicalReport medicalReportCreated = new MedicalReport();
 
 		try {
-			PatientBean PatientFoundById = microservicePatientsProxy.getPatientById(id);
-			medicalReportCreated.setPatId(PatientFoundById.getId());
-			medicalReportCreated.setPatient(PatientFoundById.getNom());
+			PatientBean patientFoundById = microservicePatientsProxy.getPatientById(id);
+			medicalReportCreated.setPatId(patientFoundById.getId());
+			medicalReportCreated.setPatient(patientFoundById.getNom());
 			medicalReportCreated.setNote(medicalReport.getNote());
 			medicalReportService.addMedicalReport(medicalReportCreated);
 

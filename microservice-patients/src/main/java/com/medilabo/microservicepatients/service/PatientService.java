@@ -14,6 +14,7 @@ import com.medilabo.microservicepatients.repository.IPatientRepository;
 @Service
 public class PatientService {
 	private static final Logger log = LogManager.getLogger(PatientService.class);
+	
 	@Autowired
 	private IPatientRepository patientRepository;
 
