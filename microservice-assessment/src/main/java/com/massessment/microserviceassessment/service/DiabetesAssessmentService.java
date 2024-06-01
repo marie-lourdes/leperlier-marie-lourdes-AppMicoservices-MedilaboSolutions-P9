@@ -10,8 +10,7 @@ import lombok.Data;
 @Data
 @Service
 public class DiabetesAssessmentService implements IEvaluatorRiskDiabete {
-	private ICounter counterTermsMedicalReportNotes;
-	private IFilter filterInfoPatient;
+
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
 	private Integer numberOfSymptoms;
@@ -23,9 +22,8 @@ public class DiabetesAssessmentService implements IEvaluatorRiskDiabete {
 
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
-		this.counterTermsMedicalReportNotes = new CounterTermsMedicalReportNotesImpl();
 		this.evaluatorDiabete = new EvaluatorDiabeteImpl(microservicePatientsProxy, microserviceMedicalReportsProxy,
-				counterTermsMedicalReportNotes, filterInfoPatient);
+				new CounterTermsMedicalReportNotesImpl(), new FilterInfoPatientImpl(microservicePatientsProxy));
 	}
 
 	@Override
