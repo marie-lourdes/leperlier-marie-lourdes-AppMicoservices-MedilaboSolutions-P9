@@ -17,11 +17,10 @@ public class DiabetesAssessmentService implements IEvaluatorRiskDiabete {
 	private IEvaluatorRiskDiabete evaluatorDiabete;
 
 	public DiabetesAssessmentService(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,
-			IMicroservicePatientsProxy microservicePatientsProxy, ICounter counterTermsMedicalReportNotes,
-			IFilter filterInfoPatient) {
-
+			IMicroservicePatientsProxy microservicePatientsProxy) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
+
 		this.evaluatorDiabete = new EvaluatorDiabeteImpl(microservicePatientsProxy, microserviceMedicalReportsProxy,
 				new CounterTermsMedicalReportNotesImpl(), new FilterInfoPatientImpl(microservicePatientsProxy));
 	}
