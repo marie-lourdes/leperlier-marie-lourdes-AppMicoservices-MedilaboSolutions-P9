@@ -18,13 +18,14 @@ public class DiabetesAssessmentService implements IEvaluatorRiskDiabete {
 	private IEvaluatorRiskDiabete evaluatorDiabete;
 
 	public DiabetesAssessmentService(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,
-			IMicroservicePatientsProxy microservicePatientsProxy, ICounter counterTermsMedicalReportNotes) {
+			IMicroservicePatientsProxy microservicePatientsProxy, ICounter counterTermsMedicalReportNotes,
+			IFilter filterInfoPatient) {
 
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
-		this.counterTermsMedicalReportNotes = counterTermsMedicalReportNotes;
+		this.counterTermsMedicalReportNotes = new CounterTermsMedicalReportNotesImpl();
 		this.evaluatorDiabete = new EvaluatorDiabeteImpl(microservicePatientsProxy, microserviceMedicalReportsProxy,
-				counterTermsMedicalReportNotes);
+				counterTermsMedicalReportNotes, filterInfoPatient);
 	}
 
 	@Override

@@ -28,11 +28,12 @@ public class EvaluatorDiabeteImpl implements IEvaluatorRiskDiabete {
 	private String riskEvaluated;
 
 	public EvaluatorDiabeteImpl(IMicroservicePatientsProxy microservicePatientsProxy,
-			IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy, ICounter counterTermsMedicalReportNotes) {
+			IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy, ICounter counterTermsMedicalReportNotes,
+			IFilter filterInfoPatient) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
-		this.filterInfoPatient = new FilterInfoPatientImpl(microservicePatientsProxy);
-		this.counterTermsMedicalReportNotes = new CounterTermsMedicalReportNotesImpl();
+		this.filterInfoPatient = filterInfoPatient;
+		this.counterTermsMedicalReportNotes = counterTermsMedicalReportNotes;
 
 	}
 
