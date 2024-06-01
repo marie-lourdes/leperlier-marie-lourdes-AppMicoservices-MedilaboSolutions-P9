@@ -10,24 +10,19 @@ import lombok.Data;
 @Data
 @Service
 public class DiabetesAssessmentService implements IEvaluatorRiskDiabete {
-	private ICounter counterTermsMedicalReportNotes;
-	private IFilter filterInfoPatient;
+
 	private IMicroservicePatientsProxy microservicePatientsProxy;
 	private IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy;
 	private Integer numberOfSymptoms;
 	private IEvaluatorRiskDiabete evaluatorDiabete;
 
 	public DiabetesAssessmentService(IMicroserviceMedicalReportsProxy microserviceMedicalReportsProxy,
-			IMicroservicePatientsProxy microservicePatientsProxy, ICounter counterTermsMedicalReportNotes) {
-
+			IMicroservicePatientsProxy microservicePatientsProxy) {
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
-<<<<<<< Updated upstream
-		this.counterTermsMedicalReportNotes = counterTermsMedicalReportNotes;
-=======
->>>>>>> Stashed changes
+
 		this.evaluatorDiabete = new EvaluatorDiabeteImpl(microservicePatientsProxy, microserviceMedicalReportsProxy,
-				counterTermsMedicalReportNotes);
+				new CounterTermsMedicalReportNotesImpl(), new FilterInfoPatientImpl(microservicePatientsProxy));
 	}
 
 	@Override
