@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.medilabo</groupId>
 	<artifactId>microservice-config-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>microservice-config-server</name>
 	<description>Config-server for application microservices medilabo solutions enterprise</description>
 	<properties>
