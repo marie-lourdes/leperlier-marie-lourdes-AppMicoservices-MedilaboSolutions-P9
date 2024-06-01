@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.medilabo</groupId>
 	<artifactId>microservice-eureka</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<description>Eureka-server for application microservices medilabo solutions enterprise</description>
 	<properties>
 		<java.version>17</java.version>

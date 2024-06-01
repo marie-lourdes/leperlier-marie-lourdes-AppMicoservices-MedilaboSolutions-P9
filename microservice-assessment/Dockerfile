@@ -6,4 +6,4 @@ COPY ./target/*.jar /lib
 
 EXPOSE 9003
   
-CMD ["java","-jar","/lib/microservice-assessment-0.0.1-SNAPSHOT.jar"]
+CMD ["java","-jar","/lib/microservice-assessment-1.0.0.jar"]

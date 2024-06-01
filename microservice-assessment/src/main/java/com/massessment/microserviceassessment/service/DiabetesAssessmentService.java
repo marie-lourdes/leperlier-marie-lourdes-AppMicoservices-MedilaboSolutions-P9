@@ -22,7 +22,10 @@ public class DiabetesAssessmentService implements IEvaluatorRiskDiabete {
 
 		this.microservicePatientsProxy = microservicePatientsProxy;
 		this.microserviceMedicalReportsProxy = microserviceMedicalReportsProxy;
+<<<<<<< Updated upstream
 		this.counterTermsMedicalReportNotes = counterTermsMedicalReportNotes;
+=======
+>>>>>>> Stashed changes
 		this.evaluatorDiabete = new EvaluatorDiabeteImpl(microservicePatientsProxy, microserviceMedicalReportsProxy,
 				counterTermsMedicalReportNotes);
 	}

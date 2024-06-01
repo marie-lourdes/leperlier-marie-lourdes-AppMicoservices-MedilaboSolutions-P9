@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.mpatients</groupId>
 	<artifactId>microservice-patients</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<description>Microservice managing data of patient for application Medilabo Solutions</description>
 	<properties>
 		<java.version>17</java.version>

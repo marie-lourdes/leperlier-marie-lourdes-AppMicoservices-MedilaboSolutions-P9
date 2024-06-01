@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.massessment</groupId>
 	<artifactId>microservice-assessment</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>microservice-assessment</name>
 	<description>Microservice back for evaluate risk diabete&lt;</description>
 	<properties>
